@@ -24,7 +24,7 @@ var mapOption = {
 }
 
 //맵 표시
-var map = new daum.maps.Map(mapContainer, mapOption);
+var map = new kakao.maps.Map(mapContainer, mapOption);
 
 // 확대축소 컨트롤
 
@@ -32,15 +32,15 @@ var zoomControl = new kakao.maps.ZoomControl();
 map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 
 //주소 좌표 변환
-var geocoder = new daum.maps.services.Geocoder();
+var geocoder = new kakao.maps.services.Geocoder();
 
 //for loop
 listData.forEach(function(addr, index) {
 	geocoder.addressSearch(addr[0], function(result, status) {
-		if (status === daum.maps.services.Status.OK) {
-			var coords = new daum.maps.LatLng(result[0].y, result[0].x);
+		if (status === kakao.maps.services.Status.OK) {
+			var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-			var marker = new daum.maps.Marker({
+			var marker = new kakao.maps.Marker({
 				position: coords,
 				clickable: true
 			});

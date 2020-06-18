@@ -1,59 +1,58 @@
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta charest="ut f-8">
-		<title> 연습용</title>
-	</head>
-	<body>
-		<!-- 지도를 표시할 div 입니다 -->
-		<div id="map" style="width:100%;height:500px;"></div>
-		<script type="text/javascript" sre="//dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6"></script>
-                
-	<script>
-		var listData = [
-			["서울 중구 세종대로 110", "서울특별시청"],
-			["경기 수원시 팔달구 효원로 1","경기도청"],
-			["서울 용산구 용문동 28-7", "중앙하이츠빌라앞 (03-245)"]
-			["서울 용산구 용문동 28-2", "중앙하이츠빌라앞 (03-246)"]
-			];
+<head>
+    <meta charset="utf-8">
+    <title>주소로 장소 표시하기</title>
+    
+</head>
+<body>
+<p style="margin-top:-12px">
+    <em class="link">
+        <a href="javascript:void(0);" onclick="window.open('http://fiy.daum.net/fiy/map/CsGeneral.daum', '_blank', 'width=981, height=650')">
+            혹시 주소 결과가 잘못 나오는 경우에는 여기에 제보해주세요.
+        </a>
+    </em>
+</p>
+<div id="map" style="width:100%;height:350px;"></div>
 
-//맵을 넣을 div
-var mapContainer = document.getElementById('map');
-var mapOption = {
-	level: 11
-}
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6&libraries=services"></script>
+<script>
+var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
+    mapOption = {
+        center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+        level: 5 // 지도의 확대 레벨
+    };  
 
+// 지도를 생성합니다    
+var map = new kakao.maps.Map(mapContainer, mapOption); 
 
-//주소 좌표 변환
+// 주소-좌표 변환 객체를 생성합니다
 var geocoder = new kakao.maps.services.Geocoder();
 
-//for loop
-listData.forEach(function(addr, index) {
-	geocoder.addressSearch(addr[0], function(result, status) {
-		if (status === kakao.maps.services.Status.OK) {
-			var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
+// 주소로 좌표를 검색합니다
+geocoder.addressSearch('제주특별자치도 제주시 첨단로 242', function(result, status) {
 
-			var marker = new kakao.maps.Marker({
-				position: coords,
-				clickable: true
-			});
+    // 정상적으로 검색이 완료됐으면 
+     if (status === kakao.maps.services.Status.OK) {
 
-			// 마커 지도표시
-			marker.setMap(map);
+        var coords = new kakao.maps.LatLng(result[0].y, result[0].x);
 
-			//인포윈도우 생성
-			var infowindow = new kakao.maps.InfoWindow({
-				content: '<div style="width:150px;text-align:center;padding:6px 0;">' + addr[1] + '</div>',
-				removable : true
-			});
+        // 결과값으로 받은 위치를 마커로 표시합니다
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: coords
+        });
 
-			//마커 인포윈도우 표시
-			infowindow.open(map, marker);
-		}
-	});
-});
+        // 인포윈도우로 장소에 대한 설명을 표시합니다
+        var infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="width:150px;text-align:center;padding:6px 0;">우리회사</div>'
+        });
+        infowindow.open(map, marker);
 
-
-	</script>
-	</body>
-	</html>
+        // 지도의 중심을 결과값으로 받은 위치로 이동시킵니다
+        map.setCenter(coords);
+    } 
+});    
+</script>
+</body>
+</html>

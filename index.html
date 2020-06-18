@@ -1,8 +1,107 @@
 <!DOCTYPE html>
 <html>
+	<head>
+		<meta charest="ut f-8">
+		<title> 연습용</title>
+	</head>
 	<body>
-		<h1>hello world</h1>
-		<p>I 'm hosted with github pages.</p>
-	</body>
-</html>
+		<!-- 지도를 표시할 div 입니다 -->
+		<div id="map" style="width:100%;height:500px;"></div>
 
+		<script type="text/javascript" sre="//dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6"></script>
+
+	<script>
+		var mapContainer = document.getElementByld('map'), // 지도를 표시할 div
+	mapOption = {
+		center: new kakao.maps.LatLng(33.450701, 126.570667), // 지도의 중심좌표
+		level: 1 // 지도의 확대 레벨
+	};
+
+//지도를 표시할 div와 지도 옵션으로 지도 생성
+var map = new kakao.maps.Map(mapContainer, mapOption);
+
+// 주소 - 좌표 변환 객체를 생성
+var geocoder = new kakao.maps.services.Geocoder();
+
+
+
+//마커를 표시할 위치와 title 객체 배열
+var positions = [
+	{
+		title: '<div>세종시점</div>',
+		latlng: '세종특별자치시 가름로 232 (어진동, 세종비지니스센터, 세종세무서)'
+	},     
+	{
+                title: '<div>부산서면점</div>',
+                latlng: '부산 부산진구 서면로 1 (부전동)'
+        },
+        {
+                title: '<div>수원시청역점</div>',
+                latlng: '경기 수원시 권선구 효원로 지하 270 (권성동, 수원시청역)'
+        },
+        {
+                title: '<div>광화문점</div>',
+                latlng: '서울 종로구 사직로 102 (필운동, 신동아 블루아 광화문의 꿈)'
+        },
+        {
+                title: '<div>디지털단지역점</div>',
+                latlng: '서울 구로구 도림천로 477 (구로동, 구로디지털단지역)'
+        },
+        {
+                title: '<div>역삼점</div>',
+                latlng: '서울 강남구 강남대로 298'
+        }
+	];
+
+
+// 주소로 좌표를 검색
+
+for (var i = 0; i < positions.length; i ++) {
+	geocoder.addressSearch(positions[i].latlng, function(result, status) {
+
+		//정상적으로 검색이 완료됐으면
+		if (status === daum.maps.services.Status.OK) {
+			
+			var coords1 = new daum.maps.LatLng(result[0].y, result[0].x);
+
+			//마커 이미지의 이미지 크기
+			var imageSize = new daum.maps.Size(24, 35);
+
+			//마커 이미지를 생성합니다
+			var markerImage = new daum.maps.MarkerImage(imageSrc, imageSize);
+
+
+			//결과값으로 받은 위치를 마커로 표시합니다
+			var marker = new daum.maps.Marker({
+				map: map,
+				position: coords1,
+				image : markerImage //마커 이미지
+			});
+
+
+			// 인포윈도우로 장소에 대한 설명을 표시합니다
+			var infowindow = new daum.maps.InfoWingow({
+				content: positions[i].title
+			});
+
+		}
+	});
+
+
+
+
+
+
+
+
+
+
+
+	
+
+	</script>
+	</body>
+	</html>
+
+// 주소 - 좌표 변환 객체를 생성
+var geocoder = new kakao.maps.services.Geocoder();

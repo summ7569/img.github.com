@@ -66,9 +66,7 @@ for (var i = 0; i < positions.length; i ++) {
     var marker = new kakao.maps.Marker({
         map: map, // 마커를 표시할 지도
         position: positions[i].latlng, // 마커를 표시할 위치
-        icon: {
-            size: { width: 40, height: 40 }
-        }
+      
             
     });
     bounds.extend(positions[i].latlng);

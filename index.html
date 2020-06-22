@@ -56,7 +56,7 @@ var positions = [
     }
 ];
     var imageSrc="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
-
+    var bounds = new kakao.maps.LatLngBounds();
 
     
 for (var i = 0; i < positions.length; i ++) {
@@ -71,10 +71,11 @@ for (var i = 0; i < positions.length; i ++) {
     var marker = new kakao.maps.Marker({
         map: map, // 마커를 표시할 지도
         position: positions[i].latlng, // 마커를 표시할 위치
-        image : markeImage
+        image : markerImage
       
             
     });
+    bounds.extend(positions[i].latlng);
 
     
     //마커에 표시할 인포윈도우 생성
@@ -89,7 +90,7 @@ for (var i = 0; i < positions.length; i ++) {
     kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
     }
    
-
+    map.setBounds(bounds);
     
     // 인포윈도우 표시하는 클로저 함수
     function makeOverListener(map, marker, infowindow) {

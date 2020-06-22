@@ -22,111 +22,54 @@ var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니
 var positions = [
       {
         //title: '중앙하이츠빌라앞',  // 마커 롤 오버시 표시될 내용
-        content: '<div>중랑역,동부시장 (07-125)</div>',
-        latlng: new kakao.maps.LatLng(37.593725, 127.075989) // 좌표
+        content: '<div>장안치안센터 (06-266)</div>',
+        latlng: new kakao.maps.LatLng(37.567957, 127.072487) // 좌표
       },
     {
-        content: '<div>지하철 7호선 상봉역 (07-130)</div>',
-        latlng: new kakao.maps.LatLng(37.596655, 127.087225)
+        content: '<div>장안치안센터 (06-266,267)</div>',
+        latlng: new kakao.maps.LatLng(37.568102, 127.072659)
     },
     {
-        content: '<div>망우역 (07-133)</div>',
-        latlng: new kakao.maps.LatLng(37.598600, 127.094019)
+        content: '<div>장평중학교 (06-268)</div>',
+        latlng: new kakao.maps.LatLng(37.565722, 127.070888)
     },
     {
-        content: '<div>중랑초등학교 (07-146)</div>',
-        latlng: new kakao.maps.LatLng(37.589178, 127.073881)
+        content: '<div>제기시장 (06-291)</div>',
+        latlng: new kakao.maps.LatLng(37.586492, 127.034589)
     },
     {
-        content: '<div>KT 중랑지점 사거리 (07-150)</div>',
-        latlng: new kakao.maps.LatLng(37.591282, 127.080416)
+        content: '<div>벽산아파트 (06-299)</div>',
+        latlng: new kakao.maps.LatLng(37.582688, 127.030160)
     },
         {
-        content: '<div>상봉터미널 입구 (07-158))</div>',
-        latlng: new kakao.maps.LatLng(37.593981, 127.092862)
+        content: '<div>장안동우체국 (06-307)</div>',
+        latlng: new kakao.maps.LatLng(37.566852, 127.065011)
     },
         {
-        content: '<div>면목5동 (07-220)</div>',
-        latlng: new kakao.maps.LatLng(37.585585, 127.075697)
+        content: '<div>장평중학교앞 (06-314)</div>',
+        latlng: new kakao.maps.LatLng(37.564936, 127.070302)
     },
         {
-        content: '<div>중화2동새마을금고 (07-318)</div>',
-        latlng: new kakao.maps.LatLng(37.595638, 127.072130)
+        content: '<div>종로사약국 (06-318)</div>',
+        latlng: new kakao.maps.LatLng(37.594537, 127.064930)
     },
         {
-        content: '<div>중랑교 동부시장 (07-320)</div>',
-        latlng: new kakao.maps.LatLng(37.593795, 127.072499)
+        content: '<div>자동차부품상가 (06-335)</div>',
+        latlng: new kakao.maps.LatLng(37.564616, 127.057620)
     },
     {
-        content: '<div>신안2차아파트 (07-352)</div>',
-        latlng: new kakao.maps.LatLng(37.614812, 127.078851)
+        content: '<div>용두동신동아아파트 (06-424)</div>',
+        latlng: new kakao.maps.LatLng(37.574073, 127.031689)
     },
         {
-        content: '<div>송곡여고 양원역 (07-355)</div>',
-        latlng: new kakao.maps.LatLng(37.605442, 127.105559)
+        content: '<div>청계한신휴플러스 (06-507)</div>',
+        latlng: new kakao.maps.LatLng(37.569687, 127.049206)
     },
             {
-        content: '<div>송곡여고 양원역 (07-356)</div>',
-        latlng: new kakao.maps.LatLng(37.605741, 127.105792)
-    },
-    {
-        content: '<div>브라운캐슬 (07-381,2)</div>',
-        latlng: new kakao.maps.LatLng(37.613569, 127.075361)
-    },
-            {
-        content: '<div>두리마트 (07-381,2)</div>',
-        latlng: new kakao.maps.LatLng(37.614475, 127.075503)
-    },
-            {
-        content: '<div>먹골역 입구 (07-383)</div>',
-        latlng: new kakao.maps.LatLng(37.611589, 127.075736)
-    },
-            {
-        content: '<div>금보다금은방 (07-388)</div>',
-        latlng: new kakao.maps.LatLng(37.607882, 127.076610)
-    },
-            {
-        content: '<div>신묵초등학교,중랑경찰서 (07-389)</div>',
-        latlng: new kakao.maps.LatLng(37.606681, 127.076662)
-    },
-            {
-        content: '<div>신묵초등학교,중랑경찰서 (07-390)</div>',
-        latlng: new kakao.maps.LatLng(37.606728, 127.077089)
-    },
-            {
-        content: '<div>제일시장 (07-391)</div>',
-        latlng: new kakao.maps.LatLng(37.605006, 127.077006)
-    },
-            {
-        content: '<div>신동신약국 (07-394)</div>',
-        latlng: new kakao.maps.LatLng(37.603459, 127.077291)
-    },
-            {
-        content: '<div>신동신약국 (07-393)</div>',
-        latlng: new kakao.maps.LatLng(37.603506, 127.077479)
-    },
-            {
-        content: '<div>중화역입구, 대원사입구 (07-396)</div>',
-        latlng: new kakao.maps.LatLng(37.601926, 127.077738)
-    },
-            {
-        content: '<div>태릉시장입구 굴다리 (07-399)</div>',
-        latlng: new kakao.maps.LatLng(37.596603, 127.075702)
-    },
-    {
-        content: '<div>신내초등학교 (07-404)</div>',
-        latlng: new kakao.maps.LatLng(37.605476, 127.098015)
-    },
-       {
-        content: '<div>서울특별시북부병원 (07-420)</div>',
-        latlng: new kakao.maps.LatLng(37.605218, 127.108820)
-    },
-       {
-        content: '<div>해모로아파트앞 (07-424)</div>',
-        latlng: new kakao.maps.LatLng(37.601790, 127.111402)
-       }
-       
-    
+        content: '<div>동대문노인종합복지관 (06-357)</div>',
+        latlng: new kakao.maps.LatLng(37.586090, 127.049477)
+    }
+
 ];
     var imageSrc="https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png";
     var bounds = new kakao.maps.LatLngBounds();

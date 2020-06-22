@@ -22,32 +22,108 @@ var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니
 var positions = [
       {
         //title: '중앙하이츠빌라앞',  // 마커 롤 오버시 표시될 내용
-       content: '<div style="font-size:10px;">방화주유소 (16-322)</div>',
-        latlng: new kakao.maps.LatLng(37.566660, 126.812588) // 좌표
+       content: '<div style="font-size:10px;">쌍용구로정비사업소 17-222</div>',
+        latlng: new kakao.maps.LatLng(37.499834, 126.882610) // 좌표
       },
     {
-        content: '<div style="font-size:10px;">제일성심병원 (16-341)</div>',
-        latlng: new kakao.maps.LatLng(37.547096, 126.845771) // 좌표
-      },
-     {
-        content: '<div style="font-size:10px;">강서농협 (16-374)</div>',
-        latlng: new kakao.maps.LatLng(37.568284, 126.812855) // 좌표
-      },
-     {
-        content: '<div style="font-size:10px;">강서농협 16-375</div>',
-        latlng: new kakao.maps.LatLng(37.568363, 126.812705) // 좌표
-      },
-     {
-        content: '<div style="font-size:10px;">천주교성당 16-379</div>',
-        latlng: new kakao.maps.LatLng(37.556152, 126.812312) // 좌표
-      },
-     {
-        content: '<div style="font-size:10px;">롯데R&D센터 16-608</div>',
-        latlng: new kakao.maps.LatLng(37.572081, 126.828565) // 좌표
+        content: '<div style="font-size:10px;">남구로역 17-245</div>',
+        latlng: new kakao.maps.LatLng(37.484874, 126.887365) // 좌표
       },
     {
-        content: '<div style="font-size:10px;">롯데R&D센터 16-700</div>',
-        latlng: new kakao.maps.LatLng(37.570491, 126.828619) // 좌표
+        content: '<div style="font-size:10px;">구로남초등학교 17-247</div>',
+        latlng: new kakao.maps.LatLng(37.483992, 126.890853) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">동양빌라 17-251</div>',
+        latlng: new kakao.maps.LatLng(37.495139, 126.831636) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">궁동입구 17-253</div>',
+        latlng: new kakao.maps.LatLng(37.493412, 126.834053) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">현대아파트 17-254</div>',
+        latlng: new kakao.maps.LatLng(37.504596, 126.886444) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">롯데아파트 17-257</div>',
+        latlng: new kakao.maps.LatLng(37.502620, 126.884613) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">궁동입구 17-300</div>',
+        latlng: new kakao.maps.LatLng(37.493452, 126.834347) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">오류동삼거리 17-307</div>',
+        latlng: new kakao.maps.LatLng(37.495201, 126.841036) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">오류동삼거리 17-308</div>',
+        latlng: new kakao.maps.LatLng(37.495126, 126.840792) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">개봉1동삼거리 17-311</div>',
+        latlng: new kakao.maps.LatLng(37.501224, 126.845254) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">개봉1동삼거리 17-312</div>',
+        latlng: new kakao.maps.LatLng(37.501073, 126.845440) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">오류2동주민센터 17-203</div>',
+        latlng: new kakao.maps.LatLng(37.488472, 126.839757) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">오류2동새마을금고 17-205</div>',
+        latlng: new kakao.maps.LatLng(37.490355, 126.840532) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">오류2새마을금고 17-206</div>',
+        latlng: new kakao.maps.LatLng(37.490453, 126.840457) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">오류남초등학교 후문 17-458</div>',
+        latlng: new kakao.maps.LatLng(37.489534, 126.837532) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">덕일전자공업고등학교 17-806</div>',
+        latlng: new kakao.maps.LatLng(37.489993, 126.837886) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">오남중학교,삼미주택 17-196</div>',
+        latlng: new kakao.maps.LatLng(37.488444, 126.836669) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">항동복합행정센터 17-362</div>',
+        latlng: new kakao.maps.LatLng(37.479501, 126.821889) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">항동복합행정센터 17-364</div>',
+        latlng: new kakao.maps.LatLng(37.479237, 126.822104) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">항동우남퍼스트빌 17-151</div>',
+        latlng: new kakao.maps.LatLng(37.477188, 126.819727) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">항동우남퍼스트빌 17-160</div>',
+        latlng: new kakao.maps.LatLng(37.477333, 126.819523) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">푸른수목원 17-361</div>',
+        latlng: new kakao.maps.LatLng(37.482161, 126.825447) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">푸른수목원 17-363</div>',
+        latlng: new kakao.maps.LatLng(37.482041, 126.825616) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">우리유엔미아파트 17-221</div>',
+        latlng: new kakao.maps.LatLng(37.496037, 126.882653) // 좌표
+      },
+    {
+        content: '<div style="font-size:10px;">롯데아파트 17-255</div>',
+        latlng: new kakao.maps.LatLng(37.502762, 126.884551) // 좌표
       }
     
 ];

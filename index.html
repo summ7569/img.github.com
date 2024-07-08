@@ -6,7 +6,7 @@
     
 </head>
 <body>
-<div id="map" style="width:auto;height:auto;"></div>
+<div id="map" style="width:100%;height:100% !important;padding-bottom: 50%; position: relative;"></div>
 	
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6"></script>
 <script>
@@ -21,6 +21,8 @@ var mapContainer = document.getElementById('map'),
 
 var map = new kakao.maps.Map(mapContainer, mapOption); 
 	// 지도를 생성합니다.
+
+	
 
 // 일반 지도와 스카이뷰로 지도 타입을 전환할 수 있는 지도타입 컨트롤을 생성합니다
 var mapTypeControl = new kakao.maps.MapTypeControl();

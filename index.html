@@ -22,14 +22,6 @@ var mapContainer = document.getElementById('map'),
 var map = new kakao.maps.Map(mapContainer, mapOption); 
 	// 지도를 생성합니다.
 	
-<script>
-function setCenter() {   
-	//이동할 위도 경도 위치를 생성
-	var moveLatLon = new kakao.maps.LatLng(,);
-
-	map.panTo(moveLatLon); 
-	//지도를 부드럽게 이동
-	
 
 //카카오맵 클릭 이벤트 추가
 	kakao.maps.event.addListener(map, 'click', (mouseEvent) => {

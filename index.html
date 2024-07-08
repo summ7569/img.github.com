@@ -38,7 +38,7 @@ map.addControl(zoomControl, kakao.maps.ControlPosition.RIGHT);
 	
 
 // 지도를 클릭했을때 클릭한 위치에 마커를 추가하도록 지도에 클릭이벤트를 등록합니다
-kakao.maps.event.addListener(map, 'click', function(mouseEvent) {        
+kakao.maps.event.addListener(map, click, function(mouseEvent) {        
     // 클릭한 위치에 마커를 표시합니다 
     addMarker(mouseEvent.latLng);             
 });

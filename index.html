@@ -23,8 +23,7 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
 
 var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다.
 	
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6"></script>
-  <script>
+<script>
 function setCenter() {   //이동할 위도 경도 위치를 생성
 	var moveLatLon = new kakao.maps.LatLng(,);
 
@@ -42,8 +41,6 @@ function setCenter() {   //이동할 위도 경도 위치를 생성
 	alert(`위도 : ${latlng.getLat()}, 경도 : ${latlng.getLng()}`);
 });
 	
-</script>    
- 
 // 마커를 표시할 위치와 title 객체 배열입니다 
 var positions = [
       

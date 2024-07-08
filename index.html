@@ -20,7 +20,10 @@ var mapContainer = document.getElementById('map'), // 지도를 표시할 div
         level: 5 // 지도의 확대 레벨
 	
     };
-sext/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6"></script>
+
+var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니다.
+	
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6"></script>
   <script>
 function setCenter() {   //이동할 위도 경도 위치를 생성
 	var moveLatLon = new kakao.maps.LatLng(,);

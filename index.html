@@ -2,7 +2,7 @@
 <HTML lang="kr">
 <head>
     <meta charset="utf-8">
-    <title>test2</title>
+    <title>test4</title>
     <style>
         #mapwrap {
             position: relative;
@@ -200,7 +200,9 @@
         "과천동 1340-1"
     ];
 
-    var markerImageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png'; 
+    var coffeeMarkerImageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png';
+    var storeMarkerImageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_green.png';
+    var carparkMarkerImageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_blue.png';
 
     var coffeeMarkers = [],
         storeMarkers = [],
@@ -213,26 +215,24 @@
 
     function initializeMarkers() {
         coffeePositions.forEach((position, index) => {
-            var marker = createMarker(position, coffeeInfo[index]);
+            var marker = createMarker(position, coffeeInfo[index], coffeeMarkerImageSrc);
             coffeeMarkers.push(marker);
         });
 
         storePositions.forEach((position, index) => {
-            var marker = createMarker(position, storeInfo[index]);
+            var marker = createMarker(position, storeInfo[index], storeMarkerImageSrc);
             storeMarkers.push(marker);
         });
 
         carparkPositions.forEach((position, index) => {
-            var marker = createMarker(position, carparkInfo[index]);
+            var marker = createMarker(position, carparkInfo[index], carparkMarkerImageSrc);
             carparkMarkers.push(marker);
         });
     }
 
-    function createMarker(position, info) {
-        var markerImage = new kakao.maps.MarkerImage(markerImageSrc, new kakao.maps.Size(22, 26), {
-            offset: new kakao.maps.Point(10, 26),
-            spriteOrigin: new kakao.maps.Point(10, 0),
-            spriteSize: new kakao.maps.Size(36, 98)
+    function createMarker(position, info, imageSrc) {
+        var markerImage = new kakao.maps.MarkerImage(imageSrc, new kakao.maps.Size(22, 26), {
+            offset: new kakao.maps.Point(11, 26)
         });
 
         var marker = new kakao.maps.Marker({
@@ -300,7 +300,21 @@
         var info = document.getElementById("info").value;
 
         var position = new kakao.maps.LatLng(latitude, longitude);
-        var marker = createMarker(position, info);
+        var imageSrc = "";
+
+        switch (category) {
+            case 'coffee':
+                imageSrc = coffeeMarkerImageSrc;
+                break;
+            case 'store':
+                imageSrc = storeMarkerImageSrc;
+                break;
+            case 'carpark':
+                imageSrc = carparkMarkerImageSrc;
+                break;
+        }
+
+        var marker = createMarker(position, info, imageSrc);
 
         switch (category) {
             case 'coffee':
@@ -353,19 +367,19 @@
         if (markersData) {
             markersData.coffee.forEach(data => {
                 var position = new kakao.maps.LatLng(data.position.Ma, data.position.La);
-                var marker = createMarker(position, data.content);
+                var marker = createMarker(position, data.content, coffeeMarkerImageSrc);
                 coffeeMarkers.push(marker);
             });
 
             markersData.store.forEach(data => {
                 var position = new kakao.maps.LatLng(data.position.Ma, data.position.La);
-                var marker = createMarker(position, data.content);
+                var marker = createMarker(position, data.content, storeMarkerImageSrc);
                 storeMarkers.push(marker);
             });
 
             markersData.carpark.forEach(data => {
                 var position = new kakao.maps.LatLng(data.position.Ma, data.position.La);
-                var marker = createMarker(position, data.content);
+                var marker = createMarker(position, data.content, carparkMarkerImageSrc);
                 carparkMarkers.push(marker);
             });
 

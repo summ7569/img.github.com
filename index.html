@@ -2,7 +2,7 @@
 <HTML lang="kr">
 <head>
     <meta charset="utf-8">
-    <title>test3</title>
+    <title>test2</title>
     <style>
         #mapwrap {
             position: relative;
@@ -212,6 +212,10 @@
         var elements = [document.querySelector('.category'), document.getElementById('searchForm')];
         elements.forEach(el => el.style.display = el.style.display === 'none' ? 'block' : 'none');
         document.getElementById('toggleUI').innerText = elements[0].style.display === 'none' ? 'UI 보이기' : 'UI 숨기기';
+    }
+
+    function changeMarker(category) {
+        setMarkers(category);
     }
 
     initializeMarkers();

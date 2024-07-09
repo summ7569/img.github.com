@@ -2,7 +2,7 @@
 <HTML lang="kr">
 <head>
     <meta charset="utf-8">
-    <title>tes56</title>
+    <title>tes4</title>
     <style>
         #mapwrap {
             position: relative;
@@ -71,13 +71,6 @@
         .category .ico_all {
             background-position: -10px -108px;
         }
-
-        #printSaveButtons {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            z-index: 10;
-        }
     </style>
 </head>
 <body>
@@ -106,8 +99,8 @@
 </div>
 
 <!-- 검색 폼 추가 -->
-<div id="searchForm" style="position: absolute; top: 70px; left: 10px; z-index: 10; background-color: white; padding: 10px; border: 1px solid black;">
-    <form>
+<div style="position: absolute; top: 70px; left: 10px; z-index: 10; background-color: white; padding: 10px; border: 1px solid black;">
+    <form id="searchForm">
         <label for="latitude">위도: </label><input type="text" id="latitude" name="latitude" required><br>
         <label for="longitude">경도: </label><input type="text" id="longitude" name="longitude" required><br>
         <label for="category">카테고리: </label>
@@ -119,12 +112,6 @@
         <label for="info">추가 정보: </label><input type="text" id="info" name="info"><br>
         <button type="button" onclick="addMarker()">추가</button>
     </form>
-</div>
-
-<!-- 인쇄 및 저장 버튼 추가 -->
-<div id="printSaveButtons" style="position: absolute; bottom: 10px; left: 10px; z-index: 10;">
-    <button onclick="printMap()">지도 인쇄</button>
-    <button onclick="saveAsImage()">지도 저장</button>
 </div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6"></script>
@@ -142,45 +129,69 @@
         new kakao.maps.LatLng(37.499427948430814, 127.02794423197847),
         new kakao.maps.LatLng(37.498553760499505, 127.02882598822454),
         new kakao.maps.LatLng(37.497625593121384, 127.02935713582038),
-        new kakao.maps.LatLng(37.49949333223966, 127.03069144884465)
+        new kakao.maps.LatLng(37.49646391248451, 127.02675574250912),
+        new kakao.maps.LatLng(37.49629291770947, 127.02587362608637),
+        new kakao.maps.LatLng(37.49754540521486, 127.02546694890695)
+    ];
+
+    var coffeeInfo = [
+        "부림동 52-1",
+        "부림동 110-1",
+        "부림동 140-1",
+        "부림동 120-1",
+        "부림동 122-221",
+        "부림동 540-1",
+        "부림동 1340-1"
     ];
 
     var storePositions = [
-        new kakao.maps.LatLng(37.49847318243406, 127.02819527061478),
-        new kakao.maps.LatLng(37.49896292488523, 127.0274044240344),
-        new kakao.maps.LatLng(37.49931270165959, 127.02596232494843)
-    ];
-
-    var carparkPositions = [
-        new kakao.maps.LatLng(37.50030935262944, 127.02811382692005),
-        new kakao.maps.LatLng(37.49989231601729, 127.0297105235977)
-    ];
-
-    var coffeeMarkers = [],
-        storeMarkers = [],
-        carparkMarkers = [];
-
-    var coffeeInfo = [
-        '스타벅스',
-        '이디야 커피',
-        '투썸플레이스',
-        '카페베네',
-        '커피빈'
+        new kakao.maps.LatLng(37.497535461505684, 127.02948149502778),
+        new kakao.maps.LatLng(37.49671536281186, 127.03020491448352),
+        new kakao.maps.LatLng(37.496201943633714, 127.02959405469642),
+        new kakao.maps.LatLng(37.49640072567703, 127.02726459882308),
+        new kakao.maps.LatLng(37.49640098874988, 127.02609983175294),
+        new kakao.maps.LatLng(37.49932849491523, 127.02935780247945),
+        new kakao.maps.LatLng(37.49996818951873, 127.02943721562295)
     ];
 
     var storeInfo = [
-        'GS25',
-        'CU',
-        '세븐일레븐'
+        "중앙동 52-1",
+        "과천동 110-1",
+        "중앙동 140-1",
+        "과천동 120-1",
+        "과천동 122-221",
+        "과천동 540-1",
+        "과천동 1340-1"
+    ];
+
+    var carparkPositions = [
+        new kakao.maps.LatLng(37.49966168796031, 127.03007039430118),
+        new kakao.maps.LatLng(37.499463762912974, 127.0288828824399),
+        new kakao.maps.LatLng(37.49896834100913, 127.02833986892401),
+        new kakao.maps.LatLng(37.49893267508434, 127.02673400572665),
+        new kakao.maps.LatLng(37.49872543597439, 127.02676785815386),
+        new kakao.maps.LatLng(37.49813096097184, 127.02591949495914),
+        new kakao.maps.LatLng(37.497680616783086, 127.02518427952202)
     ];
 
     var carparkInfo = [
-        '주차장 A',
-        '주차장 B'
+        "문원동 52-1",
+        "문원동산 110-1",
+        "혜화역 140-1",
+        "과천Ic 120-1",
+        "부천 122-221",
+        "부산 540-1",
+        "우편번호 1340-1"
     ];
 
-    var markerImageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/markerStar.png',
-        imageSize = new kakao.maps.Size(24, 35),
+    var markerImageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png',
+        coffeeMarkers = [],
+        storeMarkers = [],
+        carparkMarkers = [],
+        coffeeInfowindows = [],
+        storeInfowindows = [],
+        carparkInfowindows = [],
+        imageSize = new kakao.maps.Size(22, 26),
         coffeeImageOptions = {
             spriteOrigin: new kakao.maps.Point(10, 0),  // 커피숍 아이콘 위치
             spriteSize: new kakao.maps.Size(36, 98)
@@ -219,6 +230,8 @@
                 removable: true
             });
 
+            coffeeInfowindows.push(infowindow);
+
             kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, infowindow));
 
             marker.setMap(map);
@@ -237,6 +250,8 @@
                 removable: true
             });
 
+            storeInfowindows.push(infowindow);
+
             kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, infowindow));
 
             marker.setMap(map);
@@ -254,6 +269,8 @@
                 content: '<div style="padding:5px;">' + carparkInfo[i] + '</div>',
                 removable: true
             });
+
+            carparkInfowindows.push(infowindow);
 
             kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, infowindow));
 
@@ -336,6 +353,10 @@
         setMarkers(type);
     }
 
+    // 검색으로 추가한 마커와 인포윈도우를 관리할 배열
+    var addedMarkers = [];
+    var addedInfowindows = [];
+
     function addMarker() {
         var lat = parseFloat(document.getElementById('latitude').value);
         var lng = parseFloat(document.getElementById('longitude').value);
@@ -358,6 +379,7 @@
                 content: '<div style="padding:5px;">' + (info ? info : '새로운 커피숍') + '</div>',
                 removable: true
             });
+            coffeeInfowindows.push(infowindow);
         } else if (category === 'store') {
             markerImage = createMarkerImage(markerImageSrc, imageSize, storeImageOptions);
             marker = createMarker(position, markerImage);
@@ -366,6 +388,7 @@
                 content: '<div style="padding:5px;">' + (info ? info : '새로운 편의점') + '</div>',
                 removable: true
             });
+            storeInfowindows.push(infowindow);
         } else if (category === 'carpark') {
             markerImage = createMarkerImage(markerImageSrc, imageSize, carparkImageOptions);
             marker = createMarker(position, markerImage);
@@ -374,10 +397,15 @@
                 content: '<div style="padding:5px;">' + (info ? info : '새로운 주차장') + '</div>',
                 removable: true
             });
+            carparkInfowindows.push(infowindow);
         }
 
         kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, infowindow));
         marker.setMap(map);
+
+        // 추가된 마커와 인포윈도우를 배열에 추가
+        addedMarkers.push(marker);
+        addedInfowindows.push(infowindow);
     }
 
     // 초기화할 때는 모든 마커를 보여줍니다
@@ -385,40 +413,6 @@
     createStoreMarkers();
     createCarparkMarkers();
     setAllMarkers();
-    
-    function printMap() {
-        var mapElement = document.getElementById('map');
-        var printWindow = window.open('', '_blank');
-        printWindow.document.open();
-        printWindow.document.write('<html><head><title>Print Map</title></head><body>');
-        printWindow.document.write('<img src="' + mapElement.toDataURL() + '">');
-        printWindow.document.write('</body></html>');
-        printWindow.document.close();
-        printWindow.print();
-    }
-
-    function saveAsImage() {
-        var mapElement = document.getElementById('map');
-        var image = new Image();
-        image.src = mapElement.toDataURL();
-        var link = document.createElement('a');
-        link.href = image.src;
-        link.download = 'map.png';
-        link.click();
-    }
-
-    function toggleUI() {
-        var categoryUI = document.querySelector('.category');
-        var searchForm = document.getElementById('searchForm');
-
-        if (categoryUI.style.display === 'none') {
-            categoryUI.style.display = 'block';
-            searchForm.style.display = 'block';
-        } else {
-            categoryUI.style.display = 'none';
-            searchForm.style.display = 'none';
-        }
-    }
 </script>
 </body>
-</html>
+</HTML>

@@ -2,7 +2,7 @@
 <HTML lang="kr">
 <head>
     <meta charset="utf-8">
-    <title>tes5</title>
+    <title>tes3</title>
     <style>
         #mapwrap {
             position: relative;
@@ -110,6 +110,16 @@
         new kakao.maps.LatLng(37.49754540521486, 127.02546694890695)
     ];
 
+    var coffeeInfo = [
+        "커피숍 정보 1",
+        "커피숍 정보 2",
+        "커피숍 정보 3",
+        "커피숍 정보 4",
+        "커피숍 정보 5",
+        "커피숍 정보 6",
+        "커피숍 정보 7"
+    ];
+
     var storePositions = [
         new kakao.maps.LatLng(37.497535461505684, 127.02948149502778),
         new kakao.maps.LatLng(37.49671536281186, 127.03020491448352),
@@ -120,6 +130,16 @@
         new kakao.maps.LatLng(37.49996818951873, 127.02943721562295)
     ];
 
+    var storeInfo = [
+        "편의점 정보 1",
+        "편의점 정보 2",
+        "편의점 정보 3",
+        "편의점 정보 4",
+        "편의점 정보 5",
+        "편의점 정보 6",
+        "편의점 정보 7"
+    ];
+
     var carparkPositions = [
         new kakao.maps.LatLng(37.49966168796031, 127.03007039430118),
         new kakao.maps.LatLng(37.499463762912974, 127.0288828824399),
@@ -128,6 +148,16 @@
         new kakao.maps.LatLng(37.49872543597439, 127.02676785815386),
         new kakao.maps.LatLng(37.49813096097184, 127.02591949495914),
         new kakao.maps.LatLng(37.497680616783086, 127.02518427952202)
+    ];
+
+    var carparkInfo = [
+        "주차장 정보 1",
+        "주차장 정보 2",
+        "주차장 정보 3",
+        "주차장 정보 4",
+        "주차장 정보 5",
+        "주차장 정보 6",
+        "주차장 정보 7"
     ];
 
     var markerImageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png',
@@ -161,13 +191,11 @@
             coffeeMarkers.push(marker);
 
             var infowindow = new kakao.maps.InfoWindow({
-                content: '<div style="padding:5px;">커피숍 정보 ' + i + '</div>',
+                content: '<div style="padding:5px;">' + coffeeInfo[i] + '</div>',
                 removable: true
             });
 
-            kakao.maps.event.addListener(marker, 'click', function() {
-                infowindow.open(map, this);
-            });
+            kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, infowindow));
 
             marker.setMap(map);
         }
@@ -181,13 +209,11 @@
             storeMarkers.push(marker);
 
             var infowindow = new kakao.maps.InfoWindow({
-                content: '<div style="padding:5px;">편의점 정보 ' + i + '</div>',
+                content: '<div style="padding:5px;">' + storeInfo[i] + '</div>',
                 removable: true
             });
 
-            kakao.maps.event.addListener(marker, 'click', function() {
-                infowindow.open(map, this);
-            });
+            kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, infowindow));
 
             marker.setMap(map);
         }
@@ -201,16 +227,20 @@
             carparkMarkers.push(marker);
 
             var infowindow = new kakao.maps.InfoWindow({
-                content: '<div style="padding:5px;">주차장 정보 ' + i + '</div>',
+                content: '<div style="padding:5px;">' + carparkInfo[i] + '</div>',
                 removable: true
             });
 
-            kakao.maps.event.addListener(marker, 'click', function() {
-                infowindow.open(map, this);
-            });
+            kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, infowindow));
 
             marker.setMap(map);
         }
+    }
+
+    function makeClickListener(map, marker, infowindow) {
+        return function() {
+            infowindow.open(map, marker);
+        };
     }
 
     function setMarkers(type) {

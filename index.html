@@ -56,13 +56,13 @@ var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니
 
 // 커피숍 마커가 표시될 좌표 배열입니다
 var coffeePositions = [ 
-new kakao.maps.LatLng(37.499590490909185, 127.0263723554437),
-new kakao.maps.LatLng(37.499427948430814, 127.02794423197847),
-new kakao.maps.LatLng(37.498553760499505, 127.02882598822454),
- new kakao.maps.LatLng(37.497625593121384, 127.02935713582038),
-    new kakao.maps.LatLng(37.49646391248451, 127.02675574250912),
-    new kakao.maps.LatLng(37.49629291770947, 127.02587362608637),
-    new kakao.maps.LatLng(37.49754540521486, 127.02546694890695)                
+(new kakao.maps.LatLng(37.499590490909185, 127.0263723554437)'<div style="padding:5px;"> 부림동 110-1 </div>') ,
+(new kakao.maps.LatLng(37.499427948430814, 127.02794423197847)'<div style="padding:5px;"> 3동 110-1 </div>'),
+(new kakao.maps.LatLng(37.498553760499505, 127.02882598822454)'<div style="padding:5px;"> 2동 110-1 </div>'),
+ (new kakao.maps.LatLng(37.497625593121384, 127.02935713582038)'<div style="padding:5px;"> 1동 110-1 </div>'),
+    (new kakao.maps.LatLng(37.49646391248451, 127.02675574250912)'<div style="padding:5px;"> 문원동 110-1 </div>'),
+    (new kakao.maps.LatLng(37.49629291770947, 127.02587362608637)'<div style="padding:5px;"> 과천동 110-1 </div>'),
+    (new kakao.maps.LatLng(37.49754540521486, 127.02546694890695)'<div style="padding:5px;"> 중앙동 110-1 </div>')                
 ];
 
 // 편의점 마커가 표시될 좌표 배열입니다
@@ -93,7 +93,24 @@ var markerImageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/c
     carparkMarkers = []; // 주차장 마커 객체를 가지고 있을 배열입니다
 
     
-createCoffeeMarkers(); // 커피숍 마커를 생성하고 커피숍 마커 배열에 추가합니다
+function createCoffeeMarkers() {
+	for (let i = 0; i < data.length; i++) {
+		//마커 생성
+		let marker = new kakao.maps.Marker({
+			position: new kakao.maps.LatLng(data[i][0], data[i][1]),
+			clickable: true
+		});
+		let infowindow = new kakao.maps.InfoWindow({
+			content : data[i][2],
+			removable : true
+		});
+		marker.setMap(map)
+		kakao.maps.event.addListener(marker, 'click', function() {
+			infowindow.open(map, marker);
+		});
+		coffeeMarkers.push(marker) }
+}
+	// 커피숍 마커를 생성하고 커피숍 마커 배열에 추가합니다
 createStoreMarkers(); // 편의점 마커를 생성하고 편의점 마커 배열에 추가합니다
 createCarparkMarkers(); // 주차장 마커를 생성하고 주차장 마커 배열에 추가합니다
 

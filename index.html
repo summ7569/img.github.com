@@ -2,7 +2,7 @@
 <HTML lang="kr">
 <head>
     <meta charset="utf-8">
-    <title>tes3</title>
+    <title>tes6</title>
         <style>
 #mapwrap{position:relative;overflow:hidden;}
 .category, .category *{margin:0;padding:0;color:#000;}   
@@ -80,10 +80,10 @@ var map = new kakao.maps.Map(mapContainer, mapOption); // 지도를 생성합니
 
 // 커피숍 마커가 표시될 좌표 배열입니다
 var coffeePositions = [ 
-    new kakao.maps.LatLng(37.499590490909185, 127.0263723554437),
-    new kakao.maps.LatLng(37.499427948430814, 127.02794423197847),
-    new kakao.maps.LatLng(37.498553760499505, 127.02882598822454),
-    new kakao.maps.LatLng(37.497625593121384, 127.02935713582038),
+	{content: '<div> 부림동10-1</div>',  latlng: new kakao.maps.LatLng(37.499590490909185, 127.0263723554437)},
+	{content: '<div> 중앙동 9-2</div>', latlng: new kakao.maps.LatLng(37.499427948430814, 127.02794423197847)},
+	{content: '<div> 문원동 210-551</div>', latlng: new kakao.maps.LatLng(37.498553760499505, 127.02882598822454)},
+	{content: '<div> 과천동 112-111</div>', latlng: new kakao.maps.LatLng(37.497625593121384, 127.02935713582038)},
     new kakao.maps.LatLng(37.49646391248451, 127.02675574250912),
     new kakao.maps.LatLng(37.49629291770947, 127.02587362608637),
     new kakao.maps.LatLng(37.49754540521486, 127.02546694890695)                
@@ -266,38 +266,35 @@ function changeMarker(type){
         setCarparkMarkers(map);  
     }    
 
-// 커스텀 오버레이에 표시할 내용입니다     
-// HTML 문자열 또는 Dom Element 입니다 
-var content = '<div class ="label"><span class="left"></span><span class="center">부림동10-1</span><span class="right"></span></div>';
-// 커스텀 오버레이가 표시될 위치입니다 
-var position = new kakao.maps.LatLng(37.499590490909185, 127.0263723554437);  
 	
-// 커스텀 오버레이에 표시할 내용입니다     	
-var content = '<div class ="label"><span class="left"></span><span class="center">부림동2-1</span><span class="right"></span></div>';
-// 커스텀 오버레이가 표시될 위치입니다 
-var position = new kakao.maps.LatLng(37.497535461505684, 127.02948149502778);  
+    // 마커에 표시할 인포윈도우를 생성합니다 
+    var infowindow = new kakao.maps.InfoWindow({
+        content: positions[i].content // 인포윈도우에 표시할 내용
+    });
 
-
-	
-// 커스텀 오버레이를 생성합니다
-var customOverlay = new kakao.maps.CustomOverlay({
-    position: position,
-    content: content   
-});
-
-// 커스텀 오버레이를 지도에 표시합니다
-customOverlay.setMap(map);
-
-// 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
-kakao.maps.event.addListener(marker, 'click', function() {
-    overlay.setMap(map);
-});
-
-// 커스텀 오버레이를 닫기 위해 호출되는 함수입니다 
-function closeOverlay() {
-    overlay.setMap(null);     
+    // 마커에 mouseover 이벤트와 mouseout 이벤트를 등록합니다
+    // 이벤트 리스너로는 클로저를 만들어 등록합니다 
+    // for문에서 클로저를 만들어 주지 않으면 마지막 마커에만 이벤트가 등록됩니다
+    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
+    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
 }
 
+// 인포윈도우를 표시하는 클로저를 만드는 함수입니다 
+function makeOverListener(map, marker, infowindow) {
+    return function() {
+        infowindow.open(map, marker);
+    };
+}
+
+// 인포윈도우를 닫는 클로저를 만드는 함수입니다 
+function makeOutListener(infowindow) {
+    return function() {
+        infowindow.close();
+    };
+}
+	
+
+	
 }
 </script>
 </body>

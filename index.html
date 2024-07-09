@@ -2,7 +2,7 @@
 <HTML lang="kr">
 <head>
     <meta charset="utf-8">
-    <title>test4</title>
+    <title>test100</title>
     <style>
         #mapwrap {
             position: relative;
@@ -123,7 +123,8 @@
         </select><br>
         <label for="info">추가 정보: </label><input type="text" id="info" name="info"><br>
         <button type="button" onclick="addMarker()">추가</button>
-        <button type="button" onclick="moveToCoordinates()">위치로 이동</button> <!-- 이 버튼을 추가합니다. -->
+        <button type="button" onclick="moveToCoordinates()">위치로 이동</button>
+        <button type="button" onclick="clearMarkers()">마커 초기화</button>
     </form>
 </div>
 
@@ -200,9 +201,9 @@
         "과천동 1340-1"
     ];
 
-    var coffeeMarkerImageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png';
-    var storeMarkerImageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_green.png';
-    var carparkMarkerImageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_blue.png';
+    var coffeeMarkerImageSrc = 'https://github.com/summ7569/summ7569.github.io/blob/06daa1d1310c79e614466229c1d32c3940510460/category1.png';
+    var storeMarkerImageSrc = 'https://github.com/summ7569/summ7569.github.io/blob/06daa1d1310c79e614466229c1d32c3940510460/category2.png';
+    var carparkMarkerImageSrc = 'https://github.com/summ7569/summ7569.github.io/blob/06daa1d1310c79e614466229c1d32c3940510460/category3.png';
 
     var coffeeMarkers = [],
         storeMarkers = [],
@@ -284,8 +285,6 @@
     function moveToCoordinates() {
         var latitude = parseFloat(document.getElementById("latitude").value);
         var longitude = parseFloat(document.getElementById("longitude").value);
-        var category = document.getElementById("category").value;
-        var info = document.getElementById("info").value;
 
         var position = new kakao.maps.LatLng(latitude, longitude);
 
@@ -337,6 +336,7 @@
                 break;
         }
 
+        map.setCenter(position);  // 추가된 마커의 위치로 지도를 이동
         saveMarkersToLocalStorage();
     }
 
@@ -385,6 +385,19 @@
 
             changeMarker(category);
         }
+    }
+
+    // 로컬 스토리지에서 마커 초기화
+    function clearMarkers() {
+        localStorage.removeItem('markersData');
+
+        setMarkers(null, coffeeMarkers);
+        setMarkers(null, storeMarkers);
+        setMarkers(null, carparkMarkers);
+
+        coffeeMarkers = [];
+        storeMarkers = [];
+        carparkMarkers = [];
     }
 
     // 페이지 로드 시 로컬 스토리지에서 마커를 불러옵니다.

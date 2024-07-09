@@ -2,7 +2,7 @@
 <HTML lang="kr">
 <head>
     <meta charset="utf-8">
-    <title>test7</title>
+    <title>test1</title>
     <style>
         #mapwrap {
             position: relative;
@@ -195,7 +195,7 @@
         new kakao.maps.LatLng(37.497680616783086, 127.02518427952202)
     ];
 
-   var carparkInfo = [
+var carparkInfo = [
     "문원동 52-1",
     "문원동 110-1",
     "혜화역 140-1",
@@ -269,16 +269,14 @@ function toggleUI() {
 
 // 카테고리에 따라 마커 아이콘을 반환하는 함수
 function getCategoryIcon(category) {
-    var iconSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png';
     var icons = {
-        coffee: { x: -10, y: 0 },
-        store: { x: -10, y: -36 },
-        carpark: { x: -10, y: -72 },
-        all: { x: -10, y: -108 }
+        coffee: 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category_coffee.png',
+        store: 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category_store.png',
+        carpark: 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category_parking.png',
+        all: 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category_all.png'
     };
 
-    var position = icons[category];
-    return iconSrc + ' ' + position.x + 'px ' + position.y + 'px';
+    return icons[category];
 }
 
 // 지정한 카테고리의 마커들만 지도에 표시하는 함수
@@ -380,13 +378,9 @@ function addMarker() {
 
     var position = new kakao.maps.LatLng(latitude, longitude);
 
-    var imageSrc = getCategoryIcon(category);
-    var imageSize = new kakao.maps.Size(30, 30);
-    var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize);
-
     var marker = new kakao.maps.Marker({
         position: position,
-        image: markerImage
+        image: new kakao.maps.MarkerImage(getCategoryIcon(category), new kakao.maps.Size(30, 30))
     });
 
     var infowindow = new kakao.maps.InfoWindow({

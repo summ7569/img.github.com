@@ -2,7 +2,7 @@
 <HTML lang="kr">
 <head>
     <meta charset="utf-8">
-    <title>tes1</title>
+    <title>tes7</title>
     <style>
         #mapwrap {
             position: relative;
@@ -111,13 +111,13 @@
     ];
 
     var coffeeInfo = [
-        "부림동 52-1",
-        "부림동 110-1",
-        "부림동 140-1",
-        "부림동 120-1",
-        "부림동 122-221",
-        "부림동 540-1",
-        "부림동 1340-1"
+        "문원동 52-1",
+        "문원동산 110-1",
+        "혜화역 140-1",
+        "과천Ic 120-1",
+        "부천 122-221",
+        "부산 540-1",
+        "우편번호 1340-1"
     ];
 
     var storePositions = [
@@ -151,13 +151,13 @@
     ];
 
     var carparkInfo = [
-        "문원동 52-1",
-        "문원동산 110-1",
-        "혜화역 140-1",
-        "과천Ic 120-1",
-        "부천 122-221",
-        "부산 540-1",
-        "우편번호 1340-1"
+        "부림동 52-1",
+        "부림동 110-1",
+        "부림동 140-1",
+        "부림동 120-1",
+        "부림동 122-221",
+        "부림동 540-1",
+        "부림동 1340-1"
     ];
 
     var markerImageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png',
@@ -165,8 +165,16 @@
         storeMarkers = [],
         carparkMarkers = [],
         imageSize = new kakao.maps.Size(22, 26),
-        imageOptions = {
-            spriteOrigin: new kakao.maps.Point(10, 36),
+        coffeeImageOptions = {
+            spriteOrigin: new kakao.maps.Point(10, 0),  // 커피숍 아이콘 위치
+            spriteSize: new kakao.maps.Size(36, 98)
+        },
+        storeImageOptions = {
+            spriteOrigin: new kakao.maps.Point(10, 36),  // 편의점 아이콘 위치
+            spriteSize: new kakao.maps.Size(36, 98)
+        },
+        carparkImageOptions = {
+            spriteOrigin: new kakao.maps.Point(10, 72),  // 주차장 아이콘 위치
             spriteSize: new kakao.maps.Size(36, 98)
         };
 
@@ -185,7 +193,7 @@
 
     function createCoffeeMarkers() {
         for (var i = 0; i < coffeePositions.length; i++) {
-            var markerImage = createMarkerImage(markerImageSrc, imageSize, imageOptions),
+            var markerImage = createMarkerImage(markerImageSrc, imageSize, coffeeImageOptions),
                 marker = createMarker(coffeePositions[i], markerImage);
 
             coffeeMarkers.push(marker);
@@ -203,7 +211,7 @@
 
     function createStoreMarkers() {
         for (var i = 0; i < storePositions.length; i++) {
-            var markerImage = createMarkerImage(markerImageSrc, imageSize, imageOptions),
+            var markerImage = createMarkerImage(markerImageSrc, imageSize, storeImageOptions),
                 marker = createMarker(storePositions[i], markerImage);
 
             storeMarkers.push(marker);
@@ -221,7 +229,7 @@
 
     function createCarparkMarkers() {
         for (var i = 0; i < carparkPositions.length; i++) {
-            var markerImage = createMarkerImage(markerImageSrc, imageSize, imageOptions),
+            var markerImage = createMarkerImage(markerImageSrc, imageSize, carparkImageOptions),
                 marker = createMarker(carparkPositions[i], markerImage);
 
             carparkMarkers.push(marker);

@@ -2,7 +2,7 @@
 <HTML lang="kr">
 <head>
     <meta charset="utf-8">
-    <title>tes2</title>
+    <title>test7</title>
     <style>
         #mapwrap {
             position: relative;
@@ -199,7 +199,7 @@
         "우편번호 1340-1"
     ];
 
-    var markerImageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png',
+    var markerImageSrc = '//t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png',
         coffeeMarkers = [],
         storeMarkers = [],
         carparkMarkers = [],
@@ -421,6 +421,9 @@
         // 추가된 마커와 인포윈도우를 배열에 추가
         addedMarkers.push(marker);
         addedInfowindows.push(infowindow);
+
+        // 검색 위치로 지도 이동
+        map.panTo(position);
     }
 
     // 초기화할 때는 모든 마커를 보여줍니다

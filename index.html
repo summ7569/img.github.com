@@ -2,7 +2,7 @@
 <HTML lang="kr">
 <head>
     <meta charset="utf-8">
-    <title>tes8</title>
+    <title>tes11</title>
     <style>
         #mapwrap {
             position: relative;
@@ -21,7 +21,7 @@
             overflow: hidden;
             top: 10px;
             left: 10px;
-            width: 150px;
+            width: 200px; /* Width increased to accommodate the new category */
             height: 50px;
             z-index: 10;
             border: 1px solid black;
@@ -67,6 +67,10 @@
         .category .ico_carpark {
             background-position: -10px -72px;
         }
+        
+        .category .ico_all {
+            background-position: -10px -108px;
+        }
     </style>
 </head>
 <body>
@@ -86,6 +90,10 @@
         <li id="carparkMenu" onclick="changeMarker('carpark')">
             <span class="ico_comm ico_carpark"></span>
             주차장
+        </li>
+        <li id="allMenu" onclick="changeMarker('all')">
+            <span class="ico_comm ico_all"></span>
+            모두
         </li>
     </ul>
 </div>
@@ -267,6 +275,8 @@
             setStoreMarkers();
         } else if (type === 'carpark') {
             setCarparkMarkers();
+        } else if (type === 'all') {
+            setAllMarkers();
         }
     }
 
@@ -292,6 +302,11 @@
         carparkMarkers.forEach(function(marker) {
             marker.setMap(map);
         });
+    }
+
+    function setAllMarkers() {
+        closeAllInfowindows();
+        setMapOnAll(map);
     }
 
     function setMapOnAll(map) {
@@ -326,6 +341,7 @@
     createCoffeeMarkers();
     createStoreMarkers();
     createCarparkMarkers();
+    setAllMarkers();
 </script>
 </body>
 </HTML>

@@ -2,7 +2,7 @@
 <HTML lang="kr">
 <head>
     <meta charset="utf-8">
-    <title>tes8</title>
+    <title>tes9</title>
         <style>
 #mapwrap{position:relative;overflow:hidden;}
 .category, .category *{margin:0;padding:0;color:#000;}   
@@ -272,6 +272,15 @@ var content = '<div class ="label"><span class="left"></span><span class="center
 
 // 커스텀 오버레이가 표시될 위치입니다 
 var position = new kakao.maps.LatLng(37.499590490909185, 127.0263723554437);  
+	
+	// 커스텀 오버레이를 생성합니다
+var customOverlay = new kakao.maps.CustomOverlay({
+    position: position,
+    content: content   
+});
+
+// 커스텀 오버레이를 지도에 표시합니다
+customOverlay.setMap(map);
 
 // 마커를 클릭했을 때 커스텀 오버레이를 표시합니다
 kakao.maps.event.addListener(marker, 'click', function() {

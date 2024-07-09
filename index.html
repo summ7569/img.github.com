@@ -2,7 +2,7 @@
 <HTML lang="kr">
 <head>
     <meta charset="utf-8">
-    <title>tes4</title>
+    <title>tes2</title>
     <style>
         #mapwrap {
             position: relative;
@@ -71,6 +71,18 @@
         .category .ico_all {
             background-position: -10px -108px;
         }
+
+        /* 추가된 스타일 */
+        #toggleUI {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            z-index: 20;
+            padding: 5px 10px;
+            background-color: #fff;
+            border: 1px solid #000;
+            cursor: pointer;
+        }
     </style>
 </head>
 <body>
@@ -113,6 +125,9 @@
         <button type="button" onclick="addMarker()">추가</button>
     </form>
 </div>
+
+<!-- UI 숨기기/보이기 버튼 -->
+<div id="toggleUI" onclick="toggleUI()">UI 숨기기</div>
 
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6"></script>
 <script>
@@ -413,6 +428,22 @@
     createStoreMarkers();
     createCarparkMarkers();
     setAllMarkers();
+
+    // UI 숨기기/보이기 함수
+    function toggleUI() {
+        var categoryUI = document.querySelector('.category');
+        var searchUI = document.querySelector('form');
+
+        if (categoryUI.style.display === 'none') {
+            categoryUI.style.display = 'block';
+            searchUI.style.display = 'block';
+            document.getElementById('toggleUI').textContent = 'UI 숨기기';
+        } else {
+            categoryUI.style.display = 'none';
+            searchUI.style.display = 'none';
+            document.getElementById('toggleUI').textContent = 'UI 보이기';
+        }
+    }
 </script>
 </body>
 </HTML>

@@ -426,11 +426,23 @@
         map.panTo(position);
     }
 
+    
+ function removeMarker() {
+    // 추가된 마커와 인포윈도우 배열에서 마지막 요소를 삭제합니다.
+    var removedMarker = addedMarkers.pop();
+    var removedInfowindow = addedInfowindows.pop();
+
+    // 삭제된 마커와 인포윈도우를 지도에서 제거합니다.
+    removedMarker.setMap(null);
+    removedInfowindow.close();
+}
+
     // 초기화할 때는 모든 마커를 보여줍니다
     createCoffeeMarkers();
     createStoreMarkers();
     createCarparkMarkers();
     setAllMarkers();
+    
 
     // UI 숨기기/보이기 함수
     function toggleUI() {

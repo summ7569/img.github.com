@@ -2,7 +2,7 @@
 <HTML lang="kr">
 <head>
     <meta charset="utf-8">
-    <title>test14</title>
+    <title>test8</title>
     <style>
         #mapwrap {
             position: relative;
@@ -207,6 +207,7 @@
 
     var coffeeMarkers = [], storeMarkers = [], carparkMarkers = [];
 
+    // 초기 마커 생성
     createMarkers('coffee');
     createMarkers('store');
     createMarkers('carpark');
@@ -256,6 +257,7 @@
             kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, marker.infowindow));
 
             markers.push(marker);
+            marker.setMap(map); // 맵에 마커 추가
         }
     }
 

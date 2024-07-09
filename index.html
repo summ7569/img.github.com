@@ -2,7 +2,7 @@
 <HTML lang="kr">
 <head>
     <meta charset="utf-8">
-    <title>test7</title>
+    <title>test14</title>
     <style>
         #mapwrap {
             position: relative;
@@ -123,7 +123,7 @@
         </select><br>
         <label for="info">추가 정보: </label><input type="text" id="info" name="info"><br>
         <button type="button" onclick="addMarker()">추가</button>
-        <button type="button" onclick="removeMarker()">삭제</button>
+        <button type="button" onclick="moveToCoordinates()">지도 이동</button>
     </form>
 </div>
 
@@ -200,171 +200,180 @@
         "우편번호 1340-1"
     ];
 
-    var markerImageSrc = '//t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_red.png', // 마커 이미지의 주소입니다
-        markerImageSize = new kakao.maps.Size(30, 45), // 마커 이미지의 크기입니다
-        markerImageOption = {offset: new kakao.maps.Point(15, 45)};
+    var markerImageSrc = '//t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png',
+        coffeeMarkerImageSrc = markerImageSrc + 'ico_coffee.png',
+        storeMarkerImageSrc = markerImageSrc + 'ico_store.png',
+        carparkMarkerImageSrc = markerImageSrc + 'ico_carpark.png';
 
     var coffeeMarkers = [], storeMarkers = [], carparkMarkers = [];
-    var addedMarkers = [], addedInfowindows = [];
 
-    // 커피숍 마커와 인포윈도우를 생성하는 함수
-    function makeCoffeeMarkers() {
-        for (var i = 0; i < coffeePositions.length; i++) {
+    createMarkers('coffee');
+    createMarkers('store');
+    createMarkers('carpark');
+
+    function createMarkers(category) {
+        var positions, markers, info;
+
+        if (category === 'coffee') {
+            positions = coffeePositions;
+            markers = coffeeMarkers;
+            info = coffeeInfo;
+        } else if (category === 'store') {
+            positions = storePositions;
+            markers = storeMarkers;
+            info = storeInfo;
+        } else if (category === 'carpark') {
+            positions = carparkPositions;
+            markers = carparkMarkers;
+            info = carparkInfo;
+        } else {
+            return;
+        }
+
+        for (var i = 0; i < positions.length; i++) {
+            var imageSize = new kakao.maps.Size(40, 45),
+                imageOption = {offset: new kakao.maps.Point(27, 69)};
+
+            var markerImage;
+
+            if (category === 'coffee') {
+                markerImage = new kakao.maps.MarkerImage(coffeeMarkerImageSrc, imageSize, imageOption);
+            } else if (category === 'store') {
+                markerImage = new kakao.maps.MarkerImage(storeMarkerImageSrc, imageSize, imageOption);
+            } else if (category === 'carpark') {
+                markerImage = new kakao.maps.MarkerImage(carparkMarkerImageSrc, imageSize, imageOption);
+            }
+
             var marker = new kakao.maps.Marker({
-                position: coffeePositions[i],
-                image: new kakao.maps.MarkerImage(markerImageSrc, markerImageSize, markerImageOption)
+                position: positions[i],
+                image: markerImage
             });
 
-            var infowindow = new kakao.maps.InfoWindow({
-                content: '<div style="padding:5px;">' + coffeeInfo[i] + '</div>'
+            marker.infowindow = new kakao.maps.InfoWindow({
+                content: '<div style="padding:5px;font-size:12px;">' + info[i] + '</div>'
             });
 
-            coffeeMarkers.push(marker);
-            addedMarkers.push(marker);
-            addedInfowindows.push(infowindow);
+            kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, marker.infowindow));
 
-            // 마커를 지도에 표시합니다
-            marker.setMap(map);
-
-            // 마커에 클릭 이벤트를 등록합니다
-            kakao.maps.event.addListener(marker, 'click', function () {
-                infowindow.open(map, marker);
-            });
+            markers.push(marker);
         }
     }
 
-    // 편의점 마커와 인포윈도우를 생성하는 함수
-    function makeStoreMarkers() {
-        for (var i = 0; i < storePositions.length; i++) {
-            var marker = new kakao.maps.Marker({
-                position: storePositions[i],
-                image: new kakao.maps.MarkerImage(markerImageSrc, markerImageSize, markerImageOption)
-            });
+    var addedMarkers = [];
 
-            var infowindow = new kakao.maps.InfoWindow({
-                content: '<div style="padding:5px;">' + storeInfo[i] + '</div>'
-            });
+    function addMarker() {
+        var latitude = parseFloat(document.getElementById('latitude').value);
+        var longitude = parseFloat(document.getElementById('longitude').value);
+        var category = document.getElementById('category').value;
+        var info = document.getElementById('info').value;
 
-            storeMarkers.push(marker);
-            addedMarkers.push(marker);
-            addedInfowindows.push(infowindow);
-
-            // 마커를 지도에 표시합니다
-            marker.setMap(map);
-
-            // 마커에 클릭 이벤트를 등록합니다
-            kakao.maps.event.addListener(marker, 'click', function () {
-                infowindow.open(map, marker);
-            });
+        if (isNaN(latitude) || isNaN(longitude)) {
+            alert('올바른 위도와 경도를 입력하세요.');
+            return;
         }
-    }
 
-    // 주차장 마커와 인포윈도우를 생성하는 함수
-    function makeCarparkMarkers() {
-        for (var i = 0; i < carparkPositions.length; i++) {
-            var marker = new kakao.maps.Marker({
-                position: carparkPositions[i],
-                image: new kakao.maps.MarkerImage(markerImageSrc, markerImageSize, markerImageOption)
-            });
+        var position = new kakao.maps.LatLng(latitude, longitude);
+        var imageSize = new kakao.maps.Size(40, 45),
+            imageOption = {offset: new kakao.maps.Point(27, 69)};
 
-            var infowindow = new kakao.maps.InfoWindow({
-                content: '<div style="padding:5px;">' + carparkInfo[i] + '</div>'
-            });
+        var markerImage;
 
-            carparkMarkers.push(marker);
-            addedMarkers.push(marker);
-            addedInfowindows.push(infowindow);
-
-            // 마커를 지도에 표시합니다
-            marker.setMap(map);
-
-            // 마커에 클릭 이벤트를 등록합니다
-            kakao.maps.event.addListener(marker, 'click', function () {
-                infowindow.open(map, marker);
-            });
+        if (category === 'coffee') {
+            markerImage = new kakao.maps.MarkerImage(coffeeMarkerImageSrc, imageSize, imageOption);
+        } else if (category === 'store') {
+            markerImage = new kakao.maps.MarkerImage(storeMarkerImageSrc, imageSize, imageOption);
+        } else if (category === 'carpark') {
+            markerImage = new kakao.maps.MarkerImage(carparkMarkerImageSrc, imageSize, imageOption);
         }
+
+        var marker = new kakao.maps.Marker({
+            position: position,
+            image: markerImage
+        });
+
+        marker.infowindow = new kakao.maps.InfoWindow({
+            content: '<div style="padding:5px;font-size:12px;">' + info + '</div>'
+        });
+
+        kakao.maps.event.addListener(marker, 'click', makeClickListener(map, marker, marker.infowindow));
+
+        marker.setMap(map);
+        addedMarkers.push(marker);
     }
 
-    // 초기화 함수: 지도에 모든 마커를 표시
-    function initMap() {
-        makeCoffeeMarkers();
-        makeStoreMarkers();
-        makeCarparkMarkers();
+    var activeInfowindows = [];
+
+    function makeClickListener(map, marker, infowindow) {
+        return function () {
+            activeInfowindows.forEach(function (activeInfowindow) {
+                activeInfowindow.close();
+            });
+            activeInfowindows = [];
+
+            infowindow.open(map, marker);
+            activeInfowindows.push(infowindow);
+        };
     }
 
-    // 카테고리에 따라 마커를 변경하는 함수
-    function changeMarker(category) {
-        // 모든 마커를 지도에서 제거
-        removeMarker();
-
-        // 카테고리에 따라 해당 마커만 지도에 표시
-        switch (category) {
-            case 'coffee':
-                coffeeMarkers.forEach(function (marker) {
-                    marker.setMap(map);
-                    addedMarkers.push(marker);
-                });
-                break;
-            case 'store':
-                storeMarkers.forEach(function (marker) {
-                    marker.setMap(map);
-                    addedMarkers.push(marker);
-                });
-                break;
-            case 'carpark':
-                carparkMarkers.forEach(function (marker) {
-                    marker.setMap(map);
-                    addedMarkers.push(marker);
-                });
-                break;
-            case 'all':
-                coffeeMarkers.forEach(function (marker) {
-                    marker.setMap(map);
-                    addedMarkers.push(marker);
-                });
-                storeMarkers.forEach(function (marker) {
-                    marker.setMap(map);
-                    addedMarkers.push(marker);
-                });
-                carparkMarkers.forEach(function (marker) {
-                    marker.setMap(map);
-                    addedMarkers.push(marker);
-                });
-                break;
-            default:
-                break;
-        }
-    }
-
-    // 마커와 인포윈도우를 모두 제거하는 함수
     function removeMarker() {
-        // 추가된 모든 마커와 인포윈도우를 제거합니다.
-        addedMarkers.forEach(function (marker) {
-            marker.setMap(null);
-        });
-        addedInfowindows.forEach(function (infowindow) {
-            infowindow.close();
+        var markersToRemove = addedMarkers.filter(function (marker) {
+            return !activeInfowindows.includes(marker.infowindow);
         });
 
-        // 배열 초기화
-        addedMarkers = [];
-        addedInfowindows = [];
+        markersToRemove.forEach(function (marker) {
+            marker.setMap(null);
+            var index = addedMarkers.indexOf(marker);
+            if (index !== -1) {
+                addedMarkers.splice(index, 1);
+            }
+        });
+
+        activeInfowindows = [];
     }
 
-    // UI 숨기기/보이기 함수
+    function moveToCoordinates() {
+        var lat = parseFloat(document.getElementById('latitude').value);
+        var lng = parseFloat(document.getElementById('longitude').value);
+
+        if (isNaN(lat) || isNaN(lng)) {
+            alert('올바른 위도와 경도를 입력하세요.');
+            return;
+        }
+
+        var moveLatLng = new kakao.maps.LatLng(lat, lng);
+        map.panTo(moveLatLng);
+    }
+
     function toggleUI() {
         var category = document.querySelector('.category');
-        if (category.style.display === 'none') {
-            category.style.display = 'block';
-            document.getElementById('toggleUI').innerText = 'UI 숨기기';
-        } else {
+        var toggleUI = document.getElementById('toggleUI');
+
+        if (category.style.display !== 'none') {
             category.style.display = 'none';
-            document.getElementById('toggleUI').innerText = 'UI 보이기';
+            toggleUI.innerText = 'UI 보이기';
+        } else {
+            category.style.display = 'block';
+            toggleUI.innerText = 'UI 숨기기';
         }
     }
 
-    // 초기화 함수 호출
-    initMap();
+    function changeMarker(category) {
+        coffeeMarkers.forEach(function (marker) {
+            marker.setMap(null);
+        });
+        storeMarkers.forEach(function (marker) {
+            marker.setMap(null);
+        });
+        carparkMarkers.forEach(function (marker) {
+            marker.setMap(null);
+        });
+
+        coffeeMarkers = [];
+        storeMarkers = [];
+        carparkMarkers = [];
+
+        createMarkers(category);
+    }
 </script>
 </body>
 </html>

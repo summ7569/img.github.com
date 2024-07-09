@@ -2,7 +2,7 @@
 <HTML lang="kr">
 <head>
     <meta charset="utf-8">
-    <title>test104</title>
+    <title>test102</title>
     <style>
         #mapwrap {
             position: relative;
@@ -229,6 +229,11 @@
             var marker = createMarker(position, carparkInfo[index], carparkMarkerImageSrc);
             carparkMarkers.push(marker);
         });
+
+        // 처음에 모든 마커를 표시합니다.
+        setMarkers(map, coffeeMarkers);
+        setMarkers(map, storeMarkers);
+        setMarkers(map, carparkMarkers);
     }
 
     function createMarker(position, info, imageSrc) {
@@ -250,6 +255,8 @@
             infowindow.open(map, marker);
         });
 
+        marker.infowindow = infowindow; // 마커에 인포윈도우를 저장합니다.
+
         return marker;
     }
 
@@ -259,6 +266,9 @@
 
     function changeMarker(type) {
         category = type;
+
+        // 모든 인포윈도우를 닫습니다.
+        closeAllInfoWindows();
 
         setMarkers(null, coffeeMarkers);
         setMarkers(null, storeMarkers);
@@ -340,20 +350,27 @@
         saveMarkersToLocalStorage();
     }
 
+    // 모든 인포윈도우를 닫는 함수
+    function closeAllInfoWindows() {
+        coffeeMarkers.forEach(marker => marker.infowindow.close());
+        storeMarkers.forEach(marker => marker.infowindow.close());
+        carparkMarkers.forEach(marker => marker.infowindow.close());
+    }
+
     // 로컬 스토리지에 마커 저장
     function saveMarkersToLocalStorage() {
         var markersData = {
             coffee: coffeeMarkers.map(marker => ({
                 position: marker.getPosition(),
-                content: marker.getContent()
+                content: marker.infowindow.getContent()
             })),
             store: storeMarkers.map(marker => ({
                 position: marker.getPosition(),
-                content: marker.getContent()
+                content: marker.infowindow.getContent()
             })),
             carpark: carparkMarkers.map(marker => ({
                 position: marker.getPosition(),
-                content: marker.getContent()
+                content: marker.infowindow.getContent()
             }))
         };
 

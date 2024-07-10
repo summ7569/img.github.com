@@ -386,16 +386,25 @@ function closeOverlay() {
     coffeeMarkers.forEach(function(marker) {
         if (marker.overlay) {
             marker.overlay.setMap(null);
-            // marker.overlay = null; // 여기서는 marker.overlay를 null로 설정하지 않습니다.
+            marker.overlay = null; // marker.overlay를 null로 설정하여 초기화
         }
     });
 
     storeMarkers.forEach(function(marker) {
         if (marker.overlay) {
             marker.overlay.setMap(null);
-            // marker.overlay = null;
+            marker.overlay = null;
         }
     });
+
+    carparkMarkers.forEach(function(marker) {
+        if (marker.overlay) {
+            marker.overlay.setMap(null);
+            marker.overlay = null;
+        }
+    });
+}
+
 
     carparkMarkers.forEach(function(marker) {
         if (marker.overlay) {

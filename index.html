@@ -2,7 +2,7 @@
 <HTML lang="kr">
 <head>
     <meta charset="utf-8">
-    <title>test102</title>
+    <title>test112</title>
     <style>
         #mapwrap {
             position: relative;
@@ -353,14 +353,14 @@
         var overlayInfo = document.getElementById('overlayInfo');
         var overlayClose = document.getElementById('overlayClose');
 
-        overlayInfo.innerHTML = `
+        overlayInfo.innerHTML = 
             <div id="markerNumber">관리번호: ${info.number}</div>
             <div id="address">주소: ${info.address}</div>
             <div id="rotation">회전형: ${info.rotation}</div>
             <div id="fixed">고정형: ${info.fixed}</div>
             <div id="description">상세설명: ${info.description}</div>
             <div id="image"><img src="${info.image}" style="max-width: 100%; height: auto;"></div>
-        `;
+        ;
 
         var overlay = new kakao.maps.CustomOverlay({
             content: overlayContent,

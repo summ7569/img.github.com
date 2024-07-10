@@ -91,11 +91,13 @@
             left: -150px;
             display: none;
             border: 1px solid #ccc;
-            background-color: white;
+            background-color: #f9f9f9;
             min-width: 300px;
             padding: 10px;
             font-size: 12px;
             text-align: left;
+            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+            border-radius: 5px;
         }
 
         .overlay_close {
@@ -104,6 +106,14 @@
             right: 5px;
             cursor: pointer;
             z-index: 10;
+        }
+
+        /* 이미지 왼쪽 정렬 */
+        #overlayContent img {
+            float: left;
+            margin-right: 10px;
+            width: 100px;
+            height: 100px;
         }
     </style>
 </head>
@@ -168,6 +178,7 @@
     </div>
 </div>
 
+    
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6"></script>
 <script src="script.js"></script>
 </body>

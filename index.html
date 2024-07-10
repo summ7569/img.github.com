@@ -1,72 +1,88 @@
-<!DOCTYPE HTML>
-<HTML lang="kr">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-    <meta charset="utf-8">
-    <title>test102</title>
-    <link rel="stylesheet" type="text/css" href="styles.css">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kakao Maps Example</title>
+    <style>
+        #map {
+            width: 100%;
+            height: 400px;
+        }
+        .category {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 1;
+        }
+        #searchForm {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background-color: white;
+            padding: 10px;
+            border-radius: 5px;
+            z-index: 1;
+        }
+        .customoverlay {
+            position: absolute;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: white;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            z-index: 1;
+            display: none;
+        }
+    </style>
 </head>
 <body>
-<div id="map" style="width: 100%; height: 100% !important; padding-bottom: 50%; position: relative;"></div>
+    <div class="category">
+        <h3>카테고리</h3>
+        <button onclick="changeMarker('coffee')">커피숍</button>
+        <button onclick="changeMarker('store')">편의점</button>
+        <button onclick="changeMarker('carpark')">주차장</button>
+        <button onclick="changeMarker('all')">모두 보기</button>
+    </div>
 
-<!-- 지도 위에 표시될 마커 카테고리 -->
-<div class="category">
-    <ul>
-        <li id="coffeeMenu" onclick="changeMarker('coffee')">
-            <span class="ico_comm ico_coffee"></span>
-            커피숍
-        </li>
-        <li id="storeMenu" onclick="changeMarker('store')">
-            <span class="ico_comm ico_store"></span>
-            편의점
-        </li>
-        <li id="carparkMenu" onclick="changeMarker('carpark')">
-            <span class="ico_comm ico_carpark"></span>
-            주차장
-        </li>
-        <li id="allMenu" onclick="changeMarker('all')">
-            <span class="ico_comm ico_all"></span>
-            모두
-        </li>
-    </ul>
-</div>
+    <div id="map"></div>
 
-<!-- 검색 폼 추가 -->
-<div class="search-form">
-    <form id="searchForm">
-        <label for="latitude">위도: </label><input type="text" id="latitude" name="latitude" required><br>
-        <label for="longitude">경도: </label><input type="text" id="longitude" name="longitude" required><br>
-        <label for="category">카테고리: </label>
-        <select id="category" name="category">
+    <div id="searchForm">
+        <h3>검색 및 추가</h3>
+        <label for="latitude">위도:</label>
+        <input type="text" id="latitude" placeholder="위도 입력">
+        <label for="longitude">경도:</label>
+        <input type="text" id="longitude" placeholder="경도 입력">
+        <button onclick="moveToCoordinates()">이동하기</button>
+        <br><br>
+        <label for="category">카테고리:</label>
+        <select id="category">
             <option value="coffee">커피숍</option>
             <option value="store">편의점</option>
             <option value="carpark">주차장</option>
-        </select><br>
-        <label for="info">추가 정보: </label><input type="text" id="info" name="info"><br>
-        <button type="button" onclick="addMarker()">추가</button>
-        <button type="button" onclick="moveToCoordinates()">위치로 이동</button>
-        <button type="button" onclick="clearMarkers()">마커 초기화</button>
-    </form>
-</div>
+        </select>
+        <label for="info">추가 정보:</label>
+        <input type="text" id="info" placeholder="추가 정보 입력">
+        <button onclick="addMarker()">추가하기</button>
+        <button onclick="clearMarkers()">모두 초기화</button>
+    </div>
 
-<!-- UI 숨기기/보이기 버튼 -->
-<div id="toggleUI" onclick="toggleUI()">UI 숨기기</div>
-
-<!-- 커스텀 오버레이 -->
-<div id="customOverlay" class="customoverlay">
-    <div id="overlayContent">
-        <div id="overlayClose" class="overlay_close" onclick="closeOverlay()">닫기</div>
-        <div id="overlayInfo">
-            <div id="markerNumber"></div>
-            <div id="address"></div>
-            <div id="rotation"></div>
-            <div id="fixed"></div>
-            <div id="description"></div>
-            <div id="image"></div>
+    <div class="customoverlay">
+        <div id="overlayContent">
+            <div id="overlayInfo">
+                <button id="overlayClose">닫기</button>
+            </div>
         </div>
     </div>
-</div>
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6"></script>
-<script src="script.js"></script>
+    <button id="toggleUI" onclick="toggleUI()">UI 숨기기</button>
+
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6&libraries=services"></script>
+    <script src="map.js"></script>
 </body>
-</HTML>
+</html>

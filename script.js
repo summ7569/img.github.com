@@ -3,6 +3,148 @@ var mapContainer = document.getElementById('map'),
         center: new kakao.maps.LatLng(37.499590490909185, 127.0263723554437),
         level: 5
     };
+var mapContainer = document.getElementById('map');
+var mapOption = {
+    center: new kakao.maps.LatLng(37.499590490909185, 127.0263723554437),
+    level: 5
+};
+
+var map = new kakao.maps.Map(mapContainer, mapOption);
+
+var coffeePositions = [
+    { 
+        position: new kakao.maps.LatLng(37.499590490909185, 127.0263723554437),
+        content: '<div class="customOverlay">' +
+                 '    <h3>커피 위치 정보</h3>' +
+                 '    <p>주소: 부림동 52-1</p>' +
+                 '    <p>상세내용: 커피 맛집입니다.</p>' +
+                 '    <button class="close" onclick="closeOverlay(' + markerList.length + ')">닫기</button>' +
+                 '</div>'
+    },
+    {
+        position: new kakao.maps.LatLng(37.499427948430814, 127.02794423197847),
+        content: '<div class="customOverlay">' +
+                 '    <h3>커피 위치 정보</h3>' +
+                 '    <p>주소: 부림동 110-1</p>' +
+                 '    <p>상세내용: 한 잔의 휴식을 찾을 수 있는 곳입니다.</p>' +
+                 '    <button class="close" onclick="closeOverlay(' + markerList.length + ')">닫기</button>' +
+                 '</div>'
+    }
+];
+
+var storePositions = [
+    {
+        position: new kakao.maps.LatLng(37.497535461505684, 127.02948149502778),
+        content: '<div class="customOverlay">' +
+                 '    <h3>가게 위치 정보</h3>' +
+                 '    <p>주소: 중앙동 52-1</p>' +
+                 '    <p>상세내용: 다양한 상품을 즐길 수 있는 가게입니다.</p>' +
+                 '    <button class="close" onclick="closeOverlay(' + markerList.length + ')">닫기</button>' +
+                 '</div>'
+    }
+];
+
+var carparkPositions = [
+    {
+        position: new kakao.maps.LatLng(37.49966168796031, 127.03007039430118),
+        content: '<div class="customOverlay">' +
+                 '    <h3>주차장 위치 정보</h3>' +
+                 '    <p>주소: 공원동 52-1</p>' +
+                 '    <p>상세내용: 중앙공원 내 물놀이터에 위치한 주차장입니다.</p>' +
+                 '    <p>회전형: 1대 (비알인포텍), 고정형: 7대 (레스큐)</p>' +
+                 '    <button class="close" onclick="closeOverlay(' + markerList.length + ')">닫기</button>' +
+                 '</div>'
+    }
+];
+
+var markerImageSrc = 'https://github.com/summ7569/summ7569.github.io/blob/master/category.png?raw=true';
+
+var markerList = [];
+var overlayList = [];
+
+function displayMarkers() {
+    displayMarker(coffeePositions, 'coffee', 'ico_coffee');
+    displayMarker(storePositions, 'store', 'ico_store');
+    displayMarker(carparkPositions, 'carpark', 'ico_carpark');
+}
+
+function displayMarker(locations, category, imgSrc) {
+    for (var i = 0; i < locations.length; i++) {
+        var imageSize = new kakao.maps.Size(22, 26),
+            imgOptions = {
+                spriteSize: new kakao.maps.Size(36, 98),
+                spriteOrigin: new kakao.maps.Point(10, imgSrc === 'ico_coffee' ? 0 : imgSrc === 'ico_store' ? 36 : 72),
+                offset: new kakao.maps.Point(11, 26)
+            },
+            markerImage = new kakao.maps.MarkerImage(markerImageSrc, imageSize, imgOptions),
+            marker = new kakao.maps.Marker({
+                position: locations[i].position,
+                image: markerImage,
+                category: category
+            });
+
+        var customOverlay = new kakao.maps.CustomOverlay({
+            content: locations[i].content,
+            map: map,
+            position: locations[i].position,
+            yAnchor: 1
+        });
+
+        kakao.maps.event.addListener(marker, 'click', function(customOverlay) {
+            return function() {
+                closeAllOverlays();
+                customOverlay.setMap(map);
+            };
+        }(customOverlay));
+
+        marker.setMap(map);
+        markerList.push(marker);
+        overlayList.push(customOverlay);
+    }
+}
+
+function closeOverlay(index) {
+    overlayList[index].setMap(null);
+}
+
+function closeAllOverlays() {
+    for (var i = 0; i < overlayList.length; i++) {
+        overlayList[i].setMap(null);
+    }
+}
+
+function clearMarkers() {
+    for (var i = 0; i < markerList.length; i++) {
+        markerList[i].setMap(null);
+    }
+    markerList = [];
+    overlayList = [];
+}
+
+// 초기화 함수
+function initMap() {
+    displayMarkers();
+}
+
+// UI 토글 함수
+function toggleUI() {
+    var category = document.querySelector('.category');
+    var searchForm = document.getElementById('searchForm');
+    var toggleButton = document.getElementById('toggleUI');
+
+    if (category.style.display === 'none') {
+        category.style.display = 'block';
+        searchForm.style.display = 'block';
+        toggleButton.innerHTML = 'UI 숨기기';
+    } else {
+        category.style.display = 'none';
+        searchForm.style.display = 'none';
+        toggleButton.innerHTML = 'UI 보이기';
+    }
+}
+
+// 지도 초기화
+initMap();
 
 var map = new kakao.maps.Map(mapContainer, mapOption);
 

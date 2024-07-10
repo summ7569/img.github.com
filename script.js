@@ -66,7 +66,7 @@ var carparkInfo = [
     "공원동 1340-1"
 ];
 
-var markerImageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png';
+var markerImageSrc = 'https://github.com/summ7569/summ7569.github.io/blob/master/category.png?raw=true';
 
 var markerList = [];
 
@@ -95,7 +95,7 @@ function displayMarker(locPositions, locInfo, imgSrc) {
         var imageSize = new kakao.maps.Size(22, 26),
             imgOptions = {
                 spriteSize: new kakao.maps.Size(36, 98),
-                spriteOrigin: new kakao.maps.Point(10, imgSrc == 'ico_coffee' ? 0 : imgSrc == 'ico_store' ? 36 : 72),
+                spriteOrigin: new kakao.maps.Point(10, imgSrc === 'ico_coffee' ? 0 : imgSrc === 'ico_store' ? 36 : 72),
                 offset: new kakao.maps.Point(11, 26)
             },
             markerImage = new kakao.maps.MarkerImage(markerImageSrc, imageSize, imgOptions),

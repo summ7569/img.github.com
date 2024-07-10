@@ -84,40 +84,34 @@
             cursor: pointer;
         }
 
+        /* 커스텀 오버레이 스타일 */
         .customoverlay {
             position: absolute;
-            bottom: 27px;
-            left: -50px;
+            bottom: 10px;
+            left: -150px;
             display: none;
-            width: 300px;
-            height: auto;
+            border: 1px solid #ccc;
+            background-color: white;
+            min-width: 300px;
             padding: 10px;
-            background-color: #f0f0f0;
-            border: 1px solid #909090;
-            border-radius: 6px;
-            box-shadow: 1px 1px 1px rgba(0, 0, 0, 0.1);
+            font-size: 12px;
+            text-align: left;
         }
 
-        .customoverlay .title {
-            display: block;
-            width: 100%;
-            font-weight: bold;
-            margin-bottom: 5px;
-        }
-
-        .customoverlay .close {
+        .overlay_close {
             position: absolute;
-            top: 10px;
-            right: 10px;
+            top: 5px;
+            right: 5px;
             cursor: pointer;
+            z-index: 10;
         }
 
+        /* 추가된 스타일: 커스텀 오버레이 내 이미지 스타일 */
         .customoverlay img {
             float: left;
             margin-right: 10px;
-            width: 80px;
-            height: 80px;
-            border-radius: 5px;
+            max-width: 100px;
+            height: auto;
         }
     </style>
 </head>
@@ -167,6 +161,21 @@
 <!-- UI 숨기기/보이기 버튼 -->
 <div id="toggleUI" onclick="toggleUI()">UI 숨기기</div>
 
+<!-- 커스텀 오버레이 -->
+<div id="customOverlay" class="customoverlay">
+    <div id="overlayContent">
+        <div id="overlayClose" class="overlay_close" onclick="closeOverlay()">닫기</div>
+        <div id="overlayInfo">
+            <div id="markerNumber"></div>
+            <div id="address"></div>
+            <div id="rotation"></div>
+            <div id="fixed"></div>
+            <div id="description"></div>
+            <div id="image"></div>
+        </div>
+    </div>
+</div>
+
 <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6"></script>
 <script>
     var mapContainer = document.getElementById('map'),
@@ -188,473 +197,154 @@
     ];
 
     var coffeeInfo = [
-        {
-            관리번호: "001",
-            주소: "부림동 52-1",
-            회전형: "O",
-            고정형: "X",
-            상세설명: "커피맛집입니다.",
-            이미지: "https://dummyimage.com/80x80/ccc/000.jpg"
-        },
-        {
-            관리번호: "002",
-            주소: "부림동 110-1",
-            회전형: "O",
-            고정형: "X",
-            상세설명: "커피 좋아요.",
-            이미지: "https://dummyimage.com/80x80/ccc/000.jpg"
-        },
-        {
-            관리번호: "003",
-            주소: "부림동 140-1",
-            회전형: "O",
-            고정형: "X",
-            상세설명: "커피 파는 곳입니다.",
-            이미지: "https://dummyimage.com/80x80/ccc/000.jpg"
-        },
-        {
-            관리번호: "004",
-            주소: "부림동 120-1",
-            회전형: "O",
-            고정형: "X",
-            상세설명: "커피 전문점입니다.",
-            이미지: "https://dummyimage.com/80x80/ccc/000.jpg"
-        },
-        {
-            관리번호: "005",
-            주소: "부림동 122-221",
-            회전형: "O",
-            고정형: "X",
-            상세설명: "커피 카페입니다.",
-            이미지: "https://dummyimage.com/80x80/ccc/000.jpg"
-        },
-        {
-            관리번호: "006",
-            주소: "부림동 540-1",
-            회전형: "O",
-            고정형: "X",
-            상세설명: "커피 좋아해요.",
-            이미지: "https://dummyimage.com/80x80/ccc/000.jpg"
-        },
-        {
-            관리번호: "007",
-            주소: "부림동 1340-1",
-            회전형: "O",
-            고정형: "X",
-            상세설명: "커피 좋습니다.",
-            이미지: "https://dummyimage.com/80x80/ccc/000.jpg"
-        }
+        { number: "52-1", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+        { number: "110-1", address: "부림동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+        { number: "302-5", address: "부림동", rotation: "회전형", fixed: "회전형", description: "상세설명", image: "https://via.placeholder.com/150" },
+        { number: "505-2", address: "부림동", rotation: "고정형", fixed: "회전형", description: "상세설명", image: "https://via.placeholder.com/150" },
+        { number: "712-1", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+        { number: "800-3", address: "부림동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+        { number: "901-4", address: "부림동", rotation: "고정형", fixed: "회전형", description: "상세설명", image: "https://via.placeholder.com/150" }
     ];
 
     var storePositions = [
-        new kakao.maps.LatLng(37.497535461505684, 127.02948149502778),
-        new kakao.maps.LatLng(37.49671536281186, 127.03020491448352),
-        new kakao.maps.LatLng(37.496201943633714, 127.02959405469642),
-        new kakao.maps.LatLng(37.49640072567703, 127.02726459882308),
-        new kakao.maps.LatLng(37.49640098874988, 127.02609983175294),
-        new kakao.maps.LatLng(37.49932849491523, 127.02935780247945),
-        new kakao.maps.LatLng(37.49996818951873, 127.02943721562295)
+        new kakao.maps.LatLng(37.49693257325425, 127.02903888936508),
+        new kakao.maps.LatLng(37.49567360686953, 127.02851474534906),
+        new kakao.maps.LatLng(37.49568823427818, 127.02646539440902),
+        new kakao.maps.LatLng(37.49728869719172, 127.0256732976695),
+        new kakao.maps.LatLng(37.49810118961896, 127.0274510568175),
+        new kakao.maps.LatLng(37.49935399377584, 127.02575882812252),
+        new kakao.maps.LatLng(37.500329510504845, 127.02525172249936)
     ];
 
     var storeInfo = [
-        {
-            관리번호: "101",
-            주소: "중앙동 52-1",
-            회전형: "O",
-            고정형: "X",
-            상세설명: "편의점입니다.",
-            이미지: "https://dummyimage.com/80x80/ccc/000.jpg"
-        },
-        {
-            관리번호: "102",
-            주소: "과천동 110-1",
-            회전형: "O",
-            고정형: "X",
-            상세설명: "편의점입니다.",
-            이미지: "https://dummyimage.com/80x80/ccc/000.jpg"
-        },
-        {
-            관리번호: "103",
-            주소: "중앙동 140-1",
-            회전형: "O",
-            고정형: "X",
-            상세설명: "편의점입니다.",
-            이미지: "https://dummyimage.com/80x80/ccc/000.jpg"
-        },
-        {
-            관리번호: "104",
-            주소: "과천동 120-1",
-            회전형: "O",
-            고정형: "X",
-            상세설명: "편의점입니다.",
-            이미지: "https://dummyimage.com/80x80/ccc/000.jpg"
-        },
-        {
-            관리번호: "105",
-            주소: "과천동 122-221",
-            회전형: "O",
-            고정형: "X",
-            상세설명: "편의점입니다.",
-            이미지: "https://dummyimage.com/80x80/ccc/000.jpg"
-        },
-        {
-            관리번호: "106",
-            주소: "과천동 540-1",
-            회전형: "O",
-            고정형: "X",
-            상세설명: "편의점입니다.",
-            이미지: "https://dummyimage.com/80x80/ccc/000.jpg"
-        },
-        {
-            관리번호: "107",
-            주소: "과천동 1340-1",
-            회전형: "O",
-            고정형: "X",
-            상세설명: "편의점입니다.",
-            이미지: "https://dummyimage.com/80x80/ccc/000.jpg"
-        }
+        { number: "12-1", address: "영동대로", rotation: "고정형", fixed: "회전형", description: "상세설명", image: "https://via.placeholder.com/150" },
+        { number: "23-4", address: "영동대로", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+        { number: "35-2", address: "영동대로", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+        { number: "42-5", address: "영동대로", rotation: "회전형", fixed: "회전형", description: "상세설명", image: "https://via.placeholder.com/150" },
+        { number: "53-1", address: "영동대로", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+        { number: "60-3", address: "영동대로", rotation: "회전형", fixed: "회전형", description: "상세설명", image: "https://via.placeholder.com/150" },
+        { number: "71-2", address: "영동대로", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" }
     ];
 
     var carparkPositions = [
-        new kakao.maps.LatLng(37.49966168796031, 127.03007039430118),
-        new kakao.maps.LatLng(37.499463762912974, 127.0288828824399),
-        new kakao.maps.LatLng(37.49896834100913, 127.02833986892401),
-        new kakao.maps.LatLng(37.49893267508434, 127.02673400572665),
-        new kakao.maps.LatLng(37.49872543597439, 127.02676785815386),
-        new kakao.maps.LatLng(37.49813096097184, 127.02591949495914),
-        new kakao.maps.LatLng(37.497680616783086, 127.02518427952202)
+        new kakao.maps.LatLng(37.50030024010844, 127.02638129804548),
+        new kakao.maps.LatLng(37.4990366669257, 127.02816655525269),
+        new kakao.maps.LatLng(37.49728635486586, 127.02938659465664),
+        new kakao.maps.LatLng(37.49645289789534, 127.02698867609304),
+        new kakao.maps.LatLng(37.4972581687596, 127.02533761900772),
+        new kakao.maps.LatLng(37.49882263016354, 127.02503403239852),
+        new kakao.maps.LatLng(37.50025962161478, 127.02582960319708)
     ];
 
     var carparkInfo = [
-        {
-            관리번호: "201",
-            주소: "문원동 52-1",
-            회전형: "O",
-            고정형: "X",
-            상세설명: "주차장입니다.",
-            이미지: "https://dummyimage.com/80x80/ccc/000.jpg"
-        },
-        {
-            관리번호: "202",
-            주소: "문원동산 110-1",
-            회전형: "O",
-            고정형: "X",
-            상세설명: "주차장입니다.",
-            이미지: "https://dummyimage.com/80x80/ccc/000.jpg"
-        },
-        {
-            관리번호: "203",
-            주소: "혜화역 140-1",
-            회전형: "O",
-            고정형: "X",
-            상세설명: "주차장입니다.",
-            이미지: "https://dummyimage.com/80x80/ccc/000.jpg"
-        },
-        {
-            관리번호: "204",
-            주소: "과천Ic 120-1",
-            회전형: "O",
-            고정형: "X",
-            상세설명: "주차장입니다.",
-            이미지: "https://dummyimage.com/80x80/ccc/000.jpg"
-        },
-        {
-            관리번호: "205",
-            주소: "부림동 122-221",
-            회전형: "O",
-            고정형: "X",
-            상세설명: "주차장입니다.",
-            이미지: "https://dummyimage.com/80x80/ccc/000.jpg"
-        },
-        {
-            관리번호: "206",
-            주소: "부림동 540-1",
-            회전형: "O",
-            고정형: "X",
-            상세설명: "주차장입니다.",
-            이미지: "https://dummyimage.com/80x80/ccc/000.jpg"
-        },
-        {
-            관리번호: "207",
-            주소: "과천동 1340-1",
-            회전형: "O",
-            고정형: "X",
-            상세설명: "주차장입니다.",
-            이미지: "https://dummyimage.com/80x80/ccc/000.jpg"
-        }
+        { number: "98-1", address: "자곡동", rotation: "고정형", fixed: "회전형", description: "상세설명", image: "https://via.placeholder.com/150" },
+        { number: "104-5", address: "자곡동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+        { number: "113-2", address: "자곡동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+        { number: "125-1", address: "자곡동", rotation: "회전형", fixed: "회전형", description: "상세설명", image: "https://via.placeholder.com/150" },
+        { number: "133-4", address: "자곡동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+        { number: "147-3", address: "자곡동", rotation: "회전형", fixed: "회전형", description: "상세설명", image: "https://via.placeholder.com/150" },
+        { number: "151-2", address: "자곡동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" }
     ];
 
-    var coffeeMarkerImageSrc = 'https://raw.githubusercontent.com/summ7569/summ7569.github.io/master/category1.png';
-    var storeMarkerImageSrc = 'https://raw.githubusercontent.com/summ7569/summ7569.github.io/master/category2.png';
-    var carparkMarkerImageSrc = 'https://raw.githubusercontent.com/summ7569/summ7569.github.io/master/category3.png';
+    var markers = [];
 
-    var coffeeMarkers = [],
-        storeMarkers = [],
-        carparkMarkers = [];
+    function displayMarkers(category) {
+        // 기존 마커 삭제
+        deleteMarkers();
 
-    var category = "all";
+        var positions;
+        var infoWindow = new kakao.maps.InfoWindow({ zIndex: 1 });
 
-    // 기존 마커들을 초기화합니다.
-    initializeMarkers();
+        switch (category) {
+            case 'coffee':
+                positions = coffeePositions;
+                info = coffeeInfo;
+                break;
+            case 'store':
+                positions = storePositions;
+                info = storeInfo;
+                break;
+            case 'carpark':
+                positions = carparkPositions;
+                info = carparkInfo;
+                break;
+            default:
+                positions = coffeePositions.concat(storePositions, carparkPositions);
+                info = coffeeInfo.concat(storeInfo, carparkInfo);
+                break;
+        }
 
-    function initializeMarkers() {
-        coffeePositions.forEach((position, index) => {
-            var marker = createMarker(position, coffeeInfo[index], coffeeMarkerImageSrc);
-            coffeeMarkers.push(marker);
-        });
-
-        storePositions.forEach((position, index) => {
-            var marker = createMarker(position, storeInfo[index], storeMarkerImageSrc);
-            storeMarkers.push(marker);
-        });
-
-        carparkPositions.forEach((position, index) => {
-            var marker = createMarker(position, carparkInfo[index], carparkMarkerImageSrc);
-            carparkMarkers.push(marker);
-        });
-
-        // 처음에 모든 마커를 표시합니다.
-        setMarkers(map, coffeeMarkers);
-        setMarkers(map, storeMarkers);
-        setMarkers(map, carparkMarkers);
+        for (var i = 0; i < positions.length; i++) {
+            var marker = addMarker(positions[i], info[i], category);
+            markers.push(marker);
+        }
     }
 
-    function createMarker(position, info, imageSrc) {
-        var markerImage = new kakao.maps.MarkerImage(imageSrc, new kakao.maps.Size(22, 26), {
-            offset: new kakao.maps.Point(11, 26)
-        });
+    function addMarker(position, info, category) {
+        var markerImageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_';
+        var markerImageSize = new kakao.maps.Size(24, 35);
+
+        if (category === 'coffee') {
+            markerImageSrc += 'coffee.png';
+        } else if (category === 'store') {
+            markerImageSrc += 'convenience.png';
+        } else if (category === 'carpark') {
+            markerImageSrc += 'car.png';
+        } else {
+            markerImageSrc += 'spot.png';
+        }
+
+        var markerImage = new kakao.maps.MarkerImage(markerImageSrc, markerImageSize);
 
         var marker = new kakao.maps.Marker({
+            map: map,
             position: position,
             image: markerImage
         });
 
-        var overlayContent = `
-            <div class="customoverlay">
-                <div class="overlaybody">
-                    <div class="overlayheader">
-                        <span class="title">${info.주소}</span>
-                        <span class="close" onclick="closeOverlay()">X</span>
-                    </div>
-                    <div class="overlayinfo">
-                        <div><strong>관리번호:</strong> ${info.관리번호}</div>
-                        <div><strong>주소:</strong> ${info.주소}</div>
-                        <div><strong>회전형:</strong> ${info.회전형}</div>
-                        <div><strong>고정형:</strong> ${info.고정형}</div>
-                        <div><strong>상세설명:</strong> ${info.상세설명}</div>
-                        <div><img src="${info.이미지}" alt="${info.주소} 이미지" class="overlayimage"></div>
-                    </div>
-                </div>
-                <div class="arrow"></div>
-            </div>
-        `;
-
-        var overlay = new kakao.maps.CustomOverlay({
-            content: overlayContent,
-            map: map,
-            position: marker.getPosition()
-        });
-
-        kakao.maps.event.addListener(marker, 'click', function() {
-            closeOverlay();
-            overlay.setMap(map);
+        kakao.maps.event.addListener(marker, 'click', function () {
+            displayCustomOverlay(marker, info);
         });
 
         return marker;
     }
 
-    function setMarkers(map, markers) {
-        markers.forEach(marker => marker.setMap(map));
-    }
+    function displayCustomOverlay(marker, info) {
+        var overlay = document.getElementById('customOverlay');
+        var overlayContent = document.getElementById('overlayContent');
+        var imageContainer = document.getElementById('image');
 
-    function changeMarker(type) {
-        category = type;
+        var img = new Image();
+        img.src = info.image;
+        imageContainer.innerHTML = '';
+        imageContainer.appendChild(img);
 
-        // 모든 커스텀 오버레이를 닫습니다.
-        closeOverlay();
+        document.getElementById('markerNumber').innerHTML = '관리번호: ' + info.number;
+        document.getElementById('address').innerHTML = '주소: ' + info.address;
+        document.getElementById('rotation').innerHTML = '회전형: ' + info.rotation;
+        document.getElementById('fixed').innerHTML = '고정형: ' + info.fixed;
+        document.getElementById('description').innerHTML = '상세내용: ' + info.description;
 
-        setMarkers(null, coffeeMarkers);
-        setMarkers(null, storeMarkers);
-        setMarkers(null, carparkMarkers);
+        overlay.style.display = 'block';
 
-        switch (type) {
-            case 'coffee':
-                setMarkers(map, coffeeMarkers);
-                break;
-            case 'store':
-                setMarkers(map, storeMarkers);
-                break;
-            case 'carpark':
-                setMarkers(map, carparkMarkers);
-                break;
-            case 'all':
-                setMarkers(map, coffeeMarkers);
-                setMarkers(map, storeMarkers);
-                setMarkers(map, carparkMarkers);
-                break;
-        }
-    }
+        overlay.style.left = marker.getPosition().getLng() + 'px';
+        overlay.style.top = marker.getPosition().getLat() + 'px';
 
-    function closeOverlay() {
-        coffeeMarkers.forEach(marker => {
-            if (marker.overlay) {
-                marker.overlay.setMap(null);
-            }
-        });
-        storeMarkers.forEach(marker => {
-            if (marker.overlay) {
-                marker.overlay.setMap(null);
-            }
-        });
-        carparkMarkers.forEach(marker => {
-            if (marker.overlay) {
-                marker.overlay.setMap(null);
-            }
-        });
-    }
-
-    function moveToCoordinates() {
-        var latitude = parseFloat(document.getElementById("latitude").value);
-        var longitude = parseFloat(document.getElementById("longitude").value);
-
-        var position = new kakao.maps.LatLng(latitude, longitude);
-
-        map.setCenter(position);
-    }
-
-    // 새로운 마커 추가 함수
-    function addMarker() {
-        var latitude = parseFloat(document.getElementById("latitude").value);
-        var longitude = parseFloat(document.getElementById("longitude").value);
-        var category = document.getElementById("category").value;
-        var info = {
-            관리번호: document.getElementById("관리번호").value,
-            주소: document.getElementById("주소").value,
-            회전형: document.getElementById("회전형").checked ? "O" : "X",
-            고정형: document.getElementById("고정형").checked ? "O" : "X",
-            상세설명: document.getElementById("상세설명").value,
-            이미지: document.getElementById("이미지").value
+        var overlayClose = document.getElementById('overlayClose');
+        overlayClose.onclick = function () {
+            overlay.style.display = 'none';
+            return false;
         };
+    }
 
-        var position = new kakao.maps.LatLng(latitude, longitude);
-        var imageSrc = "";
-
-        switch (category) {
-            case 'coffee':
-                imageSrc = coffeeMarkerImageSrc;
-                break;
-            case 'store':
-                imageSrc = storeMarkerImageSrc;
-                break;
-            case 'carpark':
-                imageSrc = carparkMarkerImageSrc;
-                break;
+    function deleteMarkers() {
+        for (var i = 0; i < markers.length; i++) {
+            markers[i].setMap(null);
         }
-
-        var marker = createMarker(position, info, imageSrc);
-
-        switch (category) {
-            case 'coffee':
-                coffeeMarkers.push(marker);
-                if (category === 'coffee' || category === 'all') {
-                    setMarkers(map, coffeeMarkers);
-                }
-                break;
-            case 'store':
-                storeMarkers.push(marker);
-                if (category === 'store' || category === 'all') {
-                    setMarkers(map, storeMarkers);
-                }
-                break;
-            case 'carpark':
-                carparkMarkers.push(marker);
-                if (category === 'carpark' || category === 'all') {
-                    setMarkers(map, carparkMarkers);
-                }
-                break;
-        }
-
-        map.setCenter(position);  // 추가된 마커의 위치로 지도를 이동
-        saveMarkersToLocalStorage();
+        markers = [];
     }
 
-    // 로컬 스토리지에 마커 저장
-    function saveMarkersToLocalStorage() {
-        var markersData = {
-            coffee: coffeeMarkers.map(marker => ({
-                position: marker.getPosition(),
-                content: marker.overlay ? marker.overlay.getContent() : ""
-            })),
-            store: storeMarkers.map(marker => ({
-                position: marker.getPosition(),
-                content: marker.overlay ? marker.overlay.getContent() : ""
-            })),
-            carpark: carparkMarkers.map(marker => ({
-                position: marker.getPosition(),
-                content: marker.overlay ? marker.overlay.getContent() : ""
-            }))
-        };
-
-        localStorage.setItem('markersData', JSON.stringify(markersData));
-    }
-
-    // 로컬 스토리지에서 마커 불러오기
-    function loadMarkersFromLocalStorage() {
-        var markersData = JSON.parse(localStorage.getItem('markersData'));
-
-        if (markersData) {
-            markersData.coffee.forEach(data => {
-                var position = new kakao.maps.LatLng(data.position.Ma, data.position.La);
-                var marker = createMarker(position, coffeeInfo.find(info => info.주소 === data.content.split('<strong>주소:</strong> ')[1].split('</div>')[0]), coffeeMarkerImageSrc);
-                coffeeMarkers.push(marker);
-            });
-
-            markersData.store.forEach(data => {
-                var position = new kakao.maps.LatLng(data.position.Ma, data.position.La);
-                var marker = createMarker(position, storeInfo.find(info => info.주소 === data.content.split('<strong>주소:</strong> ')[1].split('</div>')[0]), storeMarkerImageSrc);
-                storeMarkers.push(marker);
-            });
-
-            markersData.carpark.forEach(data => {
-                var position = new kakao.maps.LatLng(data.position.Ma, data.position.La);
-                var marker = createMarker(position, carparkInfo.find(info => info.주소 === data.content.split('<strong>주소:</strong> ')[1].split('</div>')[0]), carparkMarkerImageSrc);
-                carparkMarkers.push(marker);
-            });
-
-            changeMarker(category);
-        }
-    }
-
-    // 로컬 스토리지에서 마커 초기화
-    function clearMarkers() {
-        localStorage.removeItem('markersData');
-
-        setMarkers(null, coffeeMarkers);
-        setMarkers(null, storeMarkers);
-        setMarkers(null, carparkMarkers);
-
-        coffeeMarkers = [];
-        storeMarkers = [];
-        carparkMarkers = [];
-    }
-
-    // 페이지 로드 시 로컬 스토리지에서 마커를 불러옵니다.
-    window.onload = loadMarkersFromLocalStorage;
-
-    // UI 숨기기/보이기 기능 추가
-    var uiVisible = true;
-
-    function toggleUI() {
-        var category = document.querySelector('.category');
-        var searchForm = document.getElementById('searchForm');
-        var toggleButton = document.getElementById('toggleUI');
-
-        uiVisible = !uiVisible;
-
-        category.style.display = uiVisible ? 'block' : 'none';
-        searchForm.style.display = uiVisible ? 'block' : 'none';
-        toggleButton.innerText = uiVisible ? 'UI 숨기기' : 'UI 보이기';
-    }
 </script>
+
 </body>
 </html>

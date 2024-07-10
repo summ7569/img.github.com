@@ -3,148 +3,6 @@ var mapContainer = document.getElementById('map'),
         center: new kakao.maps.LatLng(37.499590490909185, 127.0263723554437),
         level: 5
     };
-var mapContainer = document.getElementById('map');
-var mapOption = {
-    center: new kakao.maps.LatLng(37.499590490909185, 127.0263723554437),
-    level: 5
-};
-
-var map = new kakao.maps.Map(mapContainer, mapOption);
-
-var coffeePositions = [
-    { 
-        position: new kakao.maps.LatLng(37.499590490909185, 127.0263723554437),
-        content: '<div class="customOverlay">' +
-                 '    <h3>커피 위치 정보</h3>' +
-                 '    <p>주소: 부림동 52-1</p>' +
-                 '    <p>상세내용: 커피 맛집입니다.</p>' +
-                 '    <button class="close" onclick="closeOverlay(' + markerList.length + ')">닫기</button>' +
-                 '</div>'
-    },
-    {
-        position: new kakao.maps.LatLng(37.499427948430814, 127.02794423197847),
-        content: '<div class="customOverlay">' +
-                 '    <h3>커피 위치 정보</h3>' +
-                 '    <p>주소: 부림동 110-1</p>' +
-                 '    <p>상세내용: 한 잔의 휴식을 찾을 수 있는 곳입니다.</p>' +
-                 '    <button class="close" onclick="closeOverlay(' + markerList.length + ')">닫기</button>' +
-                 '</div>'
-    }
-];
-
-var storePositions = [
-    {
-        position: new kakao.maps.LatLng(37.497535461505684, 127.02948149502778),
-        content: '<div class="customOverlay">' +
-                 '    <h3>가게 위치 정보</h3>' +
-                 '    <p>주소: 중앙동 52-1</p>' +
-                 '    <p>상세내용: 다양한 상품을 즐길 수 있는 가게입니다.</p>' +
-                 '    <button class="close" onclick="closeOverlay(' + markerList.length + ')">닫기</button>' +
-                 '</div>'
-    }
-];
-
-var carparkPositions = [
-    {
-        position: new kakao.maps.LatLng(37.49966168796031, 127.03007039430118),
-        content: '<div class="customOverlay">' +
-                 '    <h3>주차장 위치 정보</h3>' +
-                 '    <p>주소: 공원동 52-1</p>' +
-                 '    <p>상세내용: 중앙공원 내 물놀이터에 위치한 주차장입니다.</p>' +
-                 '    <p>회전형: 1대 (비알인포텍), 고정형: 7대 (레스큐)</p>' +
-                 '    <button class="close" onclick="closeOverlay(' + markerList.length + ')">닫기</button>' +
-                 '</div>'
-    }
-];
-
-var markerImageSrc = 'https://github.com/summ7569/summ7569.github.io/blob/master/category.png?raw=true';
-
-var markerList = [];
-var overlayList = [];
-
-function displayMarkers() {
-    displayMarker(coffeePositions, 'coffee', 'ico_coffee');
-    displayMarker(storePositions, 'store', 'ico_store');
-    displayMarker(carparkPositions, 'carpark', 'ico_carpark');
-}
-
-function displayMarker(locations, category, imgSrc) {
-    for (var i = 0; i < locations.length; i++) {
-        var imageSize = new kakao.maps.Size(22, 26),
-            imgOptions = {
-                spriteSize: new kakao.maps.Size(36, 98),
-                spriteOrigin: new kakao.maps.Point(10, imgSrc === 'ico_coffee' ? 0 : imgSrc === 'ico_store' ? 36 : 72),
-                offset: new kakao.maps.Point(11, 26)
-            },
-            markerImage = new kakao.maps.MarkerImage(markerImageSrc, imageSize, imgOptions),
-            marker = new kakao.maps.Marker({
-                position: locations[i].position,
-                image: markerImage,
-                category: category
-            });
-
-        var customOverlay = new kakao.maps.CustomOverlay({
-            content: locations[i].content,
-            map: map,
-            position: locations[i].position,
-            yAnchor: 1
-        });
-
-        kakao.maps.event.addListener(marker, 'click', function(customOverlay) {
-            return function() {
-                closeAllOverlays();
-                customOverlay.setMap(map);
-            };
-        }(customOverlay));
-
-        marker.setMap(map);
-        markerList.push(marker);
-        overlayList.push(customOverlay);
-    }
-}
-
-function closeOverlay(index) {
-    overlayList[index].setMap(null);
-}
-
-function closeAllOverlays() {
-    for (var i = 0; i < overlayList.length; i++) {
-        overlayList[i].setMap(null);
-    }
-}
-
-function clearMarkers() {
-    for (var i = 0; i < markerList.length; i++) {
-        markerList[i].setMap(null);
-    }
-    markerList = [];
-    overlayList = [];
-}
-
-// 초기화 함수
-function initMap() {
-    displayMarkers();
-}
-
-// UI 토글 함수
-function toggleUI() {
-    var category = document.querySelector('.category');
-    var searchForm = document.getElementById('searchForm');
-    var toggleButton = document.getElementById('toggleUI');
-
-    if (category.style.display === 'none') {
-        category.style.display = 'block';
-        searchForm.style.display = 'block';
-        toggleButton.innerHTML = 'UI 숨기기';
-    } else {
-        category.style.display = 'none';
-        searchForm.style.display = 'none';
-        toggleButton.innerHTML = 'UI 보이기';
-    }
-}
-
-// 지도 초기화
-initMap();
 
 var map = new kakao.maps.Map(mapContainer, mapOption);
 
@@ -159,179 +17,180 @@ var coffeePositions = [
 ];
 
 var coffeeInfo = [
-    "부림동 52-1",
-    "부림동 110-1",
-    "부림동 140-1",
-    "부림동 120-1",
-    "부림동 122-221",
-    "부림동 540-1",
-    "부림동 1340-1"
+    { number: "52-1", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+    { number: "110-1", address: "부림동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+    { number: "140-1", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+    { number: "120-1", address: "부림동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+    { number: "122-221", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+    { number: "540-1", address: "부림동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+    { number: "1340-1", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" }
 ];
 
 var storePositions = [
-    new kakao.maps.LatLng(37.497535461505684, 127.02948149502778),
-    new kakao.maps.LatLng(37.49671536281186, 127.03020491448352),
-    new kakao.maps.LatLng(37.496201943633714, 127.02959405469642),
-    new kakao.maps.LatLng(37.49640072567703, 127.02726459882308),
-    new kakao.maps.LatLng(37.49640098874988, 127.02609983175294),
-    new kakao.maps.LatLng(37.49932849491523, 127.02935780247945),
-    new kakao.maps.LatLng(37.49996818951873, 127.02943721562295)
+    new kakao.maps.LatLng(37.49824563450009, 127.03038109512947),
+    new kakao.maps.LatLng(37.4992406988721, 127.03074293107615),
+    new kakao.maps.LatLng(37.50066190835543, 127.03036787225738),
+    new kakao.maps.LatLng(37.500733430677865, 127.03125611376426),
+    new kakao.maps.LatLng(37.49914519813063, 127.03359224430952),
+    new kakao.maps.LatLng(37.49814954326297, 127.03113465642485),
+    new kakao.maps.LatLng(37.49686318278541, 127.03121121182857)
 ];
 
 var storeInfo = [
-    "중앙동 52-1",
-    "과천동 110-1",
-    "중앙동 140-1",
-    "과천동 120-1",
-    "과천동 122-221",
-    "과천동 540-1",
-    "과천동 1340-1"
+    { number: "52-1", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+    { number: "110-1", address: "부림동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+    { number: "140-1", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+    { number: "120-1", address: "부림동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+    { number: "122-221", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+    { number: "540-1", address: "부림동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+    { number: "1340-1", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" }
 ];
 
 var carparkPositions = [
-    new kakao.maps.LatLng(37.49966168796031, 127.03007039430118),
-    new kakao.maps.LatLng(37.499463762912974, 127.0288828824399),
-    new kakao.maps.LatLng(37.49896834100913, 127.02833986892401),
-    new kakao.maps.LatLng(37.49893267508434, 127.02673400572665),
-    new kakao.maps.LatLng(37.49872543597439, 127.02676785815386),
-    new kakao.maps.LatLng(37.49813096097184, 127.02591949495914),
-    new kakao.maps.LatLng(37.497680616783086, 127.02518427952202)
+    new kakao.maps.LatLng(37.500323752984, 127.03207784979008),
+    new kakao.maps.LatLng(37.50034003486949, 127.03326067446011),
+    new kakao.maps.LatLng(37.50006460550699, 127.03264793107614),
+    new kakao.maps.LatLng(37.49824675149486, 127.03441629449724),
+    new kakao.maps.LatLng(37.49762168699192, 127.0324681061864),
+    new kakao.maps.LatLng(37.49637228210332, 127.03227268815613),
+    new kakao.maps.LatLng(37.49752999225132, 127.03106257769505)
 ];
 
 var carparkInfo = [
-    "공원동 52-1",
-    "공원동 110-1",
-    "공원동 140-1",
-    "공원동 120-1",
-    "공원동 122-221",
-    "공원동 540-1",
-    "공원동 1340-1"
+    { number: "52-1", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+    { number: "110-1", address: "부림동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+    { number: "140-1", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+    { number: "120-1", address: "부림동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+    { number: "122-221", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+    { number: "540-1", address: "부림동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" },
+    { number: "1340-1", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://via.placeholder.com/150" }
 ];
 
-var markerImageSrc = 'https://github.com/summ7569/summ7569.github.io/blob/master/category.png?raw=true';
+var allPositions = coffeePositions.concat(storePositions, carparkPositions);
+var allInfo = coffeeInfo.concat(storeInfo, carparkInfo);
 
-var markerList = [];
+var markers = [];
 
-function changeMarker(type) {
-    removeMarker();
-    switch (type) {
-        case 'coffee':
-            displayMarker(coffeePositions, coffeeInfo, 'ico_coffee');
-            break;
-        case 'store':
-            displayMarker(storePositions, storeInfo, 'ico_store');
-            break;
-        case 'carpark':
-            displayMarker(carparkPositions, carparkInfo, 'ico_carpark');
-            break;
-        case 'all':
-            displayMarker(coffeePositions, coffeeInfo, 'ico_coffee');
-            displayMarker(storePositions, storeInfo, 'ico_store');
-            displayMarker(carparkPositions, carparkInfo, 'ico_carpark');
-            break;
+function addMarker() {
+    var latitude = parseFloat(document.getElementById('latitude').value);
+    var longitude = parseFloat(document.getElementById('longitude').value);
+    var category = document.getElementById('category').value;
+    var info = document.getElementById('info').value;
+
+    var position = new kakao.maps.LatLng(latitude, longitude);
+
+    var marker = new kakao.maps.Marker({
+        map: map,
+        position: position
+    });
+
+    markers.push(marker);
+
+    var iwContent = '<div style="padding:5px;">' + info + '</div>';
+
+    var infowindow = new kakao.maps.InfoWindow({
+        content: iwContent
+    });
+
+    infowindow.open(map, marker);
+
+    kakao.maps.event.addListener(marker, 'click', function() {
+        infowindow.open(map, marker);
+    });
+}
+
+function changeMarker(category) {
+    deleteMarkers();
+
+    if (category === 'coffee') {
+        displayMarkers(coffeePositions, coffeeInfo);
+    } else if (category === 'store') {
+        displayMarkers(storePositions, storeInfo);
+    } else if (category === 'carpark') {
+        displayMarkers(carparkPositions, carparkInfo);
+    } else if (category === 'all') {
+        displayMarkers(allPositions, allInfo);
     }
 }
 
-function displayMarker(locPositions, locInfo, imgSrc) {
-    for (var i = 0; i < locPositions.length; i++) {
-        var imageSize = new kakao.maps.Size(22, 26),
-            imgOptions = {
-                spriteSize: new kakao.maps.Size(36, 98),
-                spriteOrigin: new kakao.maps.Point(10, imgSrc === 'ico_coffee' ? 0 : imgSrc === 'ico_store' ? 36 : 72),
-                offset: new kakao.maps.Point(11, 26)
-            },
-            markerImage = new kakao.maps.MarkerImage(markerImageSrc, imageSize, imgOptions),
-            marker = new kakao.maps.Marker({
-                position: locPositions[i],
-                image: markerImage
-            });
-
-        var infowindow = new kakao.maps.InfoWindow({
-            content: locInfo[i]
+function displayMarkers(positions, info) {
+    for (var i = 0; i < positions.length; i++) {
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: positions[i]
         });
 
-        kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-        kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
+        markers.push(marker);
 
-        marker.setMap(map);
-        markerList.push(marker);
-    }
-}
+        var iwContent = '<div style="padding:5px;">' +
+            '<div>' + info[i].number + '</div>' +
+            '<div>' + info[i].address + '</div>' +
+            '<div>' + info[i].rotation + '</div>' +
+            '<div>' + info[i].fixed + '</div>' +
+            '<div>' + info[i].description + '</div>' +
+            '<div><img src="' + info[i].image + '" style="max-width:100%;height:auto;"></div>' +
+            '</div>';
 
-function removeMarker() {
-    for (var i = 0; i < markerList.length; i++) {
-        markerList[i].setMap(null);
+        var infowindow = new kakao.maps.InfoWindow({
+            content: iwContent
+        });
+
+        kakao.maps.event.addListener(marker, 'click', makeOverListener(map, marker, infowindow));
     }
-    markerList = [];
 }
 
 function makeOverListener(map, marker, infowindow) {
-    return function () {
+    return function() {
         infowindow.open(map, marker);
     };
 }
 
-function makeOutListener(infowindow) {
-    return function () {
-        infowindow.close();
-    };
-}
-
-function addMarker() {
-    var lat = document.getElementById('latitude').value;
-    var lng = document.getElementById('longitude').value;
-    var category = document.getElementById('category').value;
-    var info = document.getElementById('info').value;
-
-    var position = new kakao.maps.LatLng(lat, lng);
-
-    var imageSize = new kakao.maps.Size(22, 26),
-        imgOptions = {
-            spriteSize: new kakao.maps.Size(36, 98),
-            spriteOrigin: new kakao.maps.Point(10, category == 'coffee' ? 0 : category == 'store' ? 36 : 72),
-            offset: new kakao.maps.Point(11, 26)
-        },
-        markerImage = new kakao.maps.MarkerImage(markerImageSrc, imageSize, imgOptions),
-        marker = new kakao.maps.Marker({
-            position: position,
-            image: markerImage
-        });
-
-    var infowindow = new kakao.maps.InfoWindow({
-        content: info
-    });
-
-    kakao.maps.event.addListener(marker, 'mouseover', makeOverListener(map, marker, infowindow));
-    kakao.maps.event.addListener(marker, 'mouseout', makeOutListener(infowindow));
-
-    marker.setMap(map);
-    markerList.push(marker);
+function deleteMarkers() {
+    for (var i = 0; i < markers.length; i++) {
+        markers[i].setMap(null);
+    }
+    markers = [];
 }
 
 function moveToCoordinates() {
-    var lat = document.getElementById('latitude').value;
-    var lng = document.getElementById('longitude').value;
+    var latitude = parseFloat(document.getElementById('latitude').value);
+    var longitude = parseFloat(document.getElementById('longitude').value);
 
-    var moveLatLon = new kakao.maps.LatLng(lat, lng);
-    map.setCenter(moveLatLon);
+    var moveLatLng = new kakao.maps.LatLng(latitude, longitude);
+
+    map.panTo(moveLatLng);
 }
 
 function clearMarkers() {
-    removeMarker();
+    deleteMarkers();
 }
 
 function toggleUI() {
-    var category = document.querySelector('.category');
-    var searchForm = document.getElementById('searchForm');
-    var toggleButton = document.getElementById('toggleUI');
-
-    if (category.style.display === 'none') {
-        category.style.display = 'block';
-        searchForm.style.display = 'block';
-        toggleButton.innerHTML = 'UI 숨기기';
+    var ui = document.getElementsByClassName('category')[0];
+    if (ui.style.display === 'none') {
+        ui.style.display = 'block';
+        document.getElementById('toggleUI').innerText = 'UI 숨기기';
     } else {
-        category.style.display = 'none';
-        searchForm.style.display = 'none';
-        toggleButton.innerHTML = 'UI 보이기';
+        ui.style.display = 'none';
+        document.getElementById('toggleUI').innerText = 'UI 보이기';
     }
+}
+
+function closeOverlay() {
+    document.getElementById('customOverlay').style.display = 'none';
+}
+
+function showOverlay() {
+    document.getElementById('customOverlay').style.display = 'block';
+}
+
+function openOverlay(number) {
+    showOverlay();
+
+    document.getElementById('markerNumber').innerText = '마커 번호: ' + number;
+    document.getElementById('address').innerText = '주소: ' + '부림동';
+    document.getElementById('rotation').innerText = '회전: ' + '회전형';
+    document.getElementById('fixed').innerText = '고정: ' + '고정형';
+    document.getElementById('description').innerText = '설명: ' + '상세설명';
+    document.getElementById('image').innerHTML = '<img src="https://via.placeholder.com/150" style="max-width:100%;height:auto;">';
 }

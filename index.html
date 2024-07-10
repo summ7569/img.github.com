@@ -1,348 +1,85 @@
-<!DOCTYPE HTML>
-<HTML lang="kr">
-<head>
-    <meta charset="utf-8">
-    <title>test102</title>
-    <style>
-        #mapwrap {
-            position: relative;
-            overflow: hidden;
-        }
+function changeMarker(type) {
+    category = type;
 
-        .category,
-        .category * {
-            margin: 0;
-            padding: 0;
-            color: #000;
-        }
+    // 기존에 열려있는 커스텀 오버레이를 닫습니다.
+    closeOverlay();
 
-        .category {
-            position: absolute;
-            overflow: hidden;
-            top: 10px;
-            left: 10px;
-            width: 250px;
-            height: 50px;
-            z-index: 10;
-            border: 1px solid black;
-            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
-            font-size: 12px;
-            text-align: center;
-            background-color: #fff;
-        }
+    // 모든 인포윈도우를 닫습니다.
+    closeAllInfoWindows();
 
-        .category .menu_selected {
-            background: #FF5F4A;
-            color: #fff;
-            border-left: 1px solid #915B2F;
-            border-right: 1px solid #915B2F;
-            margin: 0 -1px;
-        }
+    setMarkers(null, coffeeMarkers);
+    setMarkers(null, storeMarkers);
+    setMarkers(null, carparkMarkers);
 
-        .category li {
-            list-style: none;
-            float: left;
-            width: 60px;
-            height: 45px;
-            padding-top: 5px;
-            cursor: pointer;
-        }
+    switch (type) {
+        case 'coffee':
+            setMarkers(map, coffeeMarkers);
+            break;
+        case 'store':
+            setMarkers(map, storeMarkers);
+            break;
+        case 'carpark':
+            setMarkers(map, carparkMarkers);
+            break;
+        case 'all':
+            setMarkers(map, coffeeMarkers);
+            setMarkers(map, storeMarkers);
+            setMarkers(map, carparkMarkers);
+            break;
+    }
+}
 
-        .category .ico_comm {
-            display: block;
-            margin: 0 auto 2px;
-            width: 22px;
-            height: 26px;
-            background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png') no-repeat;
-        }
+function displayOverlay(marker, info) {
+    var overlayContent = document.getElementById('overlayContent');
+    var overlayInfo = document.getElementById('overlayInfo');
+    var overlayClose = document.getElementById('overlayClose');
 
-        .category .ico_coffee {
-            background-position: -10px 0;
-        }
+    overlayInfo.innerHTML = `
+        <div id="markerNumber">관리번호: ${info.number}</div>
+        <div id="address">주소: ${info.address}</div>
+        <div id="rotation">회전형: ${info.rotation}</div>
+        <div id="fixed">고정형: ${info.fixed}</div>
+        <div id="description">상세설명: ${info.description}</div>
+        <div id="image"><img src="${info.image}" style="max-width: 100%; height: auto;"></div>
+    `;
 
-        .category .ico_store {
-            background-position: -10px -36px;
-        }
-
-        .category .ico_carpark {
-            background-position: -10px -72px;
-        }
-        
-        .category .ico_all {
-            background-position: -10px -108px;
-        }
-
-        /* 추가된 스타일 */
-        #toggleUI {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            z-index: 20;
-            padding: 5px 10px;
-            background-color: #fff;
-            border: 1px solid #000;
-            cursor: pointer;
-        }
-
-        /* 커스텀 오버레이 스타일 */
-        .customoverlay {
-            position: absolute;
-            bottom: 10px;
-            left: -150px;
-            display: none;
-            border: 1px solid #ccc;
-            background-color: white;
-            min-width: 300px;
-            padding: 10px;
-            font-size: 12px;
-            text-align: left;
-        }
-
-        .overlay_close {
-            position: absolute;
-            top: 5px;
-            right: 5px;
-            cursor: pointer;
-            z-index: 10;
-        }
-
-        /* 이미지 스타일 */
-        .overlay_image {
-            float: left;
-            margin-right: 10px;
-            width: 150px;
-            height: 150px;
-        }
-    </style>
-</head>
-<body>
-<div id="map" style="width: 100%; height: 100% !important; padding-bottom: 50%; position: relative;"></div>
-
-<!-- 지도 위에 표시될 마커 카테고리 -->
-<div class="category">
-    <ul>
-        <li id="coffeeMenu" onclick="changeMarker('coffee')" class="menu_selected">
-            <span class="ico_comm ico_coffee"></span>
-            커피숍
-        </li>
-        <li id="storeMenu" onclick="changeMarker('store')">
-            <span class="ico_comm ico_store"></span>
-            편의점
-        </li>
-        <li id="carparkMenu" onclick="changeMarker('carpark')">
-            <span class="ico_comm ico_carpark"></span>
-            주차장
-        </li>
-        <li id="allMenu" onclick="changeMarker('all')">
-            <span class="ico_comm ico_all"></span>
-            모두
-        </li>
-    </ul>
-</div>
-
-<!-- 검색 폼 추가 -->
-<div style="position: absolute; top: 70px; left: 10px; z-index: 10; background-color: white; padding: 10px; border: 1px solid black;">
-    <form id="searchForm">
-        <label for="latitude">위도: </label><input type="text" id="latitude" name="latitude" required><br>
-        <label for="longitude">경도: </label><input type="text" id="longitude" name="longitude" required><br>
-        <label for="category">카테고리: </label>
-        <select id="category" name="category">
-            <option value="coffee">커피숍</option>
-            <option value="store">편의점</option>
-            <option value="carpark">주차장</option>
-        </select><br>
-        <label for="info">추가 정보: </label><input type="text" id="info" name="info"><br>
-        <button type="button" onclick="addMarker()">추가</button>
-        <button type="button" onclick="moveToCoordinates()">위치로 이동</button>
-        <button type="button" onclick="clearMarkers()">마커 초기화</button>
-    </form>
-</div>
-
-<!-- UI 숨기기/보이기 버튼 -->
-<div id="toggleUI" onclick="toggleUI()">UI 숨기기</div>
-
-<!-- 커스텀 오버레이 -->
-<div id="customOverlay" class="customoverlay">
-    <div id="overlayContent">
-        <div id="overlayClose" class="overlay_close" onclick="closeOverlay()">닫기</div>
-        <div id="overlayInfo">
-            <div id="markerNumber"></div>
-            <div id="address"></div>
-            <div id="rotation"></div>
-            <div id="fixed"></div>
-            <div id="description"></div>
-            <div id="image" class="overlay_image"></div>
-        </div>
-    </div>
-</div>
-
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6"></script>
-<script>
-    var mapContainer = document.getElementById('map'),
-        mapOption = {
-            center: new kakao.maps.LatLng(37.499590490909185, 127.0263723554437),
-            level: 5
-        };
-
-    var map = new kakao.maps.Map(mapContainer, mapOption);
-
-    var coffeePositions = [
-        new kakao.maps.LatLng(37.499590490909185, 127.0263723554437),
-        new kakao.maps.LatLng(37.499427948430814, 127.02794423197847),
-        new kakao.maps.LatLng(37.498553760499505, 127.02882598822454),
-        new kakao.maps.LatLng(37.497625593121384, 127.02935713582038),
-        new kakao.maps.LatLng(37.49646391248451, 127.02675574250912),
-        new kakao.maps.LatLng(37.49629291770947, 127.02587362608637),
-        new kakao.maps.LatLng(37.49754540521486, 127.02546694890695)
-    ];
-
-    var coffeeInfo = [
-        { number: "52-1", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true" },
-        { number: "110-1", address: "부림동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true" },
-        { number: "140-1", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true" },
-        { number: "120-1", address: "부림동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true" },
-        { number: "122-221", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true" },
-        { number: "133-121", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true" },
-        { number: "144-122", address: "부림동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true" }
-    ];
-
-    var storePositions = [
-        new kakao.maps.LatLng(37.50018835117923, 127.02818371871755),
-        new kakao.maps.LatLng(37.499233177576076, 127.02924488810155),
-        new kakao.maps.LatLng(37.49820870423886, 127.0301387256328),
-        new kakao.maps.LatLng(37.49650903469016, 127.03143242761212),
-        new kakao.maps.LatLng(37.4957630375205, 127.03024979375243),
-        new kakao.maps.LatLng(37.496707234328855, 127.02879078197523),
-        new kakao.maps.LatLng(37.497798655031944, 127.0280527646672)
-    ];
-
-    var storeInfo = [
-        { number: "99-11", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true" },
-        { number: "199-1", address: "부림동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true" },
-        { number: "104-1", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true" },
-        { number: "155-1", address: "부림동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true" },
-        { number: "160-1", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true" },
-        { number: "170-1", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true" },
-        { number: "180-1", address: "부림동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true" }
-    ];
-
-    var carparkPositions = [
-        new kakao.maps.LatLng(37.50012357159533, 127.02918371871755),
-        new kakao.maps.LatLng(37.499433177576076, 127.02852488810155),
-        new kakao.maps.LatLng(37.49812570523886, 127.0291387256328),
-        new kakao.maps.LatLng(37.49650903469016, 127.03073242761212),
-        new kakao.maps.LatLng(37.4958630575205, 127.03134979375243),
-        new kakao.maps.LatLng(37.496107234328855, 127.02999078197523),
-        new kakao.maps.LatLng(37.496798665031944, 127.0290527646672)
-    ];
-
-    var carparkInfo = [
-        { number: "99-1", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true" },
-        { number: "19-1", address: "부림동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true" },
-        { number: "104-1", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true" },
-        { number: "15-1", address: "부림동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true" },
-        { number: "13-1", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true" },
-        { number: "11-1", address: "부림동", rotation: "회전형", fixed: "고정형", description: "상세설명", image: "https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true" },
-        { number: "12-1", address: "부림동", rotation: "고정형", fixed: "고정형", description: "상세설명", image: "https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true" }
-    ];
-
-    var markers = [];
-
-    // 마커 클러스터러를 생성합니다
-    var clusterer = new kakao.maps.MarkerClusterer({
-        map: map, // 마커들을 클러스터로 관리하고 표시할 지도 객체
-        averageCenter: true, // 클러스터 마커의 중심좌표를 클러스터 포함 마커의 평균 좌표로 설정
-        minLevel: 5 // 클러스터 할 최소 지도 레벨
+    var overlay = new kakao.maps.CustomOverlay({
+        content: overlayContent,
+        map: map,
+        position: marker.getPosition()
     });
 
-    // 커피숍 마커 추가
-    for (var i = 0; i < coffeePositions.length; i++) {
-        addMarker(coffeePositions[i], 'coffee', i);
+    // 커스텀 오버레이를 열었을 때 해당 오버레이를 저장하여 닫을 때 사용할 수 있도록 합니다.
+    marker.overlay = overlay;
+
+    overlay.setMap(map);
+    overlay.setZIndex(10);
+
+    overlayClose.onclick = function() {
+        closeOverlay();
+    };
+}
+
+function closeOverlay() {
+    if (map && map.getOverlayMapTypeId() !== kakao.maps.MapTypeId.OVERLAY) {
+        return;
     }
 
-    // 편의점 마커 추가
-    for (var i = 0; i < storePositions.length; i++) {
-        addMarker(storePositions[i], 'store', i);
-    }
-
-    // 주차장 마커 추가
-    for (var i = 0; i < carparkPositions.length; i++) {
-        addMarker(carparkPositions[i], 'carpark', i);
-    }
-
-    function addMarker(position, category, idx) {
-        var imageSrc = 'https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/marker_' + category + '.png', // 마커 이미지 url
-            imageSize = new kakao.maps.Size(22, 26), // 마커 이미지의 크기
-            imageOption = { offset: new kakao.maps.Point(10, 26) };
-
-        // 마커 이미지를 생성합니다
-        var markerImage = new kakao.maps.MarkerImage(imageSrc, imageSize, imageOption);
-
-        // 마커를 생성합니다
-        var marker = new kakao.maps.Marker({
-            position: position, // 마커의 위치
-            image: markerImage // 마커이미지 설정
-        });
-
-        // 마커 클릭 이벤트
-        kakao.maps.event.addListener(marker, 'click', function () {
-            showCustomOverlay(idx, category);
-        });
-
-        // 생성된 마커를 배열에 추가합니다
-        markers.push(marker);
-
-        // 클러스터러에 마커를 추가합니다
-        clusterer.addMarkers(markers);
-    }
-
-    // 마커 클러스터러에 클릭 이벤트를 등록합니다
-    kakao.maps.event.addListener(clusterer, 'clusterclick', function (cluster) {
-        // 현재 지도 레벨에서 1레벨 확대한 레벨
-        var level = map.getLevel() - 1;
-
-        // 지도를 클릭된 클러스터의 마커의 위치를 기준으로 확대합니다
-        map.setLevel(level, { anchor: cluster.getCenter() });
-    });
-
-    // 커스텀 오버레이 생성
-    var customOverlay = new kakao.maps.CustomOverlay({
-        yAnchor: 1
-    });
-
-    function showCustomOverlay(idx, category) {
-        if (category === 'coffee') {
-            var content = '<div class="customoverlay">' +
-                '  <a href="http://localmap.daum.net/linkTo/' + idx + '">' +
-                '    <span class="title">커피숍</span>' +
-                '  </a>' +
-                '</div>';
-        } else if (category === 'store') {
-            var content = '<div class="customoverlay">' +
-                '  <a href="http://localmap.daum.net/linkTo/' + idx + '">' +
-                '    <span class="title">편의점</span>' +
-                '  </a>' +
-                '</div>';
-        } else {
-            var content = '<div class="customoverlay">' +
-                '  <a href="http://localmap.daum.net/linkTo/' + idx + '">' +
-                '    <span class="title">주차장</span>' +
-                '  </a>' +
-                '</div>';
+    coffeeMarkers.forEach(marker => {
+        if (marker.overlay) {
+            marker.overlay.setMap(null);
         }
-
-        // 커스텀 오버레이 컨텐츠 설정
-        customOverlay.setContent(content);
-
-        // 커스텀 오버레이를 표시합니다
-        customOverlay.setPosition(markers[idx].getPosition());
-        customOverlay.setMap(map);
-    }
-
-    // 커스텀 오버레이 클릭 이벤트
-    kakao.maps.event.addListener(customOverlay, 'click', function () {
-        customOverlay.setMap(null);
     });
-</script>
 
-</html>
+    storeMarkers.forEach(marker => {
+        if (marker.overlay) {
+            marker.overlay.setMap(null);
+        }
+    });
+
+    carparkMarkers.forEach(marker => {
+        if (marker.overlay) {
+            marker.overlay.setMap(null);
+        }
+    });
+}

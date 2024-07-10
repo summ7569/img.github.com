@@ -348,62 +348,62 @@
     }
 
     // 커스텀 오버레이를 표시하는 함수
-    function displayOverlay(marker, info) {
-        var overlayContent = document.getElementById('overlayContent');
-        var overlayInfo = document.getElementById('overlayInfo');
-        var overlayClose = document.getElementById('overlayClose');
+function displayOverlay(marker, info) {
+    var overlayContent = document.getElementById('overlayContent');
+    var overlayInfo = document.getElementById('overlayInfo');
+    var overlayClose = document.getElementById('overlayClose');
 
-        overlayInfo.innerHTML = 
-            <div id="markerNumber">관리번호: ${info.number}</div>
-            <div id="address">주소: ${info.address}</div>
-            <div id="rotation">회전형: ${info.rotation}</div>
-            <div id="fixed">고정형: ${info.fixed}</div>
-            <div id="description">상세설명: ${info.description}</div>
-            <div id="image"><img src="${info.image}" style="max-width: 100%; height: auto;"></div>
-        ;
+    overlayInfo.innerHTML = `
+        <div id="markerNumber">관리번호: ${info.number}</div>
+        <div id="address">주소: ${info.address}</div>
+        <div id="rotation">회전형: ${info.rotation}</div>
+        <div id="fixed">고정형: ${info.fixed}</div>
+        <div id="description">상세설명: ${info.description}</div>
+        <div id="image"><img src="${info.image}" style="max-width: 100%; height: auto;"></div>
+    `;
 
-        var overlay = new kakao.maps.CustomOverlay({
-            content: overlayContent,
-            map: map,
-            position: marker.getPosition()
-        });
+    var overlay = new kakao.maps.CustomOverlay({
+        content: overlayContent,
+        map: map,
+        position: marker.getPosition()
+    });
 
-        // 커스텀 오버레이를 열었을 때 해당 오버레이를 저장하여 닫을 때 사용할 수 있도록 합니다.
-        marker.overlay = overlay;
+    // 커스텀 오버레이를 열었을 때, 해당 오버레이를 저장하여 닫을 때 사용할 수 있도록 합니다.
+    marker.overlay = overlay;
 
-        overlayClose.onclick = function() {
-            closeOverlay();
-        };
+    overlayClose.onclick = function() {
+        closeOverlay();
+    };
 
-        overlay.setMap(map);
+    overlay.setMap(map);
 
-        // 커스텀 오버레이가 열렸을 때, 맵의 중심을 해당 마커로 이동시킵니다.
-        map.panTo(marker.getPosition());
-    }
+    // 커스텀 오버레이가 열렸을 때, 맵의 중심을 해당 마커로 이동시킵니다.
+    map.panTo(marker.getPosition());
+}
 
-    // 커스텀 오버레이를 닫는 함수
-    function closeOverlay() {
-        coffeeMarkers.forEach(function(marker) {
-            if (marker.overlay) {
-                marker.overlay.setMap(null);
-                marker.overlay = null;
-            }
-        });
+// 커스텀 오버레이를 닫는 함수
+function closeOverlay() {
+    coffeeMarkers.forEach(function(marker) {
+        if (marker.overlay) {
+            marker.overlay.setMap(null);
+            // marker.overlay = null; // 여기서는 marker.overlay를 null로 설정하지 않습니다.
+        }
+    });
 
-        storeMarkers.forEach(function(marker) {
-            if (marker.overlay) {
-                marker.overlay.setMap(null);
-                marker.overlay = null;
-            }
-        });
+    storeMarkers.forEach(function(marker) {
+        if (marker.overlay) {
+            marker.overlay.setMap(null);
+            // marker.overlay = null;
+        }
+    });
 
-        carparkMarkers.forEach(function(marker) {
-            if (marker.overlay) {
-                marker.overlay.setMap(null);
-                marker.overlay = null;
-            }
-        });
-    }
+    carparkMarkers.forEach(function(marker) {
+        if (marker.overlay) {
+            marker.overlay.setMap(null);
+            // marker.overlay = null;
+        }
+    });
+}
 
     // UI 숨기기/보이기 함수
     function toggleUI() {

@@ -1,185 +1,229 @@
-<!DOCTYPE HTML>
-<HTML lang="kr">
+<!DOCTYPE html>
+<html lang="ko">
 <head>
-    <meta charset="utf-8">
-    <title>test102</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kakao Maps API Example</title>
     <style>
-        #mapwrap {
-            position: relative;
-            overflow: hidden;
+        #map {
+            width: 100%;
+            height: 600px;
         }
-
-        .category,
-        .category * {
-            margin: 0;
-            padding: 0;
-            color: #000;
-        }
-
-        .category {
+        #controls {
             position: absolute;
-            overflow: hidden;
             top: 10px;
             left: 10px;
-            width: 250px;
-            height: 50px;
-            z-index: 10;
-            border: 1px solid black;
-            font-family: 'Malgun Gothic', '맑은 고딕', sans-serif;
-            font-size: 12px;
-            text-align: center;
-            background-color: #fff;
-        }
-
-        .category .menu_selected {
-            background: #FF5F4A;
-            color: #fff;
-            border-left: 1px solid #915B2F;
-            border-right: 1px solid #915B2F;
-            margin: 0 -1px;
-        }
-
-        .category li {
-            list-style: none;
-            float: left;
-            width: 60px;
-            height: 45px;
-            padding-top: 5px;
-            cursor: pointer;
-        }
-
-        .category .ico_comm {
-            display: block;
-            margin: 0 auto 2px;
-            width: 22px;
-            height: 26px;
-            background: url('https://t1.daumcdn.net/localimg/localimages/07/mapapidoc/category.png') no-repeat;
-        }
-
-        .category .ico_coffee {
-            background-position: -10px 0;
-        }
-
-        .category .ico_store {
-            background-position: -10px -36px;
-        }
-
-        .category .ico_carpark {
-            background-position: -10px -72px;
-        }
-        
-        .category .ico_all {
-            background-position: -10px -108px;
-        }
-
-        /* 추가된 스타일 */
-        #toggleUI {
-            position: absolute;
-            bottom: 10px;
-            left: 10px;
-            z-index: 20;
-            padding: 5px 10px;
-            background-color: #fff;
-            border: 1px solid #000;
-            cursor: pointer;
-        }
-
-        /* 커스텀 오버레이 스타일 */
-        .customoverlay {
-            position: absolute;
-            bottom: 10px;
-            left: -150px;
-            display: none;
-            border: 1px solid #ccc;
-            background-color: #f9f9f9;
-            min-width: 300px;
+            background-color: white;
             padding: 10px;
-            font-size: 12px;
-            text-align: left;
-            box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.3);
+            z-index: 1;
             border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
-        .overlay_close {
+        .category-icon {
+            width: 24px;
+            height: 24px;
+            margin-right: 5px;
+            vertical-align: middle;
+        }
+        #customOverlay {
+            display: none;
+            position: absolute;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 300px;
+            background-color: #f0f0f0;
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+        }
+        #overlayContent {
+            display: flex;
+        }
+        #overlayImage {
+            width: 100px;
+            height: 100px;
+            margin-right: 10px;
+        }
+        #overlayInfo {
+            flex: 1;
+        }
+        #overlayClose {
             position: absolute;
             top: 5px;
             right: 5px;
             cursor: pointer;
-            z-index: 10;
-        }
-
-        /* 이미지 왼쪽 정렬 */
-        #overlayContent img {
-            float: left;
-            margin-right: 10px;
-            width: 100px;
-            height: 100px;
         }
     </style>
 </head>
 <body>
-<div id="map" style="width: 100%; height: 100% !important; padding-bottom: 50%; position: relative;"></div>
+    <div id="map"></div>
 
-<!-- 지도 위에 표시될 마커 카테고리 -->
-<div class="category">
-    <ul>
-        <li id="coffeeMenu" onclick="changeMarker('coffee')">
-            <span class="ico_comm ico_coffee"></span>
-            커피숍
-        </li>
-        <li id="storeMenu" onclick="changeMarker('store')">
-            <span class="ico_comm ico_store"></span>
-            편의점
-        </li>
-        <li id="carparkMenu" onclick="changeMarker('carpark')">
-            <span class="ico_comm ico_carpark"></span>
-            주차장
-        </li>
-        <li id="allMenu" onclick="changeMarker('all')">
-            <span class="ico_comm ico_all"></span>
-            모두
-        </li>
-    </ul>
-</div>
-
-<!-- 검색 폼 추가 -->
-<div style="position: absolute; top: 70px; left: 10px; z-index: 10; background-color: white; padding: 10px; border: 1px solid black;">
-    <form id="searchForm">
-        <label for="latitude">위도: </label><input type="text" id="latitude" name="latitude" required><br>
-        <label for="longitude">경도: </label><input type="text" id="longitude" name="longitude" required><br>
-        <label for="category">카테고리: </label>
-        <select id="category" name="category">
-            <option value="coffee">커피숍</option>
-            <option value="store">편의점</option>
-            <option value="carpark">주차장</option>
-        </select><br>
-        <label for="info">추가 정보: </label><input type="text" id="info" name="info"><br>
-        <button type="button" onclick="addMarker()">추가</button>
-        <button type="button" onclick="moveToCoordinates()">위치로 이동</button>
-        <button type="button" onclick="clearMarkers()">마커 초기화</button>
-    </form>
-</div>
-
-<!-- UI 숨기기/보이기 버튼 -->
-<div id="toggleUI" onclick="toggleUI()">UI 숨기기</div>
-
-<!-- 커스텀 오버레이 -->
-<div id="customOverlay" class="customoverlay">
-    <div id="overlayContent">
-        <div id="overlayClose" class="overlay_close" onclick="closeOverlay()">닫기</div>
-        <div id="overlayInfo">
-            <div id="markerNumber"></div>
-            <div id="address"></div>
-            <div id="rotation"></div>
-            <div id="fixed"></div>
-            <div id="description"></div>
-            <div id="image"></div>
-        </div>
+    <div id="controls">
+        <label for="category">카테고리 선택:</label>
+        <select id="category">
+            <option value="all">전체</option>
+            <option value="갈현동">갈현동</option>
+            <option value="과천동">과천동</option>
+            <option value="문원동">문원동</option>
+            <option value="별양동">별양동</option>
+            <option value="부림동">부림동</option>
+            <option value="주암동">주암동</option>
+            <option value="중앙동">중앙동</option>
+            <option value="기타">기타</option>
+        </select>
     </div>
-</div>
 
-    
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6"></script>
-<script src="script.js"></script>
+    <div id="customOverlay">
+        <div id="overlayContent">
+            <img id="overlayImage" src="" alt="마커 이미지">
+            <div id="overlayInfo">
+                <p><strong>관리번호:</strong> <span id="overlayNumber"></span></p>
+                <p><strong>주소:</strong> <span id="overlayAddress"></span></p>
+                <p><strong>회전형:</strong> <span id="overlayRotation"></span></p>
+                <p><strong>고정형:</strong> <span id="overlayFixed"></span></p>
+                <p><strong>상세설명:</strong> <span id="overlayDescription"></span></p>
+            </div>
+        </div>
+        <span id="overlayClose">닫기</span>
+    </div>
+
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6&libraries=services"></script>
+    <script>
+        var map;
+        var markers = [];
+        var overlay = document.getElementById('customOverlay');
+        var overlayContent = document.getElementById('overlayContent');
+        var overlayImage = document.getElementById('overlayImage');
+        var overlayNumber = document.getElementById('overlayNumber');
+        var overlayAddress = document.getElementById('overlayAddress');
+        var overlayRotation = document.getElementById('overlayRotation');
+        var overlayFixed = document.getElementById('overlayFixed');
+        var overlayDescription = document.getElementById('overlayDescription');
+
+        function initMap() {
+            var mapContainer = document.getElementById('map');
+            var options = {
+                center: new kakao.maps.LatLng(37.416724, 126.982755), // 초기 중심 좌표 설정
+                level: 14 // 지도 확대 레벨 설정
+            };
+            map = new kakao.maps.Map(mapContainer, options);
+
+            // 각 카테고리별 예시 마커 추가
+            addMarker('갈현동', 37.416724, 126.982755, {
+                number: 'A-GH-16',
+                address: '갈현동 산 20-7',
+                rotation: '1대 (비알인포텍)',
+                fixed: '2대 (루주루)',
+                description: '이운정 가든 앞',
+                image: 'https://via.placeholder.com/150'
+            });
+            addMarker('과천동', 37.415478, 126.983951, {
+                number: 'A-GC-17',
+                address: '과천동 산 30-10',
+                rotation: '2대 (삼성)',
+                fixed: '3대 (LG)',
+                description: '과천 시장 근처',
+                image: 'https://via.placeholder.com/150'
+            });
+            addMarker('문원동', 37.4159214552, 126.979858, {
+                number: 'A-MW-18',
+                address: '문원동 산 40-5',
+                rotation: '3대 (SK)',
+                fixed: '1대 (KT)',
+                description: '문원 정류장 인근',
+                image: 'https://via.placeholder.com/150'
+            });
+            addMarker('별양동', 37.417504, 126.986298, {
+                number: 'A-BY-19',
+                address: '별양동 산 50-15',
+                rotation: '4대 (애플)',
+                fixed: '2대 (구글)',
+                description: '별양 공원 옆',
+                image: 'https://via.placeholder.com/150'
+            });
+            addMarker('부림동', 37.417867, 126.986083, {
+                number: 'A-BR-20',
+                address: '부림동 산 60-20',
+                rotation: '5대 (마이크로소프트)',
+                fixed: '1대 (아마존)',
+                description: '부림 중학교 근처',
+                image: 'https://via.placeholder.com/150'
+            });
+            addMarker('주암동', 37.416816, 126.985189, {
+                number: 'A-JA-21',
+                address: '주암동 산 70-25',
+                rotation: '6대 (페이스북)',
+                fixed: '3대 (트위터)',
+                description: '주암 초등학교 근처',
+                image: 'https://via.placeholder.com/150'
+            });
+            addMarker('중앙동', 37.416863, 126.981945, {
+                number: 'A-JD-22',
+                address: '중앙동 산 80-30',
+                rotation: '7대 (네이버)',
+                fixed: '4대 (카카오)',
+                description: '중앙 시장 인근',
+                image: 'https://via.placeholder.com/150'
+            });
+
+            // 카테고리 선택 시 마커 보이기 설정
+            document.getElementById('category').addEventListener('change', function () {
+                var category = this.value;
+                showMarkers(category);
+            });
+
+            // 마커 클릭 시 커스텀 오버레이 표시
+            kakao.maps.event.addListener(map, 'click', function () {
+                overlay.style.display = 'none';
+            });
+            kakao.maps.event.addListener(map, 'idle', function () {
+                overlay.style.display = 'none';
+            });
+        }
+
+        function addMarker(category, lat, lng, info) {
+            var markerPosition = new kakao.maps.LatLng(lat, lng);
+            var marker = new kakao.maps.Marker({
+                position: markerPosition,
+                category: category, // 마커의 카테고리 정보 저장
+                info: info // 마커의 정보 저장
+            });
+
+            // 마커 클릭 시 커스텀 오버레이 표시 이벤트 추가
+            kakao.maps.event.addListener(marker, 'click', function () {
+                overlayNumber.innerText = info.number;
+                overlayAddress.innerText = info.address;
+                overlayRotation.innerText = info.rotation;
+                overlayFixed.innerText = info.fixed;
+                overlayDescription.innerText = info.description;
+                overlayImage.src = info.image;
+                overlay.style.display = 'block';
+            });
+
+            markers.push(marker);
+            showMarkers('all');
+        }
+
+        function showMarkers(category) {
+            for (var i = 0; i < markers.length; i++) {
+                var marker = markers[i];
+                if (category === 'all' || marker.category === category) {
+                    marker.setMap(map);
+                } else {
+                    marker.setMap(null);
+                }
+            }
+        }
+
+        function closeOverlay() {
+            overlay.style.display = 'none';
+        }
+
+        window.onload = function () {
+            initMap();
+        };
+    </script>
 </body>
 </html>

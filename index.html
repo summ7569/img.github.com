@@ -86,7 +86,7 @@
                 <p><strong>상세설명:</strong> <span id="overlayDescription"></span></p>
             </div>
         </div>
-        <span id="overlayClose">닫기</span>
+        <span id="overlayClose" onclick="closeOverlay()">닫기</span>
     </div>
 
     <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6&libraries=services"></script>
@@ -94,7 +94,6 @@
         var map;
         var markers = [];
         var overlay = document.getElementById('customOverlay');
-        var overlayContent = document.getElementById('overlayContent');
         var overlayImage = document.getElementById('overlayImage');
         var overlayNumber = document.getElementById('overlayNumber');
         var overlayAddress = document.getElementById('overlayAddress');
@@ -110,7 +109,7 @@
             };
             map = new kakao.maps.Map(mapContainer, options);
 
-            // 각 카테고리별 예시 마커 추가
+            // 갈현동 카테고리 예시 마커 추가
             addMarker('갈현동', 37.416724, 126.982755, {
                 number: 'A-GH-16',
                 address: '갈현동 산 20-7',
@@ -119,52 +118,14 @@
                 description: '이운정 가든 앞',
                 image: 'https://via.placeholder.com/150'
             });
+
+            // 과천동 카테고리 예시 마커 추가
             addMarker('과천동', 37.415478, 126.983951, {
                 number: 'A-GC-17',
                 address: '과천동 산 30-10',
                 rotation: '2대 (삼성)',
                 fixed: '3대 (LG)',
                 description: '과천 시장 근처',
-                image: 'https://via.placeholder.com/150'
-            });
-            addMarker('문원동', 37.4159214552, 126.979858, {
-                number: 'A-MW-18',
-                address: '문원동 산 40-5',
-                rotation: '3대 (SK)',
-                fixed: '1대 (KT)',
-                description: '문원 정류장 인근',
-                image: 'https://via.placeholder.com/150'
-            });
-            addMarker('별양동', 37.417504, 126.986298, {
-                number: 'A-BY-19',
-                address: '별양동 산 50-15',
-                rotation: '4대 (애플)',
-                fixed: '2대 (구글)',
-                description: '별양 공원 옆',
-                image: 'https://via.placeholder.com/150'
-            });
-            addMarker('부림동', 37.417867, 126.986083, {
-                number: 'A-BR-20',
-                address: '부림동 산 60-20',
-                rotation: '5대 (마이크로소프트)',
-                fixed: '1대 (아마존)',
-                description: '부림 중학교 근처',
-                image: 'https://via.placeholder.com/150'
-            });
-            addMarker('주암동', 37.416816, 126.985189, {
-                number: 'A-JA-21',
-                address: '주암동 산 70-25',
-                rotation: '6대 (페이스북)',
-                fixed: '3대 (트위터)',
-                description: '주암 초등학교 근처',
-                image: 'https://via.placeholder.com/150'
-            });
-            addMarker('중앙동', 37.416863, 126.981945, {
-                number: 'A-JD-22',
-                address: '중앙동 산 80-30',
-                rotation: '7대 (네이버)',
-                fixed: '4대 (카카오)',
-                description: '중앙 시장 인근',
                 image: 'https://via.placeholder.com/150'
             });
 

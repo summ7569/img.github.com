@@ -1,19 +1,72 @@
-<!DOCTYPE html>
-<html lang="kr">
+<!DOCTYPE HTML>
+<HTML lang="kr">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Integrated Page</title>
-    <!-- style.css 파일을 링크 -->
-    <link rel="stylesheet" href="style.css">
+    <meta charset="utf-8">
+    <title>test102</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
 </head>
 <body>
-    <!-- main.html 파일을 포함 -->
-    <div id="main-container">
-        <!-- main.html 파일의 내용을 여기에 포함하는 것이 아니라 main.html 파일을 iframe으로 포함 -->
-        <iframe src="main.html" style="width: 100%; height: 100vh; border: none;"></iframe>
+<div id="map" style="width: 100%; height: 100% !important; padding-bottom: 50%; position: relative;"></div>
+
+<!-- 지도 위에 표시될 마커 카테고리 -->
+<div class="category">
+    <ul>
+        <li id="coffeeMenu" onclick="changeMarker('coffee')">
+            <span class="ico_comm ico_coffee"></span>
+            커피숍
+        </li>
+        <li id="storeMenu" onclick="changeMarker('store')">
+            <span class="ico_comm ico_store"></span>
+            편의점
+        </li>
+        <li id="carparkMenu" onclick="changeMarker('carpark')">
+            <span class="ico_comm ico_carpark"></span>
+            주차장
+        </li>
+        <li id="allMenu" onclick="changeMarker('all')">
+            <span class="ico_comm ico_all"></span>
+            모두
+        </li>
+    </ul>
+</div>
+
+<!-- 검색 폼 추가 -->
+<div class="search-form">
+    <form id="searchForm">
+        <label for="latitude">위도: </label><input type="text" id="latitude" name="latitude" required><br>
+        <label for="longitude">경도: </label><input type="text" id="longitude" name="longitude" required><br>
+        <label for="category">카테고리: </label>
+        <select id="category" name="category">
+            <option value="coffee">커피숍</option>
+            <option value="store">편의점</option>
+            <option value="carpark">주차장</option>
+        </select><br>
+        <label for="info">추가 정보: </label><input type="text" id="info" name="info"><br>
+        <button type="button" onclick="addMarker()">추가</button>
+        <button type="button" onclick="moveToCoordinates()">위치로 이동</button>
+        <button type="button" onclick="clearMarkers()">마커 초기화</button>
+    </form>
+</div>
+
+<!-- UI 숨기기/보이기 버튼 -->
+<div id="toggleUI" onclick="toggleUI()">UI 숨기기</div>
+
+<!-- 커스텀 오버레이 -->
+<div id="customOverlay" class="customoverlay">
+    <div id="overlayContent">
+        <div id="overlayClose" class="overlay_close" onclick="closeOverlay()">닫기</div>
+        <div id="overlayInfo">
+            <div id="markerNumber"></div>
+            <div id="address"></div>
+            <div id="rotation"></div>
+            <div id="fixed"></div>
+            <div id="description"></div>
+            <div id="image"></div>
+        </div>
     </div>
-    <!-- script.js 파일을 링크 -->
-    <script src="script.js"></script>
+</div>
+
+<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6"></script>
+<script src="script.js"></script>
 </body>
-</html>
+</HTML>

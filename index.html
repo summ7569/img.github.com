@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kakao7</title>
+    <title>Kakao66</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -22,19 +22,8 @@
             padding: 5px 10px;
             cursor: pointer;
         }
-        .markerDesc {
-            position: absolute;
-            bottom: -30px; /* 마커 아래에 위치하도록 조정 */
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: rgba(255, 255, 255, 0.9);
-            border: 1px solid #ccc;
-            padding: 5px 10px;
-            white-space: nowrap; /* 텍스트가 한 줄로 유지되도록 설정 */
-            display: none; /* 기본적으로 숨겨둠 */
-        }
         .customOverlay {
-            width: 150px; /* 가로 크기를 적절히 조정 */
+            width: 300px; /* 가로 크기를 적절히 조정 */
             padding: 10px;
             background-color: #fff;
             border: 1px solid #ccc;
@@ -213,7 +202,6 @@
 
         var markers = [];
         var currentOverlay = null;
-        var currentInfowindow = null; // 현재 열린 인포윈도우를 저장할 변수 추가
 
         // 모든 마커와 오버레이를 표시합니다.
         createMarkersAndOverlays('전부');
@@ -234,16 +222,8 @@
                     });
                     markers.push(marker);
 
-                    var markerDesc = document.createElement('div');
-                    markerDesc.className = 'markerDesc';
-                    markerDesc.textContent = info[catIndex].number;
-                    map.getPanes().overlayLayer.appendChild(markerDesc);
-
-                    kakao.maps.event.addListener(marker, 'mouseover', function() {
-                        markerDesc.style.display = 'block';
-                    });
-                    kakao.maps.event.addListener(marker, 'mouseout', function() {
-                        markerDesc.style.display = 'none';
+                    kakao.maps.event.addListener(marker, 'click', function() {
+                        showCustomOverlay(position, catIndex);
                     });
 
                     marker.setMap(map);
@@ -259,7 +239,8 @@
         }
 
         function showCustomOverlay(position, catIndex) {
-            closeCustomOverlay(); // 다른 마커 클릭 시 열려 있는 오버레이 닫기
+            // 기존의 커스텀 오버레이를 닫습니다.
+            closeCustomOverlay();
 
             var overlayContent =
                 '<div class="customOverlay">' +

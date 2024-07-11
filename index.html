@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kakao5</title>
+    <title>Kakao8</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -12,7 +12,7 @@
         }
         #map {
             width: 100%;
-            height: 400px;
+            height: 100%; /* 높이를 100%로 변경 */
         }
         #categoryButtons {
             margin-top: 10px;
@@ -28,11 +28,11 @@
             font-weight: bold;
         }
         .customOverlay {
+            width: 250px; /* 가로 크기를 적절히 조정 */
             padding: 10px;
-            width: 200px;
             background-color: #fff;
             border: 1px solid #ccc;
-            text-align: center;
+            text-align: left;
         }
         .title {
             font-weight: bold;
@@ -42,7 +42,19 @@
             margin-top: 5px;
         }
         .desc-content {
-            text-align: left;
+            display: flex; /* 내용을 가로로 배치 */
+            align-items: center;
+        }
+        .desc-content img {
+            margin-right: 10px; /* 이미지와 텍스트 사이 여백 조정 */
+        }
+        .closeBtn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #555;
         }
     </style>
 </head>
@@ -50,11 +62,11 @@
     <div id="map"></div>
     <div id="categoryButtons"></div>
 
-<script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6&libraries=services"></script>
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6&libraries=services"></script>
     <script>
         var mapContainer = document.getElementById('map');
         var mapOption = {
-            center: new kakao.maps.LatLng(37.4295040000,126.9883220000),
+            center: new kakao.maps.LatLng(37.4295040000, 126.9883220000),
             level: 5
         };
         var map = new kakao.maps.Map(mapContainer, mapOption);
@@ -191,69 +203,82 @@
 
         var info = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, HInfo);
 
-        var markerIndex = 0;
         var markers = [];
+        var currentOverlay = null;
+        var currentInfowindow = null; // 현재 열린 인포윈도우를 저장할 변수 추가
 
-        function createMarkersAndOverlays() {
+        function createMarkersAndOverlays(category) {
+            closeCustomOverlay(); // 현재 열려 있는 커스텀 오버레이 닫기
             markers.forEach(function(marker) {
                 marker.setMap(null);
             });
             markers = [];
 
             positions.forEach(function(position, catIndex) {
-                var markerPosition = new kakao.maps.LatLng(position.lat, position.lng);
+                if (category === 'K' || position.category === category) {
+                    var markerPosition = new kakao.maps.LatLng(position.lat, position.lng);
 
-                var marker = new kakao.maps.Marker({
-                    position: markerPosition
-                });
-                markers.push(marker);
+                    var marker = new kakao.maps.Marker({
+                        position: markerPosition
+                    });
+                    markers.push(marker);
 
-                var infowindow = new kakao.maps.InfoWindow({
-                    content: '<div class="infoWindow">' + info[catIndex].number + '</div>',
-                    removable: true
-                });
+                    kakao.maps.event.addListener(marker, 'click', function() {
+                        showInfoWindow(marker, catIndex);
+                        showCustomOverlay(position, catIndex);
+                    });
 
-                kakao.maps.event.addListener(marker, 'click', function() {
-                    infowindow.open(map, marker);
-                    closeAllCustomOverlays();
-                    showCustomOverlay(position, catIndex);
-                });
-
-                marker.setMap(map);
-                markerIndex++;
+                    marker.setMap(map);
+                }
             });
         }
 
-        function closeAllCustomOverlays() {
-            markers.forEach(function(marker) {
-                marker.setMap(null);
+        function closeCustomOverlay() {
+            if (currentOverlay) {
+                currentOverlay.setMap(null);
+                currentOverlay = null;
+            }
+        }
+
+        function showInfoWindow(marker, catIndex) {
+            // 기존에 열려 있던 인포윈도우 닫기
+            if (currentInfowindow) {
+                currentInfowindow.close();
+            }
+
+            // 새로운 인포윈도우 열기
+            currentInfowindow = new kakao.maps.InfoWindow({
+                content: '<div class="infoWindow">' + info[catIndex].number + '</div>',
+                removable: true
             });
+            currentInfowindow.open(map, marker);
         }
 
         function showCustomOverlay(position, catIndex) {
             var overlayContent =
                 '<div class="customOverlay">' +
+                '    <span class="closeBtn" onclick="closeCustomOverlay()">닫기</span>' +
                 '    <div class="title">' + position.category + '</div>' +
                 '    <div class="desc">' +
                 '        <div class="desc-content">' +
                 '            <img src="' + info[catIndex].image + '" width="50" height="50">' +
-                '            <p>관리번호 : ' + info[catIndex].number + '</p>' +
-                '            <p>주소 : ' + info[catIndex].address + '</p>' +
-                '            <p>회전형 : ' + info[catIndex].rotation + '</p>' +
-                '            <p>고정형 : ' + info[catIndex].fixed + '</p>' +
-                '            <p>상세설명 : ' + info[catIndex].description + '</p>' +
+                '            <div>' +
+                '                <p>관리번호 : ' + info[catIndex].number + '</p>' +
+                '                <p>주소 : ' + info[catIndex].address + '</p>' +
+                '                <p>회전형 : ' + info[catIndex].rotation + '</p>' +
+                '                <p>고정형 : ' + info[catIndex].fixed + '</p>' +
+                '                <p>상세설명 : ' + info[catIndex].description + '</p>' +
+                '            </div>' +
                 '        </div>' +
                 '    </div>' +
                 '</div>';
 
-            var customOverlay = new kakao.maps.CustomOverlay({
+            currentOverlay = new kakao.maps.CustomOverlay({
                 content: overlayContent,
                 map: map,
                 position: new kakao.maps.LatLng(position.lat, position.lng),
                 yAnchor: 1
             });
-
-            customOverlay.setMap(map);
         }
 
         var categoryButtons = document.getElementById('categoryButtons');
@@ -262,28 +287,12 @@
             var button = document.createElement('button');
             button.textContent = category;
             button.addEventListener('click', function() {
-                if (category === 'K') {
-                    createMarkersAndOverlays();
-                } else {
-                    if (categoryData[category].includeAll) {
-                        createMarkersAndOverlays();
-                    } else if (categoryData[category].filter && categoryData[category].minCount) {
-                        var filterKey = categoryData[category].filter;
-                        var minCount = categoryData[category].minCount;
-
-                        positions.forEach(function(position, catIndex) {
-                            var count = info[catIndex][filterKey];
-                            if (count >= minCount) {
-                                showCustomOverlay(position, catIndex);
-                            }
-                        });
-                    }
-                }
+                createMarkersAndOverlays(category);
             });
             categoryButtons.appendChild(button);
         });
 
-        createMarkersAndOverlays();
+        createMarkersAndOverlays('K'); // 초기에 모든 마커와 오버레이를 표시합니다.
     </script>
 </body>
 </html>

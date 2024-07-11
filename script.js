@@ -1,232 +1,290 @@
 var mapContainer = document.getElementById('map');
 var mapOption = {
-    center: new kakao.maps.LatLng(37.5665, 126.9780),
-    level: 3
+    center: new kakao.maps.LatLng(37.4295040000, 126.9883220000),
+    level: 5
 };
 var map = new kakao.maps.Map(mapContainer, mapOption);
 
-var categories = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
+var categories = ['갈현동', '과천동', '문원동', '별양동', '부림동', '주암동', '중앙동', '기타', '회전형', '고정형', '전부'];
 
 var categoryData = {
-    'A': { name: '갈현동', lat: 37.639, lng: 126.834 },
-    'B': { name: '과천동', lat: 37.429, lng: 126.996 },
-    'C': { name: '문원동', lat: 37.428, lng: 127.008 },
-    'D': { name: '별양동', lat: 37.426, lng: 126.994 },
-    'E': { name: '부림동', lat: 37.429, lng: 127.000 },
-    'F': { name: '주암동', lat: 37.430, lng: 127.013 },
-    'G': { name: '중앙동', lat: 37.433, lng: 126.999 },
-    'H': { name: '기타', lat: 37.440, lng: 127.002 },
-    'I': { name: '회전형', filter: 'rotation', minCount: 1, imageUrl: "https://via.placeholder.com/120" },
-    'J': { name: '고정형', filter: 'fixed', minCount: 1, imageUrl: "https://via.placeholder.com/120" },
-    'K': { name: '전부', includeAll: true }
+    '갈현동': { name: '갈현동' },
+    '과천동': { name: '과천동' },
+    '문원동': { name: '문원동' },
+    '별양동': { name: '별양동' },
+    '부림동': { name: '부림동' },
+    '주암동': { name: '주암동' },
+    '중앙동': { name: '중앙동' },
+    '기타': { name: '기타' },
+    '회전형': { name: '회전형', filter: 'rotation', minCount: 1},
+    '고정형': { name: '고정형', filter: 'fixed', minCount: 1},
+    '전부': { name: '전부', includeAll: true }
 };
 
 var Apositions = [
-    { category: '갈현동', lat: 37.639, lng: 126.834 }
+    { category: '갈현동', lat: 37.4249270000, lng:126.9897680000 },
+    { category: '갈현동', lat: 37.423681, lng: 126.9929 },
+    { category: '갈현동', lat: 37.422169, lng: 126.988136 },
+    { category: '갈현동', lat: 37.421404, lng: 126.987475 },
+    { category: '갈현동', lat: 37.419049, lng: 126.988793 },
+    { category: '갈현동', lat: 37.4182, lng: 126.9853 },
+    { category: '갈현동', lat: 37.417867, lng: 126.986083 },
+    { category: '갈현동', lat: 37.417504, lng: 126.986298 },
+    { category: '갈현동', lat: 37.416816, lng: 126.985189 },
+    { category: '갈현동', lat: 37.416021, lng: 126.98396 },
+    { category: '갈현동', lat: 37.415478, lng: 126.983951 },
+    { category: '갈현동', lat: 37.416724, lng: 126.982755 },
+    { category: '갈현동', lat: 37.416863, lng: 126.981945 },
+    { category: '갈현동', lat: 37.4159214552, lng: 126.979858 },
+    { category: '갈현동', lat: 37.417909, lng: 126.979304 },
+    { category: '갈현동', lat: 37.4040083811, lng: 126.9843401485 },
+    { category: '갈현동', lat: 37.404463, lng: 126.98082 },
+    { category: '갈현동', lat: 37.412139, lng: 126.982804 } // 새로운 위치 정보 추가
 ];
+
 var AInfo = [
     {
-        number: "HP-111",
-        address: "갈현동",
+        number: "A-GH-3",
+        address: "원문동 1",
         rotation: 1,
-        fixed: 5,
-        description: "갈현동 어린이집 앞",
-        image: "https://via.placeholder.com/150"
-    }
-];
-
-var Bpositions = [
-    { category: '과천동', lat: 37.429, lng: 126.996 }
-];
-var BInfo = [
-    {
-        number: "HP-112",
-        address: "과천동",
-        rotation: 2,
-        fixed: 3,
-        description: "과천동 어린이집 앞",
-        image: "https://via.placeholder.com/150"
-    }
-];
-
-var Cpositions = [
-    { category: '문원동', lat: 37.428, lng: 127.008 }
-];
-var CInfo = [
-    {
-        number: "HP-113",
-        address: "문원동",
-        rotation: 3,
-        fixed: 2,
-        description: "문원동 어린이집 앞",
-        image: "https://via.placeholder.com/150"
-    }
-];
-
-var Dpositions = [
-    { category: '별양동', lat: 37.426, lng: 126.994 }
-];
-var DInfo = [
-    {
-        number: "HP-114",
-        address: "별양동",
-        rotation: 0,
         fixed: 4,
-        description: "별양동 어린이집 앞",
+        description: "원문동1 소공원 지하철역 5번 출구",
         image: "https://via.placeholder.com/150"
-    }
-];
-
-var Epositions = [
-    { category: '부림동', lat: 37.429, lng: 127.000 }
-];
-var EInfo = [
+    },
     {
-        number: "HP-115",
-        address: "부림동",
+        number: "A-GH-4", // 새로운 관리번호 추가
+        address: "원문동 2-1",
         rotation: 1,
-        fixed: 3,
-        description: "부림동 어린이집 앞",
+        fixed: 4,
+        description: "우체국사거리 2단지 소공원",
         image: "https://via.placeholder.com/150"
-    }
-];
-
-var Fpositions = [
-    { category: '주암동', lat: 37.430, lng: 127.013 }
-];
-var FInfo = [
-    {
-        number: "HP-116",
-        address: "주암동",
-        rotation: 0,
+    },
+        {
+        number: "A-GH-6",
+        address: "갈현동 산121",
+        rotation: 1,
         fixed: 2,
-        description: "주암동 어린이집 앞",
+        description: "12단",
         image: "https://via.placeholder.com/150"
-    }
-];
-
-var Gpositions = [
-    { category: '중앙동', lat: 37.433, lng: 126.999 }
-];
-var GInfo = [
-    {
-        number: "HP-117",
-        address: "중앙동",
-        rotation: 2,
-        fixed: 1,
-        description: "중앙동 어린이집 앞",
-        image: "https://via.placeholder.com/150"
-    }
-];
-
-var Hpositions = [
-    { category: '기타', lat: 37.440, lng: 127.002 }
-];
-var HInfo = [
-    {
-        number: "HP-118",
-        address: "기타",
+    },
+        {
+        number: "A-GH-8",
+        address: "갈현동 640-8",
         rotation: 1,
         fixed: 0,
-        description: "기타 어린이집 앞",
+        description: "모뎀말길 13 우정병원",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-9",
+        address: "갈현동 683-1",
+        rotation: 1,
+        fixed: 3,
+        description: "정보과학도서관 입구",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-10",
+        address: "갈현동 4-3",
+        rotation: 1,
+        fixed: 5,
+        description: "",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-11",
+        address: "갈현동 8-55",
+        rotation: 1,
+        fixed: 1,
+        description: "놀이터 삼거",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-12",
+        address: "갈현동 8-5",
+        rotation: 1,
+        fixed: 0,
+        description: "찬우물공원내",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-13",
+        address: "갈현동 8-26",
+        rotation: 1,
+        fixed: 4,
+        description: "",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-14",
+        address: "갈현동 14-4",
+        rotation: 1,
+        fixed: 2,
+        description: "가일길 한샘교회 앞",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-15",
+        address: "갈현동 산22-2",
+        rotation: 1,
+        fixed: 1,
+        description: "",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-16",
+        address: "갈현동 산20-7",
+        rotation: 1,
+        fixed: 1,
+        description: "",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-17",
+        address: "갈현동 357-5",
+        rotation: 1,
+        fixed: 2,
+        description: "",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-18",
+        address: "갈현동 369-4",
+        rotation: 1,
+        fixed: 3,
+        description: "12단지 아파트 출입구",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-19",
+        address: "갈현동 376-2",
+        rotation: 1,
+        fixed: 3,
+        description: "",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-20",
+        address: "갈현동 431-9",
+        rotation: 1,
+        fixed: 4,
+        description: "",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-21",
+        address: "갈현동 442-6",
+        rotation: 1,
+        fixed: 2,
+        description: "",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-22",
+        address: "갈현동 525-2",
+        rotation: 1,
+        fixed: 2,
+        description: "",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-23",
+        address: "갈현동 464-6",
+        rotation: 1,
+        fixed: 1,
+        description: "",
         image: "https://via.placeholder.com/150"
     }
 ];
 
-var positions = Apositions.concat(Bpositions, Cpositions, Dpositions, Epositions, Fpositions, Gpositions, Hpositions);
-
-var info = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, HInfo);
-
-var markerIndex = 0;
-var markers = [];
-
-function createMarkersAndOverlays() {
-    markers.forEach(function(marker) {
-        marker.setMap(null);
-    });
-    markers = [];
-
-    positions.forEach(function(position, catIndex) {
-        var markerPosition = new kakao.maps.LatLng(position.lat, position.lng);
-
-        var marker = new kakao.maps.Marker({
-            position: markerPosition
-        });
-        markers.push(marker);
-
-        var infowindow = new kakao.maps.InfoWindow({
-            content: '<div class="infoWindow">' + info[catIndex].number + '</div>',
-            removable: true
-        });
-
-        kakao.maps.event.addListener(marker, 'click', function() {
-            infowindow.open(map, marker);
-            closeAllCustomOverlays();
-            showCustomOverlay(position, catIndex);
-        });
-
-        marker.setMap(map);
-        markerIndex++;
-    });
-}
-
-function closeAllCustomOverlays() {
-    markers.forEach(function(marker) {
-        marker.setMap(null);
-    });
-}
-
-function showCustomOverlay(position, catIndex) {
-    var overlayContent =
-        '<div class="customOverlay">' +
-        '    <div class="title">' + position.category + '</div>' +
-        '    <div class="desc">' +
-        '        <div class="desc-content">' +
-        '            <img src="' + info[catIndex].image + '" width="50" height="50">' +
-        '            <p>관리번호 : ' + info[catIndex].number + '</p>' +
-        '            <p>주소 : ' + info[catIndex].address + '</p>' +
-        '            <p>회전형 : ' + info[catIndex].rotation + '</p>' +
-        '            <p>고정형 : ' + info[catIndex].fixed + '</p>' +
-        '            <p>상세설명 : ' + info[catIndex].description + '</p>' +
-        '        </div>' +
-        '    </div>' +
-        '</div>';
-
-    var customOverlay = new kakao.maps.CustomOverlay({
-        content: overlayContent,
+function displayMarker(position) {
+    var marker = new kakao.maps.Marker({
         map: map,
-        position: new kakao.maps.LatLng(position.lat, position.lng),
-        yAnchor: 1
+        position: new kakao.maps.LatLng(position.lat, position.lng)
     });
 
-    customOverlay.setMap(map);
+    var info = AInfo.find(function(item) {
+        return item.number === position.category;
+    });
+
+    var content = document.createElement('div');
+    content.className = 'customOverlay';
+
+    var title = document.createElement('div');
+    title.className = 'title';
+    title.innerText = info.number;
+    content.appendChild(title);
+
+    var address = document.createElement('div');
+    address.innerText = info.address;
+    content.appendChild(address);
+
+    var rotation = document.createElement('div');
+    rotation.innerText = '회전형: ' + info.rotation;
+    content.appendChild(rotation);
+
+    var fixed = document.createElement('div');
+    fixed.innerText = '고정형: ' + info.fixed;
+    content.appendChild(fixed);
+
+    var description = document.createElement('div');
+    description.className = 'desc-content';
+    var image = document.createElement('img');
+    image.src = info.image;
+    image.width = 50;
+    description.appendChild(image);
+    var descText = document.createElement('div');
+    descText.innerText = info.description;
+    description.appendChild(descText);
+    content.appendChild(description);
+
+    var closeBtn = document.createElement('div');
+    closeBtn.className = 'closeBtn';
+    closeBtn.innerText = 'X';
+    closeBtn.onclick = function() {
+        overlay.setMap(null);
+    };
+    content.appendChild(closeBtn);
+
+    var overlay = new kakao.maps.CustomOverlay({
+        content: content,
+        map: map,
+        position: marker.getPosition()
+    });
+
+    kakao.maps.event.addListener(marker, 'click', function() {
+        overlay.setMap(map);
+    });
 }
 
-var categoryButtons = document.getElementById('categoryButtons');
+function displayMarkers(category) {
+    map.setLevel(5);
 
-categories.forEach(function(category) {
-    var button = document.createElement('button');
-    button.textContent = category;
-    button.addEventListener('click', function() {
-        if (category === 'K') {
-            createMarkersAndOverlays();
-        } else {
-            if (categoryData[category].includeAll) {
-                createMarkersAndOverlays();
-            } else if (categoryData[category].filter && categoryData[category].minCount) {
-                var filterKey = categoryData[category].filter;
-                var minCount = categoryData[category].minCount;
+    map.setCenter(new kakao.maps.LatLng(37.4295040000, 126.9883220000));
 
-                positions.forEach(function(position, catIndex) {
-                    var count = info[catIndex][filterKey];
-                    if (count >= minCount) {
-                        showCustomOverlay(position, catIndex);
-                    }
-                });
-            }
+    Apositions.forEach(function(position) {
+        var isValid = category.includeAll ||
+            (category.filter && category.minCount && info[category.filter] >= category.minCount) ||
+            position.category === category.name;
+
+        if (isValid) {
+            displayMarker(position);
         }
     });
-    categoryButtons.appendChild(button);
-});
+}
 
-createMarkersAndOverlays();
+function createCategoryButtons() {
+    var buttonsContainer = document.getElementById('categoryButtons');
+    buttonsContainer.innerHTML = '';
+
+    categories.forEach(function(category) {
+        var button = document.createElement('button');
+        button.innerText = categoryData[category].name;
+        button.onclick = function() {
+            displayMarkers(categoryData[category]);
+        };
+        buttonsContainer.appendChild(button);
+    });
+}
+
+createCategoryButtons();

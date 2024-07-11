@@ -15,7 +15,32 @@
             height: 700px; /* 높이를 원하는 값으로 설정 */
         }
         #categoryButtons {
-            margin-top: 10px;
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 10;
+            background-color: white;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        #searchContainer {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            z-index: 10;
+            background-color: white;
+            padding: 10px;
+            border: 1px solid #ccc;
+        }
+        #toggleButton {
+            position: absolute;
+            bottom: 10px;
+            left: 10px;
+            z-index: 10;
+            background-color: white;
+            padding: 5px 10px;
+            border: 1px solid #ccc;
+            cursor: pointer;
         }
         button {
             margin: 5px;
@@ -56,6 +81,11 @@
 <body>
     <div id="map"></div>
     <div id="categoryButtons"></div>
+    <div id="searchContainer">
+        <input type="text" id="searchInput" placeholder="위도,경도 또는 관리번호">
+        <button onclick="searchLocation()">검색</button>
+    </div>
+    <div id="toggleButton" onclick="toggleUI()">숨기기</div>
 
     <!-- Kakao Maps SDK 로드 스크립트 -->
     <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6&libraries=services"></script>
@@ -84,9 +114,9 @@
             '전부': { name: '전부', includeAll: true }
         };
 
-var Apositions = [
-    { category: '갈현동', lat: 37.4249270000, lng:126.9897680000 },
-    { category: '갈현동', lat: 37.423681, lng: 126.9929 },
+        var Apositions = [
+            { category: '갈현동', lat: 37.4249270000, lng:126.9897680000 },
+            { category: '갈현동', lat: 37.423681, lng: 126.9929 },
     { category: '갈현동', lat: 37.422169, lng: 126.988136 },
     { category: '갈현동', lat: 37.421404, lng: 126.987475 },
     { category: '갈현동', lat: 37.419049, lng: 126.988793 },
@@ -103,25 +133,25 @@ var Apositions = [
     { category: '갈현동', lat: 37.4040083811, lng: 126.9843401485 },
     { category: '갈현동', lat: 37.404463, lng: 126.98082 },
     { category: '갈현동', lat: 37.412139, lng: 126.982804 } // 새로운 위치 정보 추가
-];
+        ];
 
-var AInfo = [
-    {
-        number: "A-GH-3",
-        address: "원문동 1",
-        rotation: 1,
-        fixed: 4,
-        description: "원문동1 소공원 지하철역 5번 출구",
-        image: "https://via.placeholder.com/150"
-    },
-    {
-        number: "A-GH-4", // 새로운 관리번호 추가
-        address: "원문동 2-1",
-        rotation: 1,
-        fixed: 4,
-        description: "우체국사거리 2단지 소공원",
-        image: "https://via.placeholder.com/150"
-    },
+        var AInfo = [
+            {
+                number: "A-GH-3",
+                address: "원문동 1",
+                rotation: 1,
+                fixed: 4,
+                description: "원문동1 소공원 지하철역 5번 출구",
+                image: "https://via.placeholder.com/150"
+            },
+            {
+                number: "A-GH-4", // 새로운 관리번호 추가
+                address: "원문동 2-1",
+                rotation: 1,
+                fixed: 4,
+                description: "우체국사거리 2단지 소공원",
+                image: "https://via.placeholder.com/150"
+            },
         {
         number: "A-GH-6",
         address: "갈현동 산121",
@@ -321,7 +351,6 @@ var AInfo = [
             { category: '과천동', lat: 37.462343, lng: 127.031574 },
             { category: '과천동', lat: 37.462042, lng: 127.0331 },
             { category: '과천동', lat: 37.460926, lng: 127.031914 }
-           
         ];
         var BInfo = [
             {
@@ -332,17 +361,9 @@ var AInfo = [
                 description: "과천동 어린이집 앞",
                 image: "https://via.placeholder.com/150"
             },
-                        {
+            {
                 number: "A-GC-15",
                 address: "과천동 513-152",
-                rotation: 2,
-                fixed: 3,
-                description: "과천동 어린이집 앞",
-                image: "https://via.placeholder.com/150"
-            },
-                        {
-                number: "A-GC-16",
-                address: "과천동 513-4",
                 rotation: 2,
                 fixed: 3,
                 description: "과천동 어린이집 앞",
@@ -971,7 +992,7 @@ var AInfo = [
             });
             markers = [];
 
-            positions.forEach(function(position, catIndex) {
+            positions.forEach(function(position, index) {
                 if (category === '전부' || position.category === category) {
                     var markerPosition = new kakao.maps.LatLng(position.lat, position.lng);
 
@@ -981,7 +1002,7 @@ var AInfo = [
                     markers.push(marker);
 
                     kakao.maps.event.addListener(marker, 'click', function() {
-                        showCustomOverlay(position, catIndex);
+                        showCustomOverlay(position, index);
                     });
 
                     marker.setMap(map);
@@ -996,7 +1017,7 @@ var AInfo = [
             }
         }
 
-        function showCustomOverlay(position, catIndex) {
+        function showCustomOverlay(position, index) {
             // 기존의 커스텀 오버레이를 닫습니다.
             closeCustomOverlay();
 
@@ -1006,13 +1027,13 @@ var AInfo = [
                 '    <div class="title">' + position.category + '</div>' +
                 '    <div class="desc">' +
                 '        <div class="desc-content">' +
-                '            <img src="' + info[catIndex].image + '" width="50" height="50">' +
+                '            <img src="' + info[index].image + '" width="50" height="50">' +
                 '            <div>' +
-                '                <p>관리번호 : ' + info[catIndex].number + '</p>' +
-                '                <p>주소 : ' + info[catIndex].address + '</p>' +
-                '                <p>회전형 : ' + info[catIndex].rotation + '</p>' +
-                '                <p>고정형 : ' + info[catIndex].fixed + '</p>' +
-                '                <p>상세설명 : ' + info[catIndex].description + '</p>' +
+                '                <p>관리번호 : ' + info[index].number + '</p>' +
+                '                <p>주소 : ' + info[index].address + '</p>' +
+                '                <p>회전형 : ' + info[index].rotation + '</p>' +
+                '                <p>고정형 : ' + info[index].fixed + '</p>' +
+                '                <p>상세설명 : ' + info[index].description + '</p>' +
                 '            </div>' +
                 '        </div>' +
                 '    </div>' +
@@ -1038,8 +1059,44 @@ var AInfo = [
             categoryButtons.appendChild(button);
         });
 
+        function searchLocation() {
+            var searchInput = document.getElementById('searchInput').value.trim();
+            if (searchInput.includes(',')) {
+                // 위도, 경도 검색
+                var coords = searchInput.split(',');
+                var lat = parseFloat(coords[0].trim());
+                var lng = parseFloat(coords[1].trim());
+                var moveLatLon = new kakao.maps.LatLng(lat, lng);
+                map.setCenter(moveLatLon);
+            } else {
+                // 관리번호 검색
+                var found = info.find(item => item.number === searchInput);
+                if (found) {
+                    var foundPosition = positions[info.indexOf(found)];
+                    var moveLatLon = new kakao.maps.LatLng(foundPosition.lat, foundPosition.lng);
+                    map.setCenter(moveLatLon);
+                    showCustomOverlay(foundPosition, info.indexOf(found));
+                } else {
+                    alert('해당 관리번호를 찾을 수 없습니다.');
+                }
+            }
+        }
 
-        
+        function toggleUI() {
+            var categoryButtons = document.getElementById('categoryButtons');
+            var searchContainer = document.getElementById('searchContainer');
+            var toggleButton = document.getElementById('toggleButton');
+
+            if (categoryButtons.style.display === 'none') {
+                categoryButtons.style.display = 'block';
+                searchContainer.style.display = 'block';
+                toggleButton.textContent = '숨기기';
+            } else {
+                categoryButtons.style.display = 'none';
+                searchContainer.style.display = 'none';
+                toggleButton.textContent = '보이기';
+            }
+        }
     </script>
 </body>
 </html>

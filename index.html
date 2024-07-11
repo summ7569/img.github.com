@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kakao6</title>
+    <title>Kakao7</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -34,7 +34,7 @@
             display: none; /* 기본적으로 숨겨둠 */
         }
         .customOverlay {
-            width: 300px; /* 가로 크기를 적절히 조정 */
+            width: 150px; /* 가로 크기를 적절히 조정 */
             padding: 10px;
             background-color: #fff;
             border: 1px solid #ccc;
@@ -212,58 +212,41 @@
         var info = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, HInfo);
 
         var markers = [];
+        var currentOverlay = null;
+        var currentInfowindow = null; // 현재 열린 인포윈도우를 저장할 변수 추가
 
-        // 모든 마커를 생성하고 지도에 추가합니다.
-        createMarkers();
-
-        function createMarkers() {
-            positions.forEach(function(position, catIndex) {
-                var markerPosition = new kakao.maps.LatLng(position.lat, position.lng);
-
-                var marker = new kakao.maps.Marker({
-                    position: markerPosition
-                });
-                markers.push(marker);
-
-                // 마커 아래에 설명을 표시할 요소를 생성합니다.
-                var descElement = document.createElement('div');
-                descElement.className = 'markerDesc';
-                descElement.textContent = info[catIndex].number; // 설명 내용은 info의 number 값을 사용합니다.
-                marker.descElement = descElement;
-
-                marker.setMap(map);
-            });
-        }
-
-        // 모든 마커에 마우스 오버 이벤트를 추가하여 설명을 보이도록 합니다.
-        markers.forEach(function(marker) {
-            kakao.maps.event.addListener(marker, 'mouseover', function() {
-                marker.descElement.style.display = 'block';
-            });
-            kakao.maps.event.addListener(marker, 'mouseout', function() {
-                marker.descElement.style.display = 'none';
-            });
-        });
-
-        var categoryButtons = document.getElementById('categoryButtons');
-
-        // 카테고리 버튼 생성 및 클릭 이벤트 추가
-        categories.forEach(function(category) {
-            var button = document.createElement('button');
-            button.textContent = category;
-            button.addEventListener('click', function() {
-                createMarkersAndOverlays(category);
-            });
-            categoryButtons.appendChild(button);
-        });
+        // 모든 마커와 오버레이를 표시합니다.
+        createMarkersAndOverlays('전부');
 
         function createMarkersAndOverlays(category) {
             closeCustomOverlay(); // 현재 열려 있는 커스텀 오버레이 닫기
             markers.forEach(function(marker) {
-                if (category === '전부' || marker.getPosition().category === category) {
+                marker.setMap(null);
+            });
+            markers = [];
+
+            positions.forEach(function(position, catIndex) {
+                if (category === '전부' || position.category === category) {
+                    var markerPosition = new kakao.maps.LatLng(position.lat, position.lng);
+
+                    var marker = new kakao.maps.Marker({
+                        position: markerPosition
+                    });
+                    markers.push(marker);
+
+                    var markerDesc = document.createElement('div');
+                    markerDesc.className = 'markerDesc';
+                    markerDesc.textContent = info[catIndex].number;
+                    map.getPanes().overlayLayer.appendChild(markerDesc);
+
+                    kakao.maps.event.addListener(marker, 'mouseover', function() {
+                        markerDesc.style.display = 'block';
+                    });
+                    kakao.maps.event.addListener(marker, 'mouseout', function() {
+                        markerDesc.style.display = 'none';
+                    });
+
                     marker.setMap(map);
-                } else {
-                    marker.setMap(null);
                 }
             });
         }
@@ -303,6 +286,18 @@
                 yAnchor: 0.5 // 중앙 정렬
             });
         }
+
+        var categoryButtons = document.getElementById('categoryButtons');
+
+        // 카테고리 버튼 생성 및 클릭 이벤트 추가
+        categories.forEach(function(category) {
+            var button = document.createElement('button');
+            button.textContent = category;
+            button.addEventListener('click', function() {
+                createMarkersAndOverlays(category);
+            });
+            categoryButtons.appendChild(button);
+        });
     </script>
 </body>
 </html>

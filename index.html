@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kakao2</title>
+    <title>Kakao6</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -220,20 +220,8 @@
             positions.forEach(function(position, catIndex) {
                 var markerPosition = new kakao.maps.LatLng(position.lat, position.lng);
 
-                var markerImageSrc = 'https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true';
-                if (info[catIndex].fixed > 0) {
-                    markerImageSrc = 'https://github.com/summ7569/summ7569.github.io/blob/master/category2.png?raw=true';
-                }
-
-                var markerImage = new kakao.maps.MarkerImage(
-                    markerImageSrc,
-                    new kakao.maps.Size(50, 50),
-                    { offset: new kakao.maps.Point(25, 25) }
-                );
-
                 var marker = new kakao.maps.Marker({
-                    position: markerPosition,
-                    image: markerImage // 마커에 이미지 설정
+                    position: markerPosition
                 });
                 markers.push(marker);
 

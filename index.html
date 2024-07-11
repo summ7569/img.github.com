@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kakao2</title>
+    <title>Kakao</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -11,8 +11,8 @@
             padding: 0;
         }
         #map {
-            width: 1920px;
-            height: 100%; /* 높이를 100%로 변경 */
+            width: 100%;
+            height: 700px; /* 높이를 원하는 값으로 설정 */
         }
         #categoryButtons {
             margin-top: 10px;
@@ -28,7 +28,7 @@
             font-weight: bold;
         }
         .customOverlay {
-            width: 250px; /* 가로 크기를 적절히 조정 */
+            width: 300px; /* 가로 크기를 적절히 조정 */
             padding: 10px;
             background-color: #fff;
             border: 1px solid #ccc;
@@ -63,7 +63,7 @@
     <div id="categoryButtons"></div>
 
     <!-- Kakao Maps SDK 로드 스크립트 -->
-    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=c853f1d10da9175222476044cffe3531&libraries=services"></script>
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6&libraries=services"></script>
 
     <script>
         var mapContainer = document.getElementById('map');

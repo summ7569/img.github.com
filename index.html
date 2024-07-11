@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kakao6</title>
+    <title>Kakao2</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -21,6 +21,17 @@
             margin: 5px;
             padding: 5px 10px;
             cursor: pointer;
+        }
+        .markerDesc {
+            position: absolute;
+            bottom: -30px; /* 마커 아래에 위치하도록 조정 */
+            left: 50%;
+            transform: translateX(-50%);
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ccc;
+            padding: 5px 10px;
+            white-space: nowrap; /* 텍스트가 한 줄로 유지되도록 설정 */
+            display: none; /* 기본적으로 숨겨둠 */
         }
         .customOverlay {
             width: 300px; /* 가로 크기를 적절히 조정 */
@@ -201,41 +212,70 @@
         var info = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, HInfo);
 
         var markers = [];
-        var currentOverlay = null;
-        var currentInfowindow = null; // 현재 열린 인포윈도우를 저장할 변수 추가
 
-        // 모든 마커와 오버레이를 표시합니다.
-        createMarkersAndOverlays('전부');
+        // 모든 마커를 생성하고 지도에 추가합니다.
+        createMarkers();
+
+        function createMarkers() {
+            positions.forEach(function(position, catIndex) {
+                var markerPosition = new kakao.maps.LatLng(position.lat, position.lng);
+
+                var markerImageSrc = 'https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true';
+                if (info[catIndex].fixed > 0) {
+                    markerImageSrc = 'https://github.com/summ7569/summ7569.github.io/blob/master/category2.png?raw=true';
+                }
+
+                var markerImage = new kakao.maps.MarkerImage(
+                    markerImageSrc,
+                    new kakao.maps.Size(50, 50),
+                    { offset: new kakao.maps.Point(25, 25) }
+                );
+
+                var marker = new kakao.maps.Marker({
+                    position: markerPosition,
+                    image: markerImage // 마커에 이미지 설정
+                });
+                markers.push(marker);
+
+                // 마커 아래에 설명을 표시할 요소를 생성합니다.
+                var descElement = document.createElement('div');
+                descElement.className = 'markerDesc';
+                descElement.textContent = info[catIndex].number; // 설명 내용은 info의 number 값을 사용합니다.
+                marker.descElement = descElement;
+
+                marker.setMap(map);
+            });
+        }
+
+        // 모든 마커에 마우스 오버 이벤트를 추가하여 설명을 보이도록 합니다.
+        markers.forEach(function(marker) {
+            kakao.maps.event.addListener(marker, 'mouseover', function() {
+                marker.descElement.style.display = 'block';
+            });
+            kakao.maps.event.addListener(marker, 'mouseout', function() {
+                marker.descElement.style.display = 'none';
+            });
+        });
+
+        var categoryButtons = document.getElementById('categoryButtons');
+
+        // 카테고리 버튼 생성 및 클릭 이벤트 추가
+        categories.forEach(function(category) {
+            var button = document.createElement('button');
+            button.textContent = category;
+            button.addEventListener('click', function() {
+                createMarkersAndOverlays(category);
+            });
+            categoryButtons.appendChild(button);
+        });
 
         function createMarkersAndOverlays(category) {
             closeCustomOverlay(); // 현재 열려 있는 커스텀 오버레이 닫기
             markers.forEach(function(marker) {
-                marker.setMap(null);
-            });
-            markers = [];
-
-            positions.forEach(function(position, catIndex) {
-                if (category === '전부' || position.category === category) {
-                    var markerPosition = new kakao.maps.LatLng(position.lat, position.lng);
-
-                    var marker = new kakao.maps.Marker({
-                        position: markerPosition
-                    });
-                    markers.push(marker);
-
-                    // 인포윈도우를 마커 생성 시에 열도록 설정
-                    var infowindow = new kakao.maps.InfoWindow({
-                        content: '<div class="infoWindow">' + info[catIndex].number + '</div>',
-                        removable: true,
-                        position: marker.getPosition() // 마커 위치 아래에 표시
-                    });
-                    infowindow.open(map, marker);
-
-                    kakao.maps.event.addListener(marker, 'click', function() {
-                        showCustomOverlay(position, catIndex);
-                    });
-
+                if (category === '전부' || marker.getPosition().category === category) {
                     marker.setMap(map);
+                } else {
+                    marker.setMap(null);
                 }
             });
         }
@@ -248,6 +288,8 @@
         }
 
         function showCustomOverlay(position, catIndex) {
+            closeCustomOverlay(); // 다른 마커 클릭 시 열려 있는 오버레이 닫기
+
             var overlayContent =
                 '<div class="customOverlay">' +
                 '    <span class="closeBtn" onclick="closeCustomOverlay()">닫기</span>' +
@@ -273,18 +315,6 @@
                 yAnchor: 0.5 // 중앙 정렬
             });
         }
-
-        var categoryButtons = document.getElementById('categoryButtons');
-
-        // 카테고리 버튼 생성 및 클릭 이벤트 추가
-        categories.forEach(function(category) {
-            var button = document.createElement('button');
-            button.textContent = category;
-            button.addEventListener('click', function() {
-                createMarkersAndOverlays(category);
-            });
-            categoryButtons.appendChild(button);
-        });
     </script>
 </body>
 </html>

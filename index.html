@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kakao5</title>
+    <title>Kakao6</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -23,12 +23,18 @@
             cursor: pointer;
         }
         .infoWindow {
-            padding: 5px 10px;
+            padding: 10px;
             font-size: 14px;
             font-weight: bold;
-            background-color: transparent;
-            border: none;
+            background-color: rgba(255, 255, 255, 0.9);
+            border: 1px solid #ccc;
             text-align: center;
+            white-space: nowrap; /* 텍스트가 한 줄로 유지되도록 설정 */
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 1; /* 인포윈도우가 마커 위에 표시되도록 설정 */
         }
         .customOverlay {
             width: 300px; /* 가로 크기를 적절히 조정 */

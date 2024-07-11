@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kakao66</title>
+    <title>Kakao16</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -59,6 +59,380 @@
 
     <!-- Kakao Maps SDK 로드 스크립트 -->
     <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6&libraries=services"></script>
-    <script src="script.js"></script>
+
+    <script>
+        var mapContainer = document.getElementById('map');
+        var mapOption = {
+            center: new kakao.maps.LatLng(37.4295040000, 126.9883220000),
+            level: 5
+        };
+        var map = new kakao.maps.Map(mapContainer, mapOption);
+
+        var categories = ['갈현동', '과천동', '문원동', '별양동', '부림동', '주암동', '중앙동', '기타', '회전형', '고정형', '전부'];
+
+        var categoryData = {
+            '갈현동': { name: '갈현동' },
+            '과천동': { name: '과천동' },
+            '문원동': { name: '문원동' },
+            '별양동': { name: '별양동' },
+            '부림동': { name: '부림동' },
+            '주암동': { name: '주암동' },
+            '중앙동': { name: '중앙동' },
+            '기타': { name: '기타' },
+            '회전형': { name: '회전형', filter: 'rotation', minCount: 1},
+            '고정형': { name: '고정형', filter: 'fixed', minCount: 1},
+            '전부': { name: '전부', includeAll: true }
+        };
+
+var Apositions = [
+    { category: '갈현동', lat: 37.4249270000, lng:126.9897680000 },
+    { category: '갈현동', lat: 37.423681, lng: 126.9929 },
+    { category: '갈현동', lat: 37.422169, lng: 126.988136 },
+    { category: '갈현동', lat: 37.421404, lng: 126.987475 },
+    { category: '갈현동', lat: 37.419049, lng: 126.988793 },
+    { category: '갈현동', lat: 37.4182, lng: 126.9853 },
+    { category: '갈현동', lat: 37.417867, lng: 126.986083 },
+    { category: '갈현동', lat: 37.417504, lng: 126.986298 },
+    { category: '갈현동', lat: 37.416816, lng: 126.985189 },
+    { category: '갈현동', lat: 37.416021, lng: 126.98396 },
+    { category: '갈현동', lat: 37.415478, lng: 126.983951 },
+    { category: '갈현동', lat: 37.416724, lng: 126.982755 },
+    { category: '갈현동', lat: 37.416863, lng: 126.981945 },
+    { category: '갈현동', lat: 37.4159214552, lng: 126.979858 },
+    { category: '갈현동', lat: 37.417909, lng: 126.979304 },
+    { category: '갈현동', lat: 37.4040083811, lng: 126.9843401485 },
+    { category: '갈현동', lat: 37.404463, lng: 126.98082 },
+    { category: '갈현동', lat: 37.412139, lng: 126.982804 } // 새로운 위치 정보 추가
+];
+
+var AInfo = [
+    {
+        number: "A-GH-3",
+        address: "원문동 1",
+        rotation: 1,
+        fixed: 4,
+        description: "원문동1 소공원 지하철역 5번 출구",
+        image: "https://via.placeholder.com/150"
+    },
+    {
+        number: "A-GH-4", // 새로운 관리번호 추가
+        address: "원문동 2-1",
+        rotation: 1,
+        fixed: 4,
+        description: "우체국사거리 2단지 소공원",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-6",
+        address: "갈현동 산121",
+        rotation: 1,
+        fixed: 2,
+        description: "12단",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-8",
+        address: "갈현동 640-8",
+        rotation: 1,
+        fixed: 0,
+        description: "모뎀말길 13 우정병원",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-9",
+        address: "갈현동 683-1",
+        rotation: 1,
+        fixed: 3,
+        description: "정보과학도서관 입구",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-10",
+        address: "갈현동 4-3",
+        rotation: 1,
+        fixed: 5,
+        description: "",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-11",
+        address: "갈현동 8-55",
+        rotation: 1,
+        fixed: 1,
+        description: "놀이터 삼거",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-12",
+        address: "갈현동 8-5",
+        rotation: 1,
+        fixed: 0,
+        description: "찬우물공원내",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-13",
+        address: "갈현동 8-26",
+        rotation: 1,
+        fixed: 4,
+        description: "",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-14",
+        address: "갈현동 14-4",
+        rotation: 1,
+        fixed: 2,
+        description: "가일길 한샘교회 앞",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-15",
+        address: "갈현동 산22-2",
+        rotation: 1,
+        fixed: 1,
+        description: "",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-16",
+        address: "갈현동 산20-7",
+        rotation: 1,
+        fixed: 1,
+        description: "",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-17",
+        address: "갈현동 357-5",
+        rotation: 1,
+        fixed: 2,
+        description: "",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-18",
+        address: "갈현동 336-5",
+        rotation: 1,
+        fixed: 2,
+        description: "이운정 가든 ",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-19",
+        address: "갈현동 399",
+        rotation: 0,
+        fixed: 2,
+        description: "",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-20",
+        address: "갈현동 274-4",
+        rotation: 1,
+        fixed: 1,
+        description: "엘라이트 근처",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-21",
+        address: "갈현동 297-9",
+        rotation: 1,
+        fixed: 2,
+        description: "",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "SPD-028",
+        address: "",
+        rotation: 1,
+        fixed: 3,
+        description: "지식정보타운",
+        image: "https://via.placeholder.com/150"
+    }
+        ];
+
+        var Bpositions = [
+            { category: '과천동', lat: 37.429, lng: 126.996 }
+        ];
+        var BInfo = [
+            {
+                number: "HP-112",
+                address: "과천동",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            }
+        ];
+
+        var Cpositions = [
+            { category: '문원동', lat: 37.428, lng: 127.008 }
+        ];
+        var CInfo = [
+            {
+                number: "HP-113",
+                address: "문원동",
+                rotation: 3,
+                fixed: 2,
+                description: "문원동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            }
+        ];
+
+        var Dpositions = [
+            { category: '별양동', lat: 37.426, lng: 126.994 }
+        ];
+        var DInfo = [
+            {
+                number: "HP-114",
+                address: "별양동",
+                rotation: 0,
+                fixed: 4,
+                description: "별양동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            }
+        ];
+
+        var Epositions = [
+            { category: '부림동', lat: 37.429, lng: 127.000 }
+        ];
+        var EInfo = [
+            {
+                number: "HP-115",
+                address: "부림동",
+                rotation: 1,
+                fixed: 3,
+                description: "부림동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            }
+        ];
+
+        var Fpositions = [
+            { category: '주암동', lat: 37.430, lng: 127.013 }
+        ];
+        var FInfo = [
+            {
+                number: "HP-116",
+                address: "주암동",
+                rotation: 0,
+                fixed: 2,
+                description: "주암동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            }
+        ];
+
+        var Gpositions = [
+            { category: '중앙동', lat: 37.433, lng: 126.999 }
+        ];
+        var GInfo = [
+            {
+                number: "HP-117",
+                address: "중앙동",
+                rotation: 2,
+                fixed: 1,
+                description: "중앙동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            }
+        ];
+
+        var Hpositions = [
+            { category: '기타', lat: 37.440, lng: 127.002 }
+        ];
+        var HInfo = [
+            {
+                number: "HP-118",
+                address: "기타",
+                rotation: 1,
+                fixed: 0,
+                description: "기타 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            }
+        ];
+
+        var positions = Apositions.concat(Bpositions, Cpositions, Dpositions, Epositions, Fpositions, Gpositions, Hpositions);
+
+        var info = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, HInfo);
+
+        var markers = [];
+        var currentOverlay = null;
+
+        // 모든 마커와 오버레이를 표시합니다.
+        createMarkersAndOverlays('전부');
+
+        function createMarkersAndOverlays(category) {
+            closeCustomOverlay(); // 현재 열려 있는 커스텀 오버레이 닫기
+            markers.forEach(function(marker) {
+                marker.setMap(null);
+            });
+            markers = [];
+
+            positions.forEach(function(position, catIndex) {
+                if (category === '전부' || position.category === category) {
+                    var markerPosition = new kakao.maps.LatLng(position.lat, position.lng);
+
+                    var marker = new kakao.maps.Marker({
+                        position: markerPosition
+                    });
+                    markers.push(marker);
+
+                    kakao.maps.event.addListener(marker, 'click', function() {
+                        showCustomOverlay(position, catIndex);
+                    });
+
+                    marker.setMap(map);
+                }
+            });
+        }
+
+        function closeCustomOverlay() {
+            if (currentOverlay) {
+                currentOverlay.setMap(null);
+                currentOverlay = null;
+            }
+        }
+
+        function showCustomOverlay(position, catIndex) {
+            // 기존의 커스텀 오버레이를 닫습니다.
+            closeCustomOverlay();
+
+            var overlayContent =
+                '<div class="customOverlay">' +
+                '    <span class="closeBtn" onclick="closeCustomOverlay()">닫기</span>' +
+                '    <div class="title">' + position.category + '</div>' +
+                '    <div class="desc">' +
+                '        <div class="desc-content">' +
+                '            <img src="' + info[catIndex].image + '" width="50" height="50">' +
+                '            <div>' +
+                '                <p>관리번호 : ' + info[catIndex].number + '</p>' +
+                '                <p>주소 : ' + info[catIndex].address + '</p>' +
+                '                <p>회전형 : ' + info[catIndex].rotation + '</p>' +
+                '                <p>고정형 : ' + info[catIndex].fixed + '</p>' +
+                '                <p>상세설명 : ' + info[catIndex].description + '</p>' +
+                '            </div>' +
+                '        </div>' +
+                '    </div>' +
+                '</div>';
+
+            currentOverlay = new kakao.maps.CustomOverlay({
+                content: overlayContent,
+                map: map,
+                position: new kakao.maps.LatLng(position.lat, position.lng),
+                yAnchor: 0.5 // 중앙 정렬
+            });
+        }
+
+        var categoryButtons = document.getElementById('categoryButtons');
+
+        // 카테고리 버튼 생성 및 클릭 이벤트 추가
+        categories.forEach(function(category) {
+            var button = document.createElement('button');
+            button.textContent = category;
+            button.addEventListener('click', function() {
+                createMarkersAndOverlays(category);
+            });
+            categoryButtons.appendChild(button);
+        });
+    </script>
 </body>
 </html>

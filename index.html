@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kakao1</title>
+    <title>Kakao2</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -62,8 +62,8 @@
     <div id="map"></div>
     <div id="categoryButtons"></div>
 
-    <!-- Kakao Maps API 스크립트 -->
-    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6&libraries=services"></script>
+    <!-- Kakao Maps SDK 로드 스크립트 -->
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_APP_KEY&libraries=services"></script>
 
     <script>
         var mapContainer = document.getElementById('map');
@@ -73,20 +73,20 @@
         };
         var map = new kakao.maps.Map(mapContainer, mapOption);
 
-        var categories = ['갈현동', '과천동', '문원동', '별양동', '부림동', '주암동', '중앙동', '기타', '회전형', '고정형', '전부'];
+        var categories = ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'K'];
 
         var categoryData = {
-            '갈현동': { name: '갈현동' },
-            '과천동': { name: '과천동' },
-            '문원동': { name: '문원동' },
-            '별양동': { name: '별양동' },
-            '부림동': { name: '부림동' },
-            '주암동': { name: '주암동' },
-            '중앙동': { name: '중앙동' },
-            '기타': { name: '기타' },
-            '회전형': { name: '회전형', filter: 'rotation', minCount: 1, imageUrl: "https://via.placeholder.com/120" },
-            '고정형': { name: '고정형', filter: 'fixed', minCount: 1, imageUrl: "https://via.placeholder.com/120" },
-            '전부': { name: '전부', includeAll: true }
+            'A': { name: '갈현동' },
+            'B': { name: '과천동' },
+            'C': { name: '문원동' },
+            'D': { name: '별양동' },
+            'E': { name: '부림동' },
+            'F': { name: '주암동' },
+            'G': { name: '중앙동' },
+            'H': { name: '기타' },
+            'I': { name: '회전형', filter: 'rotation', minCount: 1, imageUrl: "https://via.placeholder.com/120" },
+            'J': { name: '고정형', filter: 'fixed', minCount: 1, imageUrl: "https://via.placeholder.com/120" },
+            'K': { name: '전부', includeAll: true }
         };
 
         var Apositions = [
@@ -217,7 +217,7 @@
             markers = [];
 
             positions.forEach(function(position, catIndex) {
-                if (category === '전부' || position.category === category) {
+                if (category === 'K' || position.category === category) {
                     var markerPosition = new kakao.maps.LatLng(position.lat, position.lng);
 
                     var marker = new kakao.maps.Marker({
@@ -294,7 +294,7 @@
             categoryButtons.appendChild(button);
         });
 
-        createMarkersAndOverlays('전부'); // 초기에 모든 마커와 오버레이를 표시합니다.
+        createMarkersAndOverlays('K'); // 초기에 모든 마커와 오버레이를 표시합니다.
     </script>
 </body>
 </html>

@@ -16,8 +16,8 @@
             '주암동': { name: '주암동' },
             '중앙동': { name: '중앙동' },
             '기타': { name: '기타' },
-            '회전형': { name: '회전형', filter: 'rotation', minCount:>0},
-            '고정형': { name: '고정형', filter: 'fixed', minCount:>0},
+            '회전형': { name: '회전형', filter: 'rotation', minCount: '> 0'},
+            '고정형': { name: '고정형', filter: 'fixed', minCount: '> 0'},
             '전부': { name: '전부', includeAll: true }
         };
 

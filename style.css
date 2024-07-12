@@ -35,7 +35,7 @@ body {
     padding: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    width: 300px; /* 박스를 좌우로 늘리기 위해 width 조정 */
+    width: 400px; /* 박스를 좌우로 늘리기 위해 width 조정 */
 }
 
 .customOverlay .closeBtn {
@@ -62,8 +62,8 @@ body {
 }
 
 .customOverlay .desc-content img {
-    width: 100px; /* 이미지 크기 조정 */
-    height: 100px; /* 이미지 크기 조정 */
+    width: 150px; /* 이미지 크기 조정 */
+    height: 150px; /* 이미지 크기 조정 */
     margin-right: 10px;
 }
 

@@ -19,7 +19,7 @@ body {
 #categoryDropdownContainer {
     position: absolute;
     top: 10px;
-    right: 10px; /* 카테고리 드롭다운을 오른쪽 상단에 위치하도록 수정 */
+    left: 1px; /* 카테고리 드롭다운을 왼쪽 상단에 위치하도록 수정 */
     z-index: 1; /* 지도 위로 올립니다. */
 }
 

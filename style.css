@@ -19,8 +19,8 @@ body {
 #categoryDropdownContainer {
     position: absolute;
     top: 10px;
-    left: 10px;
-    z-index: 1; /* 카테고리 드롭다운을 지도 위로 올립니다. */
+    right: 10px; /* 카테고리 드롭다운을 오른쪽 상단에 위치하도록 수정 */
+    z-index: 1; /* 지도 위로 올립니다. */
 }
 
 #categoryDropdown {
@@ -28,12 +28,7 @@ body {
     font-size: 16px;
 }
 
-#toggleUIBtn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    z-index: 3; /* UI 토글 버튼을 지도 위로 올립니다. */
-}
+/* UI 숨기기 버튼 스타일 제거 */
 
 .customOverlay {
     width: 300px;
@@ -73,7 +68,7 @@ body {
 #searchForm {
     position: absolute;
     top: 10px;
-    left: 10px;
+    right: 10px; /* 검색창을 오른쪽 상단에 위치하도록 수정 */
     z-index: 1;
     padding: 10px;
     border-radius: 5px;

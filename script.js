@@ -323,4 +323,9 @@ searchForm.addEventListener('submit', function(event) {
     } else {
         alert('유효한 위도/경도 또는 관리번호를 입력하세요.');
     }
+
+// 검색창을 지도 위에 표시하는 부분을 추가합니다.
+var searchForm = document.getElementById('searchForm');
+map.controls[kakao.maps.ControlPosition.TOP_LEFT].push(searchForm);
+
 });

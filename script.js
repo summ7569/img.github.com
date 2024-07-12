@@ -247,20 +247,23 @@ function showCustomOverlay(position, index) {
     });
 }
 
-var categoryButtons = document.getElementById('categoryButtons');
+var categoryDropdown = document.getElementById('categoryDropdown');
 var toggleUIBtn = document.getElementById('toggleUIBtn');
 
-// 카테고리 버튼 생성 및 클릭 이벤트 추가
-categories.forEach(function(category) {
-    var button = document.createElement('button');
-    button.textContent = category;
-    button.addEventListener('click', function() {
-        createMarkersAndOverlays(category);
-    });
-    categoryButtons.appendChild(button);
+// 드롭다운 형식의 카테고리 목록 생성 및 클릭 이벤트 추가
+Object.keys(categoryData).forEach(function(categoryKey) {
+    var option = document.createElement('option');
+    option.value = categoryKey;
+    option.textContent = categoryData[categoryKey].name;
+    categoryDropdown.appendChild(option);
 });
 
-// UI 토글 버튼 생성 및 클릭 이벤트 추가
+categoryDropdown.addEventListener('change', function() {
+    var selectedCategory = categoryDropdown.value;
+    createMarkersAndOverlays(selectedCategory);
+});
+
+// UI 토글 버튼 클릭 이벤트 추가
 toggleUIBtn.addEventListener('click', function() {
     var mapWrapper = document.getElementById('mapWrapper');
     if (mapWrapper.classList.contains('hideUI')) {

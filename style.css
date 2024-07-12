@@ -29,29 +29,46 @@ body {
 }
 
 .customOverlay {
-    width: 300px;
-    padding: 10px;
-    background-color: #fff;
+    position: relative;
+    background: white;
     border: 1px solid #ccc;
-    text-align: left;
+    padding: 10px;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    width: 300px; /* 박스를 좌우로 늘리기 위해 width 조정 */
 }
 
-.title {
+.customOverlay .closeBtn {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.customOverlay .title {
+    font-size: 16px;
     font-weight: bold;
-    margin-bottom: 5px;
+    margin-bottom: 10px;
 }
 
-.desc {
-    margin-top: 5px;
-}
-
-.desc-content {
+.customOverlay .desc {
     display: flex;
     align-items: center;
 }
 
-.desc-content img {
+.customOverlay .desc-content {
+    display: flex;
+}
+
+.customOverlay .desc-content img {
+    width: 100px; /* 이미지 크기 조정 */
+    height: 100px; /* 이미지 크기 조정 */
     margin-right: 10px;
+}
+
+.customOverlay .desc-content div {
+    flex: 1;
 }
 
 .closeBtn {

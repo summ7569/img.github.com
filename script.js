@@ -197,7 +197,7 @@ function createMarkersAndOverlays(category) {
 
             var marker = new kakao.maps.Marker({
                 position: markerPosition,
-                image: new kakao.maps.MarkerImage(markerImage, new kakao.maps.Size(50, 50))
+                image: new kakao.maps.MarkerImage(markerImage)
             });
             markers.push(marker);
 

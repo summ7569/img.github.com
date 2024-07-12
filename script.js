@@ -1,25 +1,25 @@
-var mapContainer = document.getElementById('map');
-var mapOption = {
-    center: new kakao.maps.LatLng(37.4295040000, 126.9883220000),
-    level: 5
-};
-var map = new kakao.maps.Map(mapContainer, mapOption);
+        var mapContainer = document.getElementById('map');
+        var mapOption = {
+            center: new kakao.maps.LatLng(37.4295040000, 126.9883220000),
+            level: 5
+        };
+        var map = new kakao.maps.Map(mapContainer, mapOption);
 
-var categories = ['갈현동', '과천동', '문원동', '별양동', '부림동', '주암동', '중앙동', '기타', '회전형', '고정형', '전부'];
+        var categories = ['갈현동', '과천동', '문원동', '별양동', '부림동', '주암동', '중앙동', '기타', '회전형', '고정형', '전부'];
 
-var categoryData = {
-    '갈현동': { name: '갈현동' },
-    '과천동': { name: '과천동' },
-    '문원동': { name: '문원동' },
-    '별양동': { name: '별양동' },
-    '부림동': { name: '부림동' },
-    '주암동': { name: '주암동' },
-    '중앙동': { name: '중앙동' },
-    '기타': { name: '기타' },
-    '회전형': { name: '회전형', filter: 'rotation', minCount: 1},
-    '고정형': { name: '고정형', filter: 'fixed', minCount: 1},
-    '전부': { name: '전부', includeAll: true }
-};
+        var categoryData = {
+            '갈현동': { name: '갈현동' },
+            '과천동': { name: '과천동' },
+            '문원동': { name: '문원동' },
+            '별양동': { name: '별양동' },
+            '부림동': { name: '부림동' },
+            '주암동': { name: '주암동' },
+            '중앙동': { name: '중앙동' },
+            '기타': { name: '기타' },
+            '회전형': { name: '회전형', filter: 'rotation', minCount: 1},
+            '고정형': { name: '고정형', filter: 'fixed', minCount: 1},
+            '전부': { name: '전부', includeAll: true }
+        };
 
 var Apositions = [
     { category: '갈현동', lat: 37.4249270000, lng:126.9897680000 },
@@ -187,11 +187,11 @@ var AInfo = [
         description: "지식정보타운",
         image: "https://via.placeholder.com/150"
     }
-];
+        ];
 
-var Bpositions = [
-    { category: '과천동', lat: 37.4464177858 , lng: 126.9919198623 },
-    { category: '과천동', lat: 37.447129, lng: 126.993063 },
+        var Bpositions = [
+            { category: '과천동', lat: 37.4464177858 , lng: 126.9919198623 },
+            { category: '과천동', lat: 37.447129, lng: 126.993063 },
             { category: '과천동', lat: 37.447912, lng: 126.99447 },
             { category: '과천동', lat: 37.452616, lng: 126.992914 },
             { category: '과천동', lat: 37.451995, lng: 126.993999 },
@@ -258,24 +258,33 @@ var Bpositions = [
             { category: '과천동', lat: 37.462343, lng: 127.031574 },
             { category: '과천동', lat: 37.462042, lng: 127.0331 },
             { category: '과천동', lat: 37.460926, lng: 127.031914 }
-];
-var BInfo = [
-    {
-        number: "A-GC-14",
-        address: "과천동 513-64",
-        rotation: 2,
-        fixed: 3,
-        description: "과천동 어린이집 앞",
-        image: "https://via.placeholder.com/150"
-    },
-    {
-        number: "A-GC-15",
-        address: "과천동 513-152",
-        rotation: 2,
-        fixed: 3,
-        description: "과천동 어린이집 앞",
-        image: "https://via.placeholder.com/150"
-    },
+           
+        ];
+        var BInfo = [
+            {
+                number: "A-GC-14",
+                address: "과천동 513-64",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-15",
+                address: "과천동 513-152",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-16",
+                address: "과천동 513-4",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
                         {
                 number: "A-GC-17",
                 address: "과천동 485-6",
@@ -796,184 +805,169 @@ var BInfo = [
                 description: "과천동 어린이집 앞",
                 image: "https://via.placeholder.com/150"
             }
-];
+        ];
 
-var Cpositions = [
-    { category: '문원동', lat: 37.428, lng: 127.008 }
-];
-var CInfo = [
-    {
-        number: "HP-113",
-        address: "문원동",
-        rotation: 3,
-        fixed: 2,
-        description: "문원동 어린이집 앞",
-        image: "https://via.placeholder.com/150"
-    }
-];
+        var Cpositions = [
+            { category: '문원동', lat: 37.428, lng: 127.008 }
+        ];
+        var CInfo = [
+            {
+                number: "HP-113",
+                address: "문원동",
+                rotation: 3,
+                fixed: 2,
+                description: "문원동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            }
+        ];
 
-var Dpositions = [
-    { category: '별양동', lat: 37.426, lng: 126.994 }
-];
-var DInfo = [
-    {
-        number: "HP-114",
-        address: "별양동",
-        rotation: 0,
-        fixed: 4,
-        description: "별양동 어린이집 앞",
-        image: "https://via.placeholder.com/150"
-    }
-];
+        var Dpositions = [
+            { category: '별양동', lat: 37.426, lng: 126.994 }
+        ];
+        var DInfo = [
+            {
+                number: "HP-114",
+                address: "별양동",
+                rotation: 0,
+                fixed: 4,
+                description: "별양동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            }
+        ];
 
-var Epositions = [
-    { category: '부림동', lat: 37.429, lng: 127.000 }
-];
-var EInfo = [
-    {
-        number: "HP-115",
-        address: "부림동",
-        rotation: 1,
-        fixed: 3,
-        description: "부림동 어린이집 앞",
-        image: "https://via.placeholder.com/150"
-    }
-];
+        var Epositions = [
+            { category: '부림동', lat: 37.429, lng: 127.000 }
+        ];
+        var EInfo = [
+            {
+                number: "HP-115",
+                address: "부림동",
+                rotation: 1,
+                fixed: 3,
+                description: "부림동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            }
+        ];
 
-var Fpositions = [
-    { category: '주암동', lat: 37.430, lng: 127.013 }
-];
-var FInfo = [
-    {
-        number: "HP-116",
-        address: "주암동",
-        rotation: 0,
-        fixed: 2,
-        description: "주암동 어린이집 앞",
-        image: "https://via.placeholder.com/150"
-    }
-];
+        var Fpositions = [
+            { category: '주암동', lat: 37.430, lng: 127.013 }
+        ];
+        var FInfo = [
+            {
+                number: "HP-116",
+                address: "주암동",
+                rotation: 0,
+                fixed: 2,
+                description: "주암동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            }
+        ];
 
-var Gpositions = [
-    { category: '중앙동', lat: 37.433, lng: 126.999 }
-];
-var GInfo = [
-    {
-        number: "HP-117",
-        address: "중앙동",
-        rotation: 2,
-        fixed: 1,
-        description: "중앙동 어린이집 앞",
-        image: "https://via.placeholder.com/150"
-    }
-];
+        var Gpositions = [
+            { category: '중앙동', lat: 37.433, lng: 126.999 }
+        ];
+        var GInfo = [
+            {
+                number: "HP-117",
+                address: "중앙동",
+                rotation: 2,
+                fixed: 1,
+                description: "중앙동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            }
+        ];
 
-var OtherPositions = [
-    { category: '기타', lat: 37.431, lng: 126.997 }
-];
-var OtherInfo = [
-    {
-        number: "HP-118",
-        address: "기타동",
-        rotation: 1,
-        fixed: 2,
-        description: "기타동 어린이집 앞",
-        image: "https://via.placeholder.com/150"
-    }
-];
+        var Hpositions = [
+            { category: '기타', lat: 37.440, lng: 127.002 }
+        ];
+        var HInfo = [
+            {
+                number: "HP-118",
+                address: "기타",
+                rotation: 1,
+                fixed: 0,
+                description: "기타 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            }
+        ];
 
-var currentCategory = '전부';
+        var positions = Apositions.concat(Bpositions, Cpositions, Dpositions, Epositions, Fpositions, Gpositions, Hpositions);
 
-function updateCategory() {
-    currentCategory = document.getElementById('categorySelect').value;
-    displayMarkers();
-}
+        var info = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, HInfo);
 
-function displayMarkers() {
-    // 모든 마커를 지도에서 제거
-    markers.forEach(function(marker) {
-        marker.setMap(null);
-    });
-    markers = [];
+        var markers = [];
+        var currentOverlay = null;
 
-    if (currentCategory === '전부') {
-        addMarkers(Apositions, AInfo);
-        addMarkers(Bpositions, BInfo);
-        addMarkers(Cpositions, CInfo);
-        addMarkers(Dpositions, DInfo);
-        addMarkers(Epositions, EInfo);
-        addMarkers(Fpositions, FInfo);
-        addMarkers(Gpositions, GInfo);
-        addMarkers(OtherPositions, OtherInfo);
-    } else {
-        var filteredPositions = [];
-        var filteredInfo = [];
-        if (currentCategory === '회전형') {
-            filteredPositions = Apositions.concat(Bpositions, Cpositions, Dpositions, Epositions, Fpositions, Gpositions, OtherPositions);
-            filteredInfo = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, OtherInfo).filter(function(info) {
-                return info.rotation > 0;
+        // 모든 마커와 오버레이를 표시합니다.
+        createMarkersAndOverlays('전부');
+
+        function createMarkersAndOverlays(category) {
+            closeCustomOverlay(); // 현재 열려 있는 커스텀 오버레이 닫기
+            markers.forEach(function(marker) {
+                marker.setMap(null);
             });
-        } else if (currentCategory === '고정형') {
-            filteredPositions = Apositions.concat(Bpositions, Cpositions, Dpositions, Epositions, Fpositions, Gpositions, OtherPositions);
-            filteredInfo = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, OtherInfo).filter(function(info) {
-                return info.fixed > 0;
+            markers = [];
+
+            positions.forEach(function(position, catIndex) {
+                if (category === '전부' || position.category === category) {
+                    var markerPosition = new kakao.maps.LatLng(position.lat, position.lng);
+
+                    var marker = new kakao.maps.Marker({
+                        position: markerPosition
+                    });
+                    markers.push(marker);
+
+                    kakao.maps.event.addListener(marker, 'click', function() {
+                        showCustomOverlay(position, catIndex);
+                    });
+
+                    marker.setMap(map);
+                }
             });
-        } else {
-            filteredPositions = window[currentCategory + 'positions'];
-            filteredInfo = window[currentCategory + 'Info'];
         }
-        addMarkers(filteredPositions, filteredInfo);
-    }
-}
 
-var markers = [];
+        function closeCustomOverlay() {
+            if (currentOverlay) {
+                currentOverlay.setMap(null);
+                currentOverlay = null;
+            }
+        }
 
-function addMarkers(positions, info) {
-    for (var i = 0; i < positions.length; i++) {
-        var marker = new kakao.maps.Marker({
-            map: map,
-            position: new kakao.maps.LatLng(positions[i].lat, positions[i].lng)
-        });
-        markers.push(marker);
+        function showCustomOverlay(position, catIndex) {
+            // 기존의 커스텀 오버레이를 닫습니다.
+            closeCustomOverlay();
 
-        var overlayContent = createOverlayContent(info[i]);
-        var customOverlay = new kakao.maps.CustomOverlay({
-            map: map,
-            position: marker.getPosition(),
-            content: overlayContent,
-            yAnchor: 1
-        });
-        customOverlay.setMap(null);
+            var overlayContent =
+                '<div class="customOverlay">' +
+                '    <span class="closeBtn" onclick="closeCustomOverlay()">닫기</span>' +
+                '    <div class="title">' + position.category + '</div>' +
+                '    <div class="desc">' +
+                '        <div class="desc-content">' +
+                '            <img src="' + info[catIndex].image + '" width="50" height="50">' +
+                '            <div>' +
+                '                <p>관리번호 : ' + info[catIndex].number + '</p>' +
+                '                <p>주소 : ' + info[catIndex].address + '</p>' +
+                '                <p>회전형 : ' + info[catIndex].rotation + '</p>' +
+                '                <p>고정형 : ' + info[catIndex].fixed + '</p>' +
+                '                <p>상세설명 : ' + info[catIndex].description + '</p>' +
+                '            </div>' +
+                '        </div>' +
+                '    </div>' +
+                '</div>';
 
-        kakao.maps.event.addListener(marker, 'click', (function(overlay) {
-            return function() {
-                overlay.setMap(overlay.getMap() ? null : map);
-            };
-        })(customOverlay));
-    }
-}
+            currentOverlay = new kakao.maps.CustomOverlay({
+                content: overlayContent,
+                map: map,
+                position: new kakao.maps.LatLng(position.lat, position.lng),
+                yAnchor: 0.5 // 중앙 정렬
+            });
+        }
 
-function createOverlayContent(info) {
-    var overlayContent = document.createElement('div');
-    overlayContent.className = 'customOverlay';
-    overlayContent.innerHTML = '<div class="title">' + info.number + '</div>' +
-                               '<div class="desc"><div class="desc-content">' +
-                               '<img src="' + info.image + '" width="50" height="50">' +
-                               '<div><div>' + info.address + '</div>' +
-                               '<div>회전형: ' + info.rotation + '</div>' +
-                               '<div>고정형: ' + info.fixed + '</div>' +
-                               '<div>' + info.description + '</div></div>' +
-                               '</div></div>' +
-                               '<div class="closeBtn" onclick="closeOverlay(event)">X</div>';
-    return overlayContent;
-}
+        var categoryButtons = document.getElementById('categoryButtons');
 
-function closeOverlay(event) {
-    var overlayElement = event.target.closest('.customOverlay');
-    var overlays = Array.from(document.getElementsByClassName('customOverlay'));
-    var overlayIndex = overlays.indexOf(overlayElement);
-    markers[overlayIndex].setMap(null);
-}
+
+
+
 
 function searchLocation() {
     var input = document.getElementById('searchInput').value;
@@ -996,6 +990,8 @@ function searchLocation() {
         }
     }
 }
+
+
 
 function toggleUI() {
     var categorySelectContainer = document.getElementById('categorySelectContainer');

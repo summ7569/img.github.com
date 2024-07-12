@@ -7,19 +7,20 @@
 
         var categories = ['갈현동', '과천동', '문원동', '별양동', '부림동', '주암동', '중앙동', '기타', '회전형', '고정형', '전부'];
 
-        var categoryData = {
-            '갈현동': { name: '갈현동' },
-            '과천동': { name: '과천동' },
-            '문원동': { name: '문원동' },
-            '별양동': { name: '별양동' },
-            '부림동': { name: '부림동' },
-            '주암동': { name: '주암동' },
-            '중앙동': { name: '중앙동' },
-            '기타': { name: '기타' },
-            '회전형': { name: '회전형', filter: 'rotation', minCount: >= 1},
-            '고정형': { name: '고정형', filter: 'fixed', minCount: >= 1},
-            '전부': { name: '전부', includeAll: true }
-        };
+var categoryData = {
+    '갈현동': { name: '갈현동' },
+    '과천동': { name: '과천동' },
+    '문원동': { name: '문원동' },
+    '별양동': { name: '별양동' },
+    '부림동': { name: '부림동' },
+    '주암동': { name: '주암동' },
+    '중앙동': { name: '중앙동' },
+    '기타': { name: '기타' },
+    '회전형': { name: '회전형', filter: 'rotation', minCount: 1 },
+    '고정형': { name: '고정형', filter: 'fixed', minCount: 1 },
+    '전부': { name: '전부', includeAll: true }
+};
+
 
 var Apositions = [
     { category: '갈현동', lat: 37.4249270000, lng:126.9897680000 },

@@ -89,7 +89,7 @@ var DInfo = [
     {
         number: "HP-114",
         address: "별양동",
-        rotation: 0,
+        rotation: 1,
         fixed: 4,
         description: "별양동 어린이집 앞",
         image: "https://via.placeholder.com/150"
@@ -185,11 +185,11 @@ function createMarkersAndOverlays(category) {
     positions.forEach(function(position, index) {
         var showMarker = true;
         if (category === '회전형') {
-            if (info[index].rotation <= 0) {
+            if (info[index].rotation < 1) { // 회전형 카테고리 조건 변경
                 showMarker = false;
             }
         } else if (category === '고정형') {
-            if (info[index].fixed <= 0) {
+            if (info[index].fixed < 1) { // 고정형 카테고리 조건 변경
                 showMarker = false;
             }
         }
@@ -229,7 +229,7 @@ function showCustomOverlay(position, index) {
 
     var overlayContent =
         '<div class="customOverlay">' +
-        '    <span class="closeBtn" onclick="closeCustomOverlay()">&times;</span>' +
+        '    <span class="closeBtn" onclick="closeCustomOverlay()">×</span>' +
         '    <div class="title">' + position.category + '</div>' +
         '    <div class="desc">' +
         '        <div class="desc-content">' +

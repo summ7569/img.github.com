@@ -891,6 +891,13 @@ var AInfo = [
             }
         ];
 
+// 카테고리가 변경되었을 때 호출되는 함수입니다.
+function updateCategory() {
+    // 카테고리 선택 셀렉트 박스에서 선택된 값을 가져옵니다.
+    currentCategory = document.getElementById('categorySelect').value;
+    // 마커를 표시하는 함수를 호출합니다.
+    displayMarkers();
+        
         var positions = Apositions.concat(Bpositions, Cpositions, Dpositions, Epositions, Fpositions, Gpositions, Hpositions);
 
         var info = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, HInfo);

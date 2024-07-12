@@ -28,8 +28,6 @@ body {
     font-size: 16px;
 }
 
-/* UI 숨기기 버튼 스타일 제거 */
-
 .customOverlay {
     width: 300px;
     padding: 10px;
@@ -68,7 +66,7 @@ body {
 #searchForm {
     position: absolute;
     top: 10px;
-    right: 10px; /* 검색창을 오른쪽 상단에 위치하도록 수정 */
+    right: 10px; /* 검색창을 오른쪽 상단에 위치하도록 설정은 유지합니다. */
     z-index: 1;
     padding: 10px;
     border-radius: 5px;

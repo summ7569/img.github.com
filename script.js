@@ -528,7 +528,7 @@ var BInfo = [
                 number: "A-GC-48",
                 address: "과천동 245-13",
                 rotation: 1,
-                fixed: 3=0,
+                fixed: 3,
                 description: "",
                 image: "https://via.placeholder.com/150"
             },
@@ -799,15 +799,18 @@ var BInfo = [
 ];
 
 var Cpositions = [
-    { category: '문원동', lat: 37.428, lng: 127.008 }
+    { category: '문원동', lat: 37.428, lng: 127.008 },
+    { category: '문원동', lat: 37.428, lng: 127.008 },
+    
 ];
+
 var CInfo = [
     {
         number: "HP-113",
         address: "문원동",
-        rotation: 3,
+        rotation: 1,
         fixed: 2,
-        description: "문원동 어린이집 앞",
+        description: "어린이집",
         image: "https://via.placeholder.com/150"
     }
 ];
@@ -820,8 +823,8 @@ var DInfo = [
         number: "HP-114",
         address: "별양동",
         rotation: 1,
-        fixed: 4,
-        description: "별양동 어린이집 앞",
+        fixed: 3,
+        description: "어린이집",
         image: "https://via.placeholder.com/150"
     }
 ];
@@ -834,8 +837,8 @@ var EInfo = [
         number: "HP-115",
         address: "부림동",
         rotation: 1,
-        fixed: 3,
-        description: "부림동 어린이집 앞",
+        fixed: 2,
+        description: "어린이집",
         image: "https://via.placeholder.com/150"
     }
 ];
@@ -847,9 +850,9 @@ var FInfo = [
     {
         number: "HP-116",
         address: "주암동",
-        rotation: 0,
+        rotation: 1,
         fixed: 2,
-        description: "주암동 어린이집 앞",
+        description: "어린이집",
         image: "https://via.placeholder.com/150"
     }
 ];
@@ -861,9 +864,9 @@ var GInfo = [
     {
         number: "HP-117",
         address: "중앙동",
-        rotation: 2,
-        fixed: 1,
-        description: "중앙동 어린이집 앞",
+        rotation: 1,
+        fixed: 2,
+        description: "어린이집",
         image: "https://via.placeholder.com/150"
     }
 ];
@@ -882,19 +885,6 @@ var HInfo = [
     }
 ];
 
-var Ipositions = [
-    { category: '전부', lat: 37.446, lng: 127.003 }
-];
-var IInfo = [
-    {
-        number: "A-GC-14",
-        address: "전부",
-        rotation: 1,
-        fixed: 2,
-        description: "전부 어린이집 앞",
-        image: "https://via.placeholder.com/150"
-    }
-];
 
 var positions = Apositions.concat(Bpositions, Cpositions, Dpositions, Epositions, Fpositions, Gpositions, Hpositions, Ipositions);
 var info = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, HInfo, IInfo);

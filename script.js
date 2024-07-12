@@ -59,7 +59,7 @@ var AInfo = [
         description: "우체국사거리 2단지 소공원",
         image: "https://via.placeholder.com/150"
     },
-    {
+        {
         number: "A-GH-6",
         address: "갈현동 산121",
         rotation: 1,
@@ -67,7 +67,7 @@ var AInfo = [
         description: "12단",
         image: "https://via.placeholder.com/150"
     },
-    {
+        {
         number: "A-GH-8",
         address: "갈현동 640-8",
         rotation: 1,
@@ -75,7 +75,7 @@ var AInfo = [
         description: "모뎀말길 13 우정병원",
         image: "https://via.placeholder.com/150"
     },
-    {
+        {
         number: "A-GH-9",
         address: "갈현동 683-1",
         rotation: 1,
@@ -83,7 +83,7 @@ var AInfo = [
         description: "정보과학도서관 입구",
         image: "https://via.placeholder.com/150"
     },
-    {
+        {
         number: "A-GH-10",
         address: "갈현동 4-3",
         rotation: 1,
@@ -91,7 +91,7 @@ var AInfo = [
         description: "",
         image: "https://via.placeholder.com/150"
     },
-    {
+        {
         number: "A-GH-11",
         address: "갈현동 8-55",
         rotation: 1,
@@ -99,7 +99,7 @@ var AInfo = [
         description: "놀이터 삼거",
         image: "https://via.placeholder.com/150"
     },
-    {
+        {
         number: "A-GH-12",
         address: "갈현동 8-5",
         rotation: 1,
@@ -107,7 +107,7 @@ var AInfo = [
         description: "찬우물공원내",
         image: "https://via.placeholder.com/150"
     },
-    {
+        {
         number: "A-GH-13",
         address: "갈현동 8-26",
         rotation: 1,
@@ -115,7 +115,7 @@ var AInfo = [
         description: "",
         image: "https://via.placeholder.com/150"
     },
-    {
+        {
         number: "A-GH-14",
         address: "갈현동 14-4",
         rotation: 1,
@@ -123,7 +123,7 @@ var AInfo = [
         description: "가일길 한샘교회 앞",
         image: "https://via.placeholder.com/150"
     },
-    {
+        {
         number: "A-GH-15",
         address: "갈현동 산22-2",
         rotation: 1,
@@ -131,7 +131,7 @@ var AInfo = [
         description: "",
         image: "https://via.placeholder.com/150"
     },
-    {
+        {
         number: "A-GH-16",
         address: "갈현동 산20-7",
         rotation: 1,
@@ -139,7 +139,7 @@ var AInfo = [
         description: "",
         image: "https://via.placeholder.com/150"
     },
-    {
+        {
         number: "A-GH-17",
         address: "갈현동 357-5",
         rotation: 1,
@@ -147,250 +147,867 @@ var AInfo = [
         description: "",
         image: "https://via.placeholder.com/150"
     },
-    {
+        {
         number: "A-GH-18",
-        address: "갈현동 224-1",
+        address: "갈현동 336-5",
         rotation: 1,
-        fixed: 4,
+        fixed: 2,
+        description: "이운정 가든 ",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "A-GH-19",
+        address: "갈현동 399",
+        rotation: 0,
+        fixed: 2,
         description: "",
         image: "https://via.placeholder.com/150"
     },
-    {
-        number: "A-GH-19",
-        address: "갈현동 338-10",
-        rotation: 1,
-        fixed: 4,
-        description: "양지말길 삼거리",
-        image: "https://via.placeholder.com/150"
-    },
-    {
+        {
         number: "A-GH-20",
-        address: "갈현동 280-1",
+        address: "갈현동 274-4",
         rotation: 1,
-        fixed: 4,
-        description: "옥상정원",
+        fixed: 1,
+        description: "엘라이트 근처",
         image: "https://via.placeholder.com/150"
     },
-    {
+        {
         number: "A-GH-21",
-        address: "갈현동 4-9",
+        address: "갈현동 297-9",
         rotation: 1,
-        fixed: 4,
-        description: "갈현동 4-9",
+        fixed: 2,
+        description: "",
+        image: "https://via.placeholder.com/150"
+    },
+        {
+        number: "SPD-028",
+        address: "",
+        rotation: 1,
+        fixed: 3,
+        description: "지식정보타운",
         image: "https://via.placeholder.com/150"
     }
 ];
 
 var Bpositions = [
-    { category: '과천동', lat: 37.4295040000, lng:126.9883220000 },
-    { category: '과천동', lat: 37.4285040000, lng:126.9873220000 },
-    { category: '과천동', lat: 37.4275040000, lng:126.9863220000 }
+    { category: '과천동', lat: 37.4464177858 , lng: 126.9919198623 },
+    { category: '과천동', lat: 37.447129, lng: 126.993063 },
+            { category: '과천동', lat: 37.447912, lng: 126.99447 },
+            { category: '과천동', lat: 37.452616, lng: 126.992914 },
+            { category: '과천동', lat: 37.451995, lng: 126.993999 },
+            { category: '과천동', lat: 37.451393, lng: 126.995546 },
+            { category: '과천동', lat: 37.450036, lng: 126.993925 },
+            { category: '과천동', lat: 37.450653, lng: 126.995592 },
+            { category: '과천동', lat: 37.449715, lng: 126.993935 },
+            { category: '과천동', lat: 37.450283, lng: 126.996933 },
+            { category: '과천동', lat: 37.449201019, lng: 126.9965516876 },
+            { category: '과천동', lat: 37.44983, lng: 126.998151 },
+            { category: '과천동', lat: 37.445258, lng: 126.996232 },
+            { category: '과천동', lat: 37.447403, lng: 126.996467 },
+            { category: '과천동', lat: 37.4491, lng: 127.0 },
+            { category: '과천동', lat: 37.451954, lng:126.998685 },
+            { category: '과천동', lat: 37.460261, lng: 127.000528 },
+            { category: '과천동', lat: 37.458219, lng: 127.000875 },
+            { category: '과천동', lat: 37.457861, lng: 127.000972 },
+            { category: '과천동', lat: 37.4575275578, lng: 127.0002712615 },
+            { category: '과천동', lat: 37.457, lng: 127.0013 },
+            { category: '과천동', lat: 37.456674, lng: 127.000721 },
+            { category: '과천동', lat: 37.456241, lng: 126.999979 },
+            { category: '과천동', lat: 37.455527, lng: 127.001146 },
+            { category: '과천동', lat: 37.454827, lng: 127.000535 },
+            { category: '과천동', lat: 37.453237, lng: 127.00198 },
+            { category: '과천동', lat: 37.454223, lng: 127.001211 },
+            { category: '과천동', lat: 37.4532499971, lng: 127.0006894171 },
+            { category: '과천동', lat: 37.453237, lng: 127.00198 },
+            { category: '과천동', lat: 37.460261, lng: 127.000528 },
+            { category: '과천동', lat: 37.4560788551, lng: 127.0087649689 },
+            { category: '과천동', lat: 37.445104, lng: 126.99639 },
+            { category: '과천동', lat: 37.450157, lng: 127.003311 },
+            { category: '과천동', lat: 37.4482616707, lng: 127.0046532564 },
+            { category: '과천동', lat: 37.447323, lng: 127.004574 },
+            { category: '과천동', lat: 37.44804, lng: 127.004527 },
+            { category: '과천동', lat: 37.439256, lng: 126.999597 },
+            { category: '과천동', lat: 37.441026, lng: 127.004854 },
+            { category: '과천동', lat: 37.443752, lng: 127.007824 },
+            { category: '과천동', lat: 37.43956, lng: 127.008493 },
+            { category: '과천동', lat: 37.441028, lng: 127.009682 },
+            { category: '과천동', lat: 37.44851, lng: 127.006456 },
+            { category: '과천동', lat: 37.450067, lng: 127.008205 },
+            { category: '과천동', lat: 37.448432, lng: 127.009646 },
+            { category: '과천동', lat: 37.448561, lng: 127.01035 },
+            { category: '과천동', lat: 37.450355, lng: 127.011507 },
+            { category: '과천동', lat: 37.446525, lng: 127.008959 },
+            { category: '과천동', lat: 37.447378, lng: 127.0106 },
+            { category: '과천동', lat: 37.449135, lng: 127.012021 },
+            { category: '과천동', lat: 37.450355, lng: 127.011507 },
+            { category: '과천동', lat: 37.446456, lng: 127.022929 },
+            { category: '과천동', lat: 37.445846, lng: 127.023325 },
+            { category: '과천동', lat: 37.445065, lng: 127.023495 },
+            { category: '과천동', lat: 37.444922, lng: 127.024851 },
+             { category: '과천동', lat: 37.4518, lng: 127.0281 },
+            { category: '과천동', lat: 37.453182, lng: 127.028728 },
+            { category: '과천동', lat: 37.457066, lng: 127.032175 },
+            { category: '과천동', lat: 37.45945, lng: 127.032566 },
+            { category: '과천동', lat: 37.459163, lng: 127.034043 },
+            { category: '과천동', lat: 37.4573645744, lng: 127.0354150922 },
+            { category: '과천동', lat: 37.4601629648, lng: 127.0328280342 },
+            { category: '과천동', lat: 37.461074, lng: 127.033251 },
+            { category: '과천동', lat: 37.4632288725, lng: 127.0320466127 },
+            { category: '과천동', lat: 37.4628669675, lng: 127.0333972105 },
+            { category: '과천동', lat: 37.463468, lng: 127.033571 },
+            { category: '과천동', lat: 37.462343, lng: 127.031574 },
+            { category: '과천동', lat: 37.462042, lng: 127.0331 },
+            { category: '과천동', lat: 37.460926, lng: 127.031914 }
 ];
-
 var BInfo = [
     {
-        number: "B-GH-1",
-        address: "과천동 1",
+        number: "A-GC-14",
+        address: "과천동 513-64",
         rotation: 2,
         fixed: 3,
-        description: "과천동 설명 1",
+        description: "과천동 어린이집 앞",
         image: "https://via.placeholder.com/150"
     },
     {
-        number: "B-GH-2",
-        address: "과천동 2",
+        number: "A-GC-15",
+        address: "과천동 513-152",
         rotation: 2,
-        fixed: 4,
-        description: "과천동 설명 2",
+        fixed: 3,
+        description: "과천동 어린이집 앞",
         image: "https://via.placeholder.com/150"
     },
-    {
-        number: "B-GH-3",
-        address: "과천동 3",
-        rotation: 2,
-        fixed: 5,
-        description: "과천동 설명 3",
-        image: "https://via.placeholder.com/150"
-    }
+                        {
+                number: "A-GC-17",
+                address: "과천동 485-6",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-18",
+                address: "과천동 485-14",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-19",
+                address: "과천동 475-9",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-20",
+                address: "과천동 464",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-21",
+                address: "과천동 461-10(답)",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-22",
+                address: "과천동 517-40",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-23",
+                address: "JA-8",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-24",
+                address: "과천동 521-4",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-25",
+                address: "과천동 520-3",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-26",
+                address: "과천동 535-68",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-27",
+                address: "과천동 535-66",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-28",
+                address: "과천동 524-5",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-29",
+                address: "무네미길 36",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-30",
+                address: "과천동 391-22",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-31",
+                address: "과천동 386-7",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-32",
+                address: "과천동 382-15",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-33",
+                address: "과천동 382-1",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-34",
+                address: "과천동 380-2",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-35",
+                address: "과천동 379-9",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-36",
+                address: "과천동 378-40",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-37",
+                address: "과천동 376-9",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-38",
+                address: "과천동 372",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-39",
+                address: "과천동 373-3",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-40",
+                address: "뒷골로 22-11",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-41",
+                address: "과천동 366-6",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-42",
+                address: "과천동 362-4",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-43",
+                address: "과천동 17",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-44",
+                address: "과천동 16-16",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-45",
+                address: "과천동 605-1",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-46",
+                address: "과천동 247-7",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-47",
+                address: "과천동 242-7",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-48",
+                address: "과천동 245-13",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-49",
+                address: "상하벌로 50",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-50",
+                address: "과천동 592-2",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-51",
+                address: "과천동 303-1",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-52",
+                address: "과천동 189-22",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-53",
+                address: "과천동 750-4",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-54",
+                address: "과천동 645-9",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-55",
+                address: "과천동 140-67",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-56",
+                address: "과천동 95-7",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-57",
+                address: "과천동 141-6",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-58",
+                address: "과천동 133-2",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-59",
+                address: "광창3로 16",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-60",
+                address: "과천동 140-98",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-61",
+                address: "과천동 142-34",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-62",
+                address: "과천동 152-3",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-63",
+                address: "주암동 415-2",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-64",
+                address: "주암동 442-2",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-65",
+                address: "주암동 444-18",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-66",
+                address: "주암동 450-20",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-67",
+                address: "주암동 458",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-68",
+                address: "주암동 691-63",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-69",
+                address: "추사로78",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-70",
+                address: "주암동 105-16",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-71",
+                address: "주암동 44-8",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-72",
+                address: "주암동 18-13",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-73",
+                address: "주암동 27",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-74",
+                address: "주암동 14-4",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-GC-75",
+                address: "주암동 69-19",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-40",
+                address: "주암동 65-7",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-41",
+                address: "주암동 63-7",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-61",
+                address: "주암동 62-16",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-123",
+                address: "주암동 66-6",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+                        {
+                number: "A-124",
+                address: "주암동 69-8",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            },
+            {
+                number: "A-GC-40",
+                address: "주암동 53",
+                rotation: 2,
+                fixed: 3,
+                description: "과천동 어린이집 앞",
+                image: "https://via.placeholder.com/150"
+            }
 ];
 
 var Cpositions = [
-    { category: '문원동', lat: 37.4295040000, lng:126.9883220000 },
-    { category: '문원동', lat: 37.4285040000, lng:126.9873220000 },
-    { category: '문원동', lat: 37.4275040000, lng:126.9863220000 }
+    { category: '문원동', lat: 37.428, lng: 127.008 }
 ];
-
 var CInfo = [
     {
-        number: "C-GH-1",
-        address: "문원동 1",
+        number: "HP-113",
+        address: "문원동",
         rotation: 3,
-        fixed: 4,
-        description: "문원동 설명 1",
-        image: "https://via.placeholder.com/150"
-    },
-    {
-        number: "C-GH-2",
-        address: "문원동 2",
-        rotation: 3,
-        fixed: 5,
-        description: "문원동 설명 2",
-        image: "https://via.placeholder.com/150"
-    },
-    {
-        number: "C-GH-3",
-        address: "문원동 3",
-        rotation: 3,
-        fixed: 6,
-        description: "문원동 설명 3",
+        fixed: 2,
+        description: "문원동 어린이집 앞",
         image: "https://via.placeholder.com/150"
     }
 ];
 
 var Dpositions = [
-    { category: '별양동', lat: 37.4295040000, lng:126.9883220000 },
-    { category: '별양동', lat: 37.4285040000, lng:126.9873220000 },
-    { category: '별양동', lat: 37.4275040000, lng:126.9863220000 }
+    { category: '별양동', lat: 37.426, lng: 126.994 }
 ];
-
 var DInfo = [
     {
-        number: "D-GH-1",
-        address: "별양동 1",
-        rotation: 4,
-        fixed: 7,
-        description: "별양동 설명 1",
-        image: "https://via.placeholder.com/150"
-    },
-    {
-        number: "D-GH-2",
-        address: "별양동 2",
-        rotation: 4,
-        fixed: 8,
-        description: "별양동 설명 2",
-        image: "https://via.placeholder.com/150"
-    },
-    {
-        number: "D-GH-3",
-        address: "별양동 3",
-        rotation: 4,
-        fixed: 9,
-        description: "별양동 설명 3",
+        number: "HP-114",
+        address: "별양동",
+        rotation: 0,
+        fixed: 4,
+        description: "별양동 어린이집 앞",
         image: "https://via.placeholder.com/150"
     }
 ];
 
-function displayCategoryButtons() {
-    var categoryButtonsContainer = document.getElementById('categoryButtons');
-
-    categories.forEach(function(category) {
-        var button = document.createElement('button');
-        button.innerText = categoryData[category].name;
-        button.addEventListener('click', function() {
-            filterMarkers(category);
-        });
-        categoryButtonsContainer.appendChild(button);
-    });
-}
-
-function filterMarkers(category) {
-    var filteredPositions = Apositions.concat(Bpositions, Cpositions, Dpositions).filter(function(position) {
-        if (category === '전부') {
-            return true;
-        }
-        return position.category === category;
-    });
-
-    removeMarkers();
-    addMarkers(filteredPositions, category);
-}
-
-var markers = [];
-
-function addMarkers(positions, category) {
-    var infoData;
-    switch(category) {
-        case '갈현동':
-            infoData = AInfo;
-            break;
-        case '과천동':
-            infoData = BInfo;
-            break;
-        case '문원동':
-            infoData = CInfo;
-            break;
-        case '별양동':
-            infoData = DInfo;
-            break;
-        default:
-            infoData = AInfo.concat(BInfo, CInfo, DInfo);
-            break;
+var Epositions = [
+    { category: '부림동', lat: 37.429, lng: 127.000 }
+];
+var EInfo = [
+    {
+        number: "HP-115",
+        address: "부림동",
+        rotation: 1,
+        fixed: 3,
+        description: "부림동 어린이집 앞",
+        image: "https://via.placeholder.com/150"
     }
+];
 
-    positions.forEach(function(position, index) {
-        var marker = new kakao.maps.Marker({
-            map: map,
-            position: new kakao.maps.LatLng(position.lat, position.lng)
-        });
+var Fpositions = [
+    { category: '주암동', lat: 37.430, lng: 127.013 }
+];
+var FInfo = [
+    {
+        number: "HP-116",
+        address: "주암동",
+        rotation: 0,
+        fixed: 2,
+        description: "주암동 어린이집 앞",
+        image: "https://via.placeholder.com/150"
+    }
+];
 
-        var infoContent = createInfoContent(infoData[index]);
-        var infoOverlay = new kakao.maps.CustomOverlay({
-            content: infoContent,
-            position: marker.getPosition()
-        });
+var Gpositions = [
+    { category: '중앙동', lat: 37.433, lng: 126.999 }
+];
+var GInfo = [
+    {
+        number: "HP-117",
+        address: "중앙동",
+        rotation: 2,
+        fixed: 1,
+        description: "중앙동 어린이집 앞",
+        image: "https://via.placeholder.com/150"
+    }
+];
 
-        kakao.maps.event.addListener(marker, 'click', function() {
-            infoOverlay.setMap(map);
-        });
+var OtherPositions = [
+    { category: '기타', lat: 37.431, lng: 126.997 }
+];
+var OtherInfo = [
+    {
+        number: "HP-118",
+        address: "기타동",
+        rotation: 1,
+        fixed: 2,
+        description: "기타동 어린이집 앞",
+        image: "https://via.placeholder.com/150"
+    }
+];
 
-        markers.push(marker);
-    });
+var currentCategory = '전부';
+
+function updateCategory() {
+    currentCategory = document.getElementById('categorySelect').value;
+    displayMarkers();
 }
 
-function createInfoContent(info) {
-    var content = document.createElement('div');
-    content.className = 'customOverlay';
-
-    var closeBtn = document.createElement('div');
-    closeBtn.className = 'closeBtn';
-    closeBtn.innerHTML = 'X';
-    closeBtn.onclick = function() {
-        infoOverlay.setMap(null); // 닫기 버튼 클릭 시 오버레이 닫기
-    };
-    content.appendChild(closeBtn);
-
-    var title = document.createElement('div');
-    title.className = 'title';
-    title.innerHTML = info.number + ' - ' + info.address;
-    content.appendChild(title);
-
-    var desc = document.createElement('div');
-    desc.className = 'desc';
-    var descContent = document.createElement('div');
-    descContent.className = 'desc-content';
-
-    var image = document.createElement('img');
-    image.src = info.image;
-    image.width = 50; // 이미지 크기 조정
-    image.height = 50;
-
-    var description = document.createElement('div');
-    description.innerHTML = info.description;
-
-    descContent.appendChild(image);
-    descContent.appendChild(description);
-    desc.appendChild(descContent);
-    content.appendChild(desc);
-
-    return content;
-}
-
-function removeMarkers() {
+function displayMarkers() {
+    // 모든 마커를 지도에서 제거
     markers.forEach(function(marker) {
         marker.setMap(null);
     });
     markers = [];
+
+    if (currentCategory === '전부') {
+        addMarkers(Apositions, AInfo);
+        addMarkers(Bpositions, BInfo);
+        addMarkers(Cpositions, CInfo);
+        addMarkers(Dpositions, DInfo);
+        addMarkers(Epositions, EInfo);
+        addMarkers(Fpositions, FInfo);
+        addMarkers(Gpositions, GInfo);
+        addMarkers(OtherPositions, OtherInfo);
+    } else {
+        var filteredPositions = [];
+        var filteredInfo = [];
+        if (currentCategory === '회전형') {
+            filteredPositions = Apositions.concat(Bpositions, Cpositions, Dpositions, Epositions, Fpositions, Gpositions, OtherPositions);
+            filteredInfo = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, OtherInfo).filter(function(info) {
+                return info.rotation > 0;
+            });
+        } else if (currentCategory === '고정형') {
+            filteredPositions = Apositions.concat(Bpositions, Cpositions, Dpositions, Epositions, Fpositions, Gpositions, OtherPositions);
+            filteredInfo = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, OtherInfo).filter(function(info) {
+                return info.fixed > 0;
+            });
+        } else {
+            filteredPositions = window[currentCategory + 'positions'];
+            filteredInfo = window[currentCategory + 'Info'];
+        }
+        addMarkers(filteredPositions, filteredInfo);
+    }
 }
 
-displayCategoryButtons();
-filterMarkers('전부');
+var markers = [];
+
+function addMarkers(positions, info) {
+    for (var i = 0; i < positions.length; i++) {
+        var marker = new kakao.maps.Marker({
+            map: map,
+            position: new kakao.maps.LatLng(positions[i].lat, positions[i].lng)
+        });
+        markers.push(marker);
+
+        var overlayContent = createOverlayContent(info[i]);
+        var customOverlay = new kakao.maps.CustomOverlay({
+            map: map,
+            position: marker.getPosition(),
+            content: overlayContent,
+            yAnchor: 1
+        });
+        customOverlay.setMap(null);
+
+        kakao.maps.event.addListener(marker, 'click', (function(overlay) {
+            return function() {
+                overlay.setMap(overlay.getMap() ? null : map);
+            };
+        })(customOverlay));
+    }
+}
+
+function createOverlayContent(info) {
+    var overlayContent = document.createElement('div');
+    overlayContent.className = 'customOverlay';
+    overlayContent.innerHTML = '<div class="title">' + info.number + '</div>' +
+                               '<div class="desc"><div class="desc-content">' +
+                               '<img src="' + info.image + '" width="50" height="50">' +
+                               '<div><div>' + info.address + '</div>' +
+                               '<div>회전형: ' + info.rotation + '</div>' +
+                               '<div>고정형: ' + info.fixed + '</div>' +
+                               '<div>' + info.description + '</div></div>' +
+                               '</div></div>' +
+                               '<div class="closeBtn" onclick="closeOverlay(event)">X</div>';
+    return overlayContent;
+}
+
+function closeOverlay(event) {
+    var overlayElement = event.target.closest('.customOverlay');
+    var overlays = Array.from(document.getElementsByClassName('customOverlay'));
+    var overlayIndex = overlays.indexOf(overlayElement);
+    markers[overlayIndex].setMap(null);
+}
+
+function searchLocation() {
+    var input = document.getElementById('searchInput').value;
+    if (input.includes(',')) {
+        var coords = input.split(',');
+        var lat = parseFloat(coords[0]);
+        var lng = parseFloat(coords[1]);
+        map.setCenter(new kakao.maps.LatLng(lat, lng));
+    } else {
+        var allInfo = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, OtherInfo);
+        var found = allInfo.find(function(info) {
+            return info.number === input;
+        });
+        if (found) {
+            var index = allInfo.indexOf(found);
+            var position = Apositions.concat(Bpositions, Cpositions, Dpositions, Epositions, Fpositions, Gpositions, OtherPositions)[index];
+            map.setCenter(new kakao.maps.LatLng(position.lat, position.lng));
+        } else {
+            alert('관리번호를 찾을 수 없습니다.');
+        }
+    }
+}
+
+function toggleUI() {
+    var categorySelectContainer = document.getElementById('categorySelectContainer');
+    var searchContainer = document.getElementById('searchContainer');
+    var toggleButton = document.getElementById('toggleButton');
+    var isHidden = categorySelectContainer.style.display === 'none';
+
+    categorySelectContainer.style.display = isHidden ? 'block' : 'none';
+    searchContainer.style.display = isHidden ? 'block' : 'none';
+    toggleButton.innerText = isHidden ? '숨기기' : '보이기';
+}
+
+document.getElementById('categorySelect').addEventListener('change', updateCategory);
+
+updateCategory();

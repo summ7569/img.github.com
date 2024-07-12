@@ -922,25 +922,6 @@ var defaultMarkerImage = {
     anchor: new kakao.maps.Point(25, 25)
 };
 
-// 카테고리 컨테이너와 아이템 설정
-var categoryContainer = document.getElementById('categoryContainer');
-var categoryItems = categoryContainer.querySelectorAll('.category-item');
-
-// 각 카테고리 아이템에 클릭 이벤트 핸들러 등록
-categoryItems.forEach(function(item) {
-    item.addEventListener('click', function() {
-        var category = item.getAttribute('data-category');
-        updateCategory(category);
-    });
-});
-
-// updateCategory() 함수 수정
-function updateCategory(selectedCategory) {
-    createMarkersAndOverlays(selectedCategory);
-    // 필요한 경우 추가적으로 UI 업데이트
-}
-
-
 // 모든 마커와 오버레이 표시 함수 호출
 createMarkersAndOverlays('전부');
 
@@ -1068,6 +1049,17 @@ function toggleUI() {
     searchContainer.style.display = isHidden ? 'block' : 'none';
     toggleButton.innerText = isHidden ? '숨기기' : '보이기';
 }
+
+        // 카테고리 버튼 생성 및 클릭 이벤트 추가
+        categories.forEach(function(category) {
+            var button = document.createElement('button');
+            button.textContent = category;
+            button.addEventListener('click', function() {
+                createMarkersAndOverlays(category);
+            });
+            categoryButtons.appendChild(button);
+        });
+
 
 // 카테고리 선택 시 업데이트 함수 등록
 document.getElementById('categorySelect').addEventListener('change', updateCategory);

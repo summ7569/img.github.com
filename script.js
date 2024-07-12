@@ -248,7 +248,7 @@ function showCustomOverlay(position, index) {
 }
 
 var categoryButtons = document.getElementById('categoryButtons');
-var toggleButtons = document.getElementById('toggleButtons');
+var toggleUIBtn = document.getElementById('toggleUIBtn');
 
 // 카테고리 버튼 생성 및 클릭 이벤트 추가
 categories.forEach(function(category) {
@@ -260,11 +260,14 @@ categories.forEach(function(category) {
     categoryButtons.appendChild(button);
 });
 
-// 검색창 표시/숨김 버튼 생성 및 이벤트 추가
-var toggleButton = document.createElement('button');
-toggleButton.textContent = '토글';
-toggleButton.addEventListener('click', function() {
-    var toggleSection = document.getElementById('toggleSection');
-    toggleSection.classList.toggle('hidden');
+// UI 토글 버튼 생성 및 클릭 이벤트 추가
+toggleUIBtn.addEventListener('click', function() {
+    var mapWrapper = document.getElementById('mapWrapper');
+    if (mapWrapper.classList.contains('hideUI')) {
+        mapWrapper.classList.remove('hideUI');
+        toggleUIBtn.textContent = 'UI 숨기기';
+    } else {
+        mapWrapper.classList.add('hideUI');
+        toggleUIBtn.textContent = 'UI 보이기';
+    }
 });
-toggleButtons.appendChild(toggleButton);

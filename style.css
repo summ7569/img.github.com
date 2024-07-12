@@ -9,40 +9,21 @@ body {
     height: 700px;
 }
 
+#mapWrapper {
+    position: relative;
+}
+
 #categoryButtons {
     position: absolute;
     top: 10px;
     left: 10px;
-    background-color: white;
-    padding: 10px;
-    border: 1px solid #ccc;
+    z-index: 1;
 }
 
 button {
-    display: block;
-    margin: 5px 0;
+    margin: 5px;
     padding: 5px 10px;
     cursor: pointer;
-    background-color: transparent;
-    border: none;
-}
-
-#searchContainer {
-    position: absolute;
-    top: 50px;
-    left: 10px;
-    display: block;
-}
-
-#toggleControlsButton {
-    position: absolute;
-    bottom: 10px;
-    left: 10px;
-    cursor: pointer;
-    background-color: #007BFF;
-    color: white;
-    border: none;
-    padding: 5px 10px;
 }
 
 .customOverlay {
@@ -78,4 +59,8 @@ button {
     cursor: pointer;
     font-size: 14px;
     color: #555;
+}
+
+.hideUI #categoryButtons {
+    display: none;
 }

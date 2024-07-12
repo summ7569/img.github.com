@@ -188,11 +188,11 @@ function createMarkersAndOverlays(category) {
 
             var markerImage;
             if (category === '회전형') {
-                markerImage = 'https://via.placeholder.com/50/FF5733/000000?text=R'; // 회전형 마커 이미지
+                markerImage = 'https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true'; // 회전형 마커 이미지
             } else if (category === '고정형') {
-                markerImage = 'https://via.placeholder.com/50/3498DB/000000?text=F'; // 고정형 마커 이미지
+                markerImage = 'https://github.com/summ7569/summ7569.github.io/blob/master/category2.png?raw=true'; // 고정형 마커 이미지
             } else {
-                markerImage = 'https://via.placeholder.com/50/AAAAAA/000000?text=M'; // 기본 마커 이미지
+                markerImage = 'http://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png'; // 기본 마커 이미지
             }
 
             var marker = new kakao.maps.Marker({

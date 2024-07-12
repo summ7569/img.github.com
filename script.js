@@ -22,7 +22,7 @@ var categoryData = {
 };
 
 var Apositions = [
-    { category: '갈현동', lat: 37.4249270000, lng:126.9897680000 },
+    { category: '갈현동', lat: 37.4249270000, lng: 126.9897680000 },
     { category: '갈현동', lat: 37.423681, lng: 126.9929 } // 새로운 위치 정보 추가
 ];
 
@@ -184,20 +184,24 @@ function createMarkersAndOverlays(category) {
 
     positions.forEach(function(position, index) {
         var showMarker = true;
+
+        // 회전형 카테고리 조건 설정
         if (category === '회전형') {
-            if (info[index].rotation < 1) { // 회전형 카테고리 조건 변경
+            if (info[index].rotation < 1) {
                 showMarker = false;
             }
-        } else if (category === '고정형') {
-            if (info[index].fixed < 1) { // 고정형 카테고리 조건 변경
+        }
+        // 고정형 카테고리 조건 설정
+        else if (category === '고정형') {
+            if (info[index].fixed < 1) {
                 showMarker = false;
             }
         }
 
+        // 선택된 카테고리 또는 전체 카테고리인 경우 마커 생성
         if (category === '전부' || position.category === category) {
             if (showMarker) {
                 var markerPosition = new kakao.maps.LatLng(position.lat, position.lng);
-
                 var markerImage = 'http://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png'; // 기본 마커 이미지
 
                 var marker = new kakao.maps.Marker({
@@ -224,7 +228,6 @@ function closeCustomOverlay() {
 }
 
 function showCustomOverlay(position, index) {
-    // 기존의 커스텀 오버레이를 닫습니다.
     closeCustomOverlay();
 
     var overlayContent =
@@ -284,21 +287,19 @@ toggleUIBtn.addEventListener('click', function() {
 // 검색창을 추가하여 위도/경도/관리번호로 위치 검색 가능하도록 설정
 var searchForm = document.createElement('form');
 searchForm.id = 'searchForm';
-searchForm.innerHTML = `
-    <input type="text" id="searchInput" placeholder="위도/경도 또는 관리번호 입력" required>
-    <button type="submit">검색</button>
-`;
+searchForm.innerHTML = 
+    '<input type="text" id="searchInput" placeholder="위도/경도 또는 관리번호 입력" required>' +
+    '<button type="submit">검색</button>';
 map.controls[kakao.maps.ControlPosition.TOP_LEFT].push(searchForm);
 
 searchForm.addEventListener('submit', function(event) {
     event.preventDefault();
     var userInput = document.getElementById('searchInput').value.trim();
 
-    // 위도/경도 입력인지 관리번호 입력인지 확인 후 처리
     var position = null;
-    var category = '전부'; // 기본적으로 전체 카테고리에서 검색
+    var category = '전부';
 
-    // 위도/경도 형식인지 확인
+    // 위도/경도 형식 확인
     var latLngPattern = /(-?\d+(\.\d+)?),\s*(-?\d+(\.\d+)?)/;
     if (latLngPattern.test(userInput)) {
         var match = userInput.match(latLngPattern);
@@ -323,5 +324,4 @@ searchForm.addEventListener('submit', function(event) {
     } else {
         alert('유효한 위도/경도 또는 관리번호를 입력하세요.');
     }
-
 });

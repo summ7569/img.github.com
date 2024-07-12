@@ -69,7 +69,30 @@ body {
     color: #555;
 }
 
-.hideUI #categoryDropdownContainer,
-.hideUI #toggleUIBtn {
-    display: none;
+#searchForm {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    z-index: 3;
+    background-color: transparent; /* 흰색 배경 제거 */
+}
+
+#searchForm input[type="text"] {
+    padding: 5px;
+    font-size: 14px;
+    width: 200px;
+    border: 1px solid #ccc;
+}
+
+#searchForm button {
+    padding: 6px 10px;
+    font-size: 14px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+}
+
+#searchForm button:hover {
+    background-color: #0056b3;
 }

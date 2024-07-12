@@ -183,29 +183,35 @@ function createMarkersAndOverlays(category) {
     markers = [];
 
     positions.forEach(function(position, index) {
-        if (category === '전부' || position.category === category) {
-            var markerPosition = new kakao.maps.LatLng(position.lat, position.lng);
-
-            var markerImage;
-            if (category === '회전형') {
-                markerImage = 'https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true'; // 회전형 마커 이미지
-            } else if (category === '고정형') {
-                markerImage = 'https://github.com/summ7569/summ7569.github.io/blob/master/category2.png?raw=true'; // 고정형 마커 이미지
-            } else {
-                markerImage = 'http://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png'; // 기본 마커 이미지
+        var showMarker = true;
+        if (category === '회전형') {
+            if (info[index].rotation <= 0) {
+                showMarker = false;
             }
+        } else if (category === '고정형') {
+            if (info[index].fixed <= 0) {
+                showMarker = false;
+            }
+        }
 
-            var marker = new kakao.maps.Marker({
-                position: markerPosition,
-                image: new kakao.maps.MarkerImage(markerImage, new kakao.maps.Size(30, 30)) // 마커 이미지 크기 설정
-            });
-            markers.push(marker);
+        if (category === '전부' || position.category === category) {
+            if (showMarker) {
+                var markerPosition = new kakao.maps.LatLng(position.lat, position.lng);
 
-            kakao.maps.event.addListener(marker, 'click', function() {
-                showCustomOverlay(position, index);
-            });
+                var markerImage = 'http://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png'; // 기본 마커 이미지
 
-            marker.setMap(map);
+                var marker = new kakao.maps.Marker({
+                    position: markerPosition,
+                    image: new kakao.maps.MarkerImage(markerImage, new kakao.maps.Size(30, 30)) // 기본 마커 이미지 크기 설정
+                });
+                markers.push(marker);
+
+                kakao.maps.event.addListener(marker, 'click', function() {
+                    showCustomOverlay(position, index);
+                });
+
+                marker.setMap(map);
+            }
         }
     });
 }
@@ -318,4 +324,3 @@ searchForm.addEventListener('submit', function(event) {
         alert('유효한 위도/경도 또는 관리번호를 입력하세요.');
     }
 });
-

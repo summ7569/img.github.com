@@ -7,14 +7,13 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <div id="map"></div>
-    <div id="categoryButtons"></div>
-    <div id="searchContainer">
-        <input type="text" id="searchInput" placeholder="위도, 경도 또는 관리번호 입력">
-        <button onclick="searchLocation()">검색</button>
+    <div id="mapWrapper">
+        <div id="map"></div>
+        <div id="categoryButtons"></div>
     </div>
-    <button id="toggleControlsButton" onclick="toggleControls()">카테고리 및 검색창 토글</button>
+    <button id="toggleUIBtn">UI 숨기기</button>
 
+    <!-- Kakao Maps SDK 로드 스크립트 -->
     <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6&libraries=services"></script>
     <script src="script.js"></script>
 </body>

@@ -197,7 +197,7 @@ function createMarkersAndOverlays(category) {
 
             var marker = new kakao.maps.Marker({
                 position: markerPosition,
-                image: new kakao.maps.MarkerImage(markerImage)
+                image: new kakao.maps.MarkerImage(markerImage, new kakao.maps.Size(30, 30)) // 마커 이미지 크기 설정
             });
             markers.push(marker);
 
@@ -223,7 +223,7 @@ function showCustomOverlay(position, index) {
 
     var overlayContent =
         '<div class="customOverlay">' +
-        '    <span class="closeBtn" onclick="closeCustomOverlay()">닫기</span>' +
+        '    <span class="closeBtn" onclick="closeCustomOverlay()">&times;</span>' +
         '    <div class="title">' + position.category + '</div>' +
         '    <div class="desc">' +
         '        <div class="desc-content">' +
@@ -274,3 +274,48 @@ toggleUIBtn.addEventListener('click', function() {
         toggleUIBtn.textContent = 'UI 보이기';
     }
 });
+
+// 검색창을 추가하여 위도/경도/관리번호로 위치 검색 가능하도록 설정
+var searchForm = document.createElement('form');
+searchForm.id = 'searchForm';
+searchForm.innerHTML = `
+    <input type="text" id="searchInput" placeholder="위도/경도 또는 관리번호 입력" required>
+    <button type="submit">검색</button>
+`;
+map.controls[kakao.maps.ControlPosition.TOP_LEFT].push(searchForm);
+
+searchForm.addEventListener('submit', function(event) {
+    event.preventDefault();
+    var userInput = document.getElementById('searchInput').value.trim();
+
+    // 위도/경도 입력인지 관리번호 입력인지 확인 후 처리
+    var position = null;
+    var category = '전부'; // 기본적으로 전체 카테고리에서 검색
+
+    // 위도/경도 형식인지 확인
+    var latLngPattern = /(-?\d+(\.\d+)?),\s*(-?\d+(\.\d+)?)/;
+    if (latLngPattern.test(userInput)) {
+        var match = userInput.match(latLngPattern);
+        var lat = parseFloat(match[1]);
+        var lng = parseFloat(match[3]);
+        position = new kakao.maps.LatLng(lat, lng);
+    } else {
+        // 관리번호 검색
+        var filtered = info.filter(function(item) {
+            return item.number.toLowerCase() === userInput.toLowerCase();
+        });
+        if (filtered.length > 0) {
+            position = new kakao.maps.LatLng(filtered[0].lat, filtered[0].lng);
+            category = filtered[0].category;
+        }
+    }
+
+    if (position) {
+        map.setCenter(position);
+        map.setLevel(4);
+        createMarkersAndOverlays(category);
+    } else {
+        alert('유효한 위도/경도 또는 관리번호를 입력하세요.');
+    }
+});
+

@@ -16,8 +16,8 @@
             '주암동': { name: '주암동' },
             '중앙동': { name: '중앙동' },
             '기타': { name: '기타' },
-            '회전형': { name: '회전형', filter: 'rotation', minCount: 1},
-            '고정형': { name: '고정형', filter: 'fixed', minCount: 1},
+            '회전형': { name: '회전형', filter: 'rotation', minCount: > 0},
+            '고정형': { name: '고정형', filter: 'fixed', minCount: > 0},
             '전부': { name: '전부', includeAll: true }
         };
 
@@ -891,89 +891,123 @@ var AInfo = [
             }
         ];
 
-// 카테고리가 변경되었을 때 호출되는 함수입니다.
+
+// 전체 위치 정보와 정보 리스트
+var positions = Apositions.concat(Bpositions, Cpositions, Dpositions, Epositions, Fpositions, Gpositions, Hpositions);
+var info = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, HInfo);
+
+// 마커 배열과 현재 오버레이 변수
+var markers = [];
+var currentOverlay = null;
+
+// 회전형, 고정형 카테고리의 마커 이미지 정의
+var rotationMarkerImage = {
+    url: 'path/to/rotation-marker.png',
+    size: new kakao.maps.Size(50, 50),
+    origin: new kakao.maps.Point(0, 0),
+    anchor: new kakao.maps.Point(25, 25)
+};
+
+var fixedMarkerImage = {
+    url: 'path/to/fixed-marker.png',
+    size: new kakao.maps.Size(50, 50),
+    origin: new kakao.maps.Point(0, 0),
+    anchor: new kakao.maps.Point(25, 25)
+};
+
+// 모든 마커와 오버레이 표시 함수 호출
+createMarkersAndOverlays('전부');
+
+// 카테고리 변경 시 호출할 함수
 function updateCategory() {
-    // 카테고리 선택 셀렉트 박스에서 선택된 값을 가져옵니다.
-    currentCategory = document.getElementById('categorySelect').value;
+    var categorySelect = document.getElementById('categorySelect');
+    var selectedCategory = categorySelect.options[categorySelect.selectedIndex].value;
+    createMarkersAndOverlays(selectedCategory);
+}
 
-        
-        var positions = Apositions.concat(Bpositions, Cpositions, Dpositions, Epositions, Fpositions, Gpositions, Hpositions);
+// 마커와 오버레이 생성 함수
+function createMarkersAndOverlays(category) {
+    closeCustomOverlay(); // 현재 열려 있는 커스텀 오버레이 닫기
+    markers.forEach(function(marker) {
+        marker.setMap(null); // 기존 마커 제거
+    });
+    markers = [];
 
-        var info = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, HInfo);
+    positions.forEach(function(position, catIndex) {
+        // 선택된 카테고리 또는 전체일 경우 모든 마커 표시
+        if (category === '전부' || position.category === category) {
+            var markerPosition = new kakao.maps.LatLng(position.lat, position.lng);
+            var markerImage = null;
 
-        var markers = [];
-        var currentOverlay = null;
-
-        // 모든 마커와 오버레이를 표시합니다.
-        createMarkersAndOverlays('전부');
-
-        function createMarkersAndOverlays(category) {
-            closeCustomOverlay(); // 현재 열려 있는 커스텀 오버레이 닫기
-            markers.forEach(function(marker) {
-                marker.setMap(null);
-            });
-            markers = [];
-
-            positions.forEach(function(position, catIndex) {
-                if (category === '전부' || position.category === category) {
-                    var markerPosition = new kakao.maps.LatLng(position.lat, position.lng);
-
-                    var marker = new kakao.maps.Marker({
-                        position: markerPosition
-                    });
-                    markers.push(marker);
-
-                    kakao.maps.event.addListener(marker, 'click', function() {
-                        showCustomOverlay(position, catIndex);
-                    });
-
-                    marker.setMap(map);
-                }
-            });
-        }
-
-        function closeCustomOverlay() {
-            if (currentOverlay) {
-                currentOverlay.setMap(null);
-                currentOverlay = null;
+            // 회전형 카테고리일 경우 회전형 마커 이미지 사용
+            if (position.category === '회전형') {
+                markerImage = rotationMarkerImage;
             }
-        }
+            // 고정형 카테고리일 경우 고정형 마커 이미지 사용
+            else if (position.category === '고정형') {
+                markerImage = fixedMarkerImage;
+            }
+            // 기타 카테고리는 기본 마커 이미지 사용 (예시로 기본 이미지를 'defaultMarkerImage'로 가정)
+            else {
+                markerImage = defaultMarkerImage; // 기본 이미지 변수를 설정해야 함
+            }
 
-        function showCustomOverlay(position, catIndex) {
-            // 기존의 커스텀 오버레이를 닫습니다.
-            closeCustomOverlay();
-
-            var overlayContent =
-                '<div class="customOverlay">' +
-                '    <span class="closeBtn" onclick="closeCustomOverlay()">닫기</span>' +
-                '    <div class="title">' + position.category + '</div>' +
-                '    <div class="desc">' +
-                '        <div class="desc-content">' +
-                '            <img src="' + info[catIndex].image + '" width="50" height="50">' +
-                '            <div>' +
-                '                <p>관리번호 : ' + info[catIndex].number + '</p>' +
-                '                <p>주소 : ' + info[catIndex].address + '</p>' +
-                '                <p>회전형 : ' + info[catIndex].rotation + '</p>' +
-                '                <p>고정형 : ' + info[catIndex].fixed + '</p>' +
-                '                <p>상세설명 : ' + info[catIndex].description + '</p>' +
-                '            </div>' +
-                '        </div>' +
-                '    </div>' +
-                '</div>';
-
-            currentOverlay = new kakao.maps.CustomOverlay({
-                content: overlayContent,
-                map: map,
-                position: new kakao.maps.LatLng(position.lat, position.lng),
-                yAnchor: 0.5 // 중앙 정렬
+            var marker = new kakao.maps.Marker({
+                position: markerPosition,
+                image: markerImage // 해당 카테고리의 이미지로 설정
             });
+
+            markers.push(marker);
+
+            // 마커 클릭 시 커스텀 오버레이 표시
+            kakao.maps.event.addListener(marker, 'click', function() {
+                showCustomOverlay(position, catIndex);
+            });
+
+            marker.setMap(map);
         }
+    });
+}
 
-        var categoryButtons = document.getElementById('categoryButtons');
+// 현재 열려 있는 커스텀 오버레이 닫기 함수
+function closeCustomOverlay() {
+    if (currentOverlay) {
+        currentOverlay.setMap(null);
+        currentOverlay = null;
+    }
+}
 
+// 클릭한 마커의 커스텀 오버레이 표시 함수
+function showCustomOverlay(position, catIndex) {
+    closeCustomOverlay(); // 기존의 커스텀 오버레이 닫기
 
+    // 커스텀 오버레이 내용 구성
+    var overlayContent =
+        '<div class="customOverlay">' +
+        '    <span class="closeBtn" onclick="closeCustomOverlay()">닫기</span>' +
+        '    <div class="title">' + position.category + '</div>' +
+        '    <div class="desc">' +
+        '        <div class="desc-content">' +
+        '            <img src="' + info[catIndex].image + '" width="50" height="50">' +
+        '            <div>' +
+        '                <p>관리번호 : ' + info[catIndex].number + '</p>' +
+        '                <p>주소 : ' + info[catIndex].address + '</p>' +
+        '                <p>회전형 : ' + info[catIndex].rotation + '</p>' +
+        '                <p>고정형 : ' + info[catIndex].fixed + '</p>' +
+        '                <p>상세설명 : ' + info[catIndex].description + '</p>' +
+        '            </div>' +
+        '        </div>' +
+        '    </div>' +
+        '</div>';
 
-
+    // 커스텀 오버레이 생성 및 표시
+    currentOverlay = new kakao.maps.CustomOverlay({
+        content: overlayContent,
+        map: map,
+        position: new kakao.maps.LatLng(position.lat, position.lng),
+        yAnchor: 0.5 // 중앙 정렬
+    });
+}
 
 function searchLocation() {
     var input = document.getElementById('searchInput').value;
@@ -997,8 +1031,7 @@ function searchLocation() {
     }
 }
 
-
-
+// UI 토글 함수
 function toggleUI() {
     var categorySelectContainer = document.getElementById('categorySelectContainer');
     var searchContainer = document.getElementById('searchContainer');
@@ -1010,6 +1043,8 @@ function toggleUI() {
     toggleButton.innerText = isHidden ? '숨기기' : '보이기';
 }
 
+// 카테고리 선택 시 업데이트 함수 등록
 document.getElementById('categorySelect').addEventListener('change', updateCategory);
 
+// 초기 카테고리 설정
 updateCategory();

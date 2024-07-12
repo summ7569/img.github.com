@@ -902,18 +902,44 @@ var currentOverlay = null;
 
 // 회전형, 고정형 카테고리의 마커 이미지 정의
 var rotationMarkerImage = {
-    url: 'path/to/rotation-marker.png',
+    url: 'https://github.com/summ7569/summ7569.github.io/blob/master/category1.png?raw=true',
     size: new kakao.maps.Size(50, 50),
     origin: new kakao.maps.Point(0, 0),
     anchor: new kakao.maps.Point(25, 25)
 };
 
 var fixedMarkerImage = {
-    url: 'path/to/fixed-marker.png',
+    url: 'https://github.com/summ7569/summ7569.github.io/blob/master/category2.png?raw=true',
     size: new kakao.maps.Size(50, 50),
     origin: new kakao.maps.Point(0, 0),
     anchor: new kakao.maps.Point(25, 25)
 };
+
+var defaultMarkerImage = {
+          url: 'https://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png',
+    size: new kakao.maps.Size(50, 50),
+    origin: new kakao.maps.Point(0, 0),
+    anchor: new kakao.maps.Point(25, 25)
+};
+
+// 카테고리 컨테이너와 아이템 설정
+var categoryContainer = document.getElementById('categoryContainer');
+var categoryItems = categoryContainer.querySelectorAll('.category-item');
+
+// 각 카테고리 아이템에 클릭 이벤트 핸들러 등록
+categoryItems.forEach(function(item) {
+    item.addEventListener('click', function() {
+        var category = item.getAttribute('data-category');
+        updateCategory(category);
+    });
+});
+
+// updateCategory() 함수 수정
+function updateCategory(selectedCategory) {
+    createMarkersAndOverlays(selectedCategory);
+    // 필요한 경우 추가적으로 UI 업데이트
+}
+
 
 // 모든 마커와 오버레이 표시 함수 호출
 createMarkersAndOverlays('전부');

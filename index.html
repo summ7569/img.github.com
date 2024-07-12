@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kakao6</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Kakao16</title>
+    <link rel="stylesheet" href="styles.css">
 </head>
 <body>
     <div id="mapWrapper">
@@ -13,6 +13,12 @@
             <select id="categoryDropdown"></select>
         </div>
         <button id="toggleUIBtn">UI 숨기기</button>
+    </div>
+
+    <!-- 검색창을 추가합니다. -->
+    <div id="searchForm">
+        <input type="text" id="searchInput" placeholder="위도/경도 또는 관리번호 입력" required>
+        <button type="submit">검색</button>
     </div>
 
     <!-- Kakao Maps SDK 로드 스크립트 -->

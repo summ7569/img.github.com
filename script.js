@@ -972,7 +972,7 @@ function showCustomOverlay(position, index) {
         content: overlayContent,
         map: map,
         position: new kakao.maps.LatLng(position.lat, position.lng),
-        yAnchor: 0.5 // 중앙 정렬
+        yAnchor: 1.5 // 중앙 정렬(0.5) 위쪽 오버레이 (1.5)
     });
 }
 

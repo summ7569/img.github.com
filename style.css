@@ -20,7 +20,7 @@ body {
     position: absolute;
     top: 10px;
     left: 10px;
-    z-index: 1;
+    z-index: 2;
 }
 
 #categoryDropdown {
@@ -84,11 +84,13 @@ body {
     position: absolute;
     top: 10px;
     right: 10px;
-    z-index: 1;
+    z-index: 2;
     padding: 10px;
     border-radius: 5px;
     display: flex;
     align-items: center;
+    background: white;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 #searchForm input[type="text"] {

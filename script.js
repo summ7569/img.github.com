@@ -58,7 +58,7 @@ var AInfo = [
         fixed: 4,
         description: "우체국사거리 2단지 소공원",
         image: "https://via.placeholder.com/150"
-    },,
+    },
         {
         number: "A-GH-6",
         address: "갈현동 산121",
@@ -1321,26 +1321,25 @@ function createMarkersAndOverlays(category) {
             }
         }
 
-// 선택된 카테고리 또는 전체 카테고리인 경우 마커 생성
-if (category === '전부' || info[index].category === category) {
-    if (showMarker) {
-        var markerPosition = new kakao.maps.LatLng(position.lat, position.lng);
-        var markerImage = 'http://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png'; // 기본 마커 이미지
+        // 선택된 카테고리 또는 전체 카테고리인 경우 마커 생성
+        if (category === '전부' || info[index].category === category) {
+            if (showMarker) {
+                var markerPosition = new kakao.maps.LatLng(position.lat, position.lng);
+                var markerImage = 'http://t1.daumcdn.net/localimg/localimages/07/2018/pc/img/marker_spot.png'; // 기본 마커 이미지
 
-        var marker = new kakao.maps.Marker({
-            position: markerPosition,
-            image: new kakao.maps.MarkerImage(markerImage, new kakao.maps.Size(30, 40)) // 기본 마커 이미지 크기 설정
-        });
-        markers.push(marker);
+                var marker = new kakao.maps.Marker({
+                    position: markerPosition,
+                    image: new kakao.maps.MarkerImage(markerImage, new kakao.maps.Size(30, 40)) // 기본 마커 이미지 크기 설정
+                });
+                markers.push(marker);
 
-        kakao.maps.event.addListener(marker, 'click', function() {
-            showCustomOverlay(position, index);
-        });
+                kakao.maps.event.addListener(marker, 'click', function() {
+                    showCustomOverlay(position, index);
+                });
 
-        marker.setMap(map);
-    }
-}
-
+                marker.setMap(map);
+            }
+        }
     });
 }
 
@@ -1437,4 +1436,3 @@ searchForm.addEventListener('submit', function(event) {
         alert('유효한 위도/경도 또는 관리번호를 입력하세요.');
     }
 });
-

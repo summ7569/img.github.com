@@ -1408,12 +1408,16 @@ toggleUIBtn.addEventListener('click', function() {
 });
 
 // 검색창을 추가하여 위도/경도/관리번호로 위치 검색 가능하도록 설정
-var searchForm = document.getElementById('searchForm');
-var searchInput = document.getElementById('searchInput');
+var searchForm = document.createElement('form');
+searchForm.id = 'searchForm';
+searchForm.innerHTML = 
+    '<input type="text" id="searchInput" placeholder="위도/경도 또는 관리번호 입력" required>' +
+    '<button type="submit">검색</button>';
+map.controls[kakao.maps.ControlPosition.TOP_LEFT].push(searchForm);
 
 searchForm.addEventListener('submit', function(event) {
     event.preventDefault();
-    var userInput = searchInput.value.trim();
+    var userInput = document.getElementById('searchInput').value.trim();
 
     var position = null;
     var category = '전부';
@@ -1444,3 +1448,4 @@ searchForm.addEventListener('submit', function(event) {
         alert('유효한 위도/경도 또는 관리번호를 입력하세요.');
     }
 });
+

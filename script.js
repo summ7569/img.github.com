@@ -1039,6 +1039,7 @@ var CInfo = [
         fixed: 4,
         description: "유토피아캐슬 맞은편"
         image: "https://via.placeholder.com/150"
+
     },
     {
         number: "A-MW-32",
@@ -1219,35 +1220,6 @@ var CInfo = [
 ];
 
 var Dpositions = [
- //   { category: '별양동', lat: 37.426, lng: 126.994 },
- //   { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
- //   { category: '별양동', lat: 37.426, lng: 126.994 },
- //   { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
-//    { category: '별양동', lat: 37.426, lng: 126.994 },
       { category: '별양동', lat: 37.426, lng: 126.994 }                     
 ];
 var DInfo = [

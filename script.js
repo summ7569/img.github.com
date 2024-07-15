@@ -1407,6 +1407,7 @@ newSearchForm.addEventListener('submit', function(event) {
 
     var position = null;
     var category = '전부';
+    var markerIndex = -1;
 
     // 위도/경도 형식 확인
     var latLngPattern = /(-?\d+(\.\d+)?),\s*(-?\d+(\.\d+)?)/;
@@ -1421,9 +1422,11 @@ newSearchForm.addEventListener('submit', function(event) {
             return item.number.toLowerCase() === userInput.toLowerCase();
         });
         if (filtered.length > 0) {
-            var index = info.indexOf(filtered[0]);
+            var foundItem = filtered[0];
+            var index = info.indexOf(foundItem);
             position = new kakao.maps.LatLng(positions[index].lat, positions[index].lng);
-            category = filtered[0].category;
+            category = foundItem.category;
+            markerIndex = index;
         }
     }
 
@@ -1433,11 +1436,8 @@ newSearchForm.addEventListener('submit', function(event) {
         createMarkersAndOverlays(category);
 
         // 검색된 위치의 마커가 클릭된 것처럼 커스텀 오버레이 표시
-        var index = positions.findIndex(function(pos) {
-            return pos.lat === position.getLat() && pos.lng === position.getLng();
-        });
-        if (index !== -1) {
-            kakao.maps.event.trigger(markers[index], 'click');
+        if (markerIndex !== -1) {
+            kakao.maps.event.trigger(markers[markerIndex], 'click');
         }
     } else {
         alert('유효한 위도/경도 또는 관리번호를 입력하세요.');
@@ -1448,3 +1448,4 @@ newSearchForm.addEventListener('submit', function(event) {
 newSearchBtn.addEventListener('click', function() {
     newSearchForm.dispatchEvent(new Event('submit'));
 });
+

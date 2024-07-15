@@ -1421,15 +1421,24 @@ newSearchForm.addEventListener('submit', function(event) {
             return item.number.toLowerCase() === userInput.toLowerCase();
         });
         if (filtered.length > 0) {
-            position = new kakao.maps.LatLng(filtered[0].lat, filtered[0].lng);
+            var index = info.indexOf(filtered[0]);
+            position = new kakao.maps.LatLng(positions[index].lat, positions[index].lng);
             category = filtered[0].category;
         }
     }
 
     if (position) {
         map.setCenter(position);
-        map.setLevel(4);
+        map.setLevel(4); // 필요에 따라 줌 레벨을 조정
         createMarkersAndOverlays(category);
+
+        // 검색된 위치의 마커가 클릭된 것처럼 커스텀 오버레이 표시
+        var index = positions.findIndex(function(pos) {
+            return pos.lat === position.getLat() && pos.lng === position.getLng();
+        });
+        if (index !== -1) {
+            showCustomOverlay(positions[index], index);
+        }
     } else {
         alert('유효한 위도/경도 또는 관리번호를 입력하세요.');
     }

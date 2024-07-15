@@ -673,7 +673,7 @@ var BInfo = [
                 address: "주암동 450-20",
                 rotation: 1,
                 fixed: 3,
-                description: "삼포마을을",
+                description: "삼포마을",
                 image: "https://via.placeholder.com/150"
             },
                         {
@@ -681,7 +681,7 @@ var BInfo = [
                 address: "주암동 458",
                 rotation: 1,
                 fixed: 3,
-                description: "삼포마",
+                description: "삼포마을",
                 image: "https://via.placeholder.com/150"
             },
                         {
@@ -861,7 +861,7 @@ var CInfo = [
         address: "문원동 924-7번지",
         rotation: 1,
         fixed: 4,
-        description: "어린이집",
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -869,7 +869,7 @@ var CInfo = [
         address: "문원동 994-2",
         rotation: 1,
         fixed: 0,
-        description: "천궁수라상",
+        description: "천궁수라상 입구",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -885,7 +885,7 @@ var CInfo = [
         address: "문원동 475-5",
         rotation: 0,
         fixed: 3,
-        description: "어린이집",
+        description: "구리안안",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -893,7 +893,7 @@ var CInfo = [
         address: "문원동 389",
         rotation: 1,
         fixed: 2,
-        description: "어린이집",
+        description: "과천대로밑보도앞",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -901,7 +901,7 @@ var CInfo = [
         address: "문원동 311",
         rotation: 1,
         fixed: 1,
-        description: "어린이집",
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -909,7 +909,7 @@ var CInfo = [
         address: "문원동 324-19",
         rotation: 1,
         fixed: 1,
-        description: "어린이집",
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -917,7 +917,7 @@ var CInfo = [
         address: "문원동 365",
         rotation: 1,
         fixed: 2,
-        description: "어린이집",
+        description: "사기막1길 41",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -925,7 +925,7 @@ var CInfo = [
         address: "문원동 332-16",
         rotation: 1,
         fixed: 2,
-        description: "어린이집",
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -933,7 +933,7 @@ var CInfo = [
         address: "문원동 348",
         rotation: 1,
         fixed: 1,
-        description: "어린이집",
+        description: "유아숲숲",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -941,7 +941,7 @@ var CInfo = [
         address: "문원동 57-1",
         rotation: 1,
         fixed: 0,
-        description: "어린이집",
+        description: "문원유아숲",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -949,7 +949,7 @@ var CInfo = [
         address: "문원동 57-1",
         rotation: 1,
         fixed: 0,
-        description: "어린이집",
+        description: "문원유아숲",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -957,7 +957,7 @@ var CInfo = [
         address: "문원동 57-1",
         rotation: 1,
         fixed: 0,
-        description: "어린이집",
+        description: "문원유아",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -973,7 +973,7 @@ var CInfo = [
         address: "문원동 227-2",
         rotation: 1,
         fixed: 2,
-        description: "어린이집",
+        description: "가원미술관 옆",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -981,7 +981,7 @@ var CInfo = [
         address: "문원동 217",
         rotation: 1,
         fixed: 3,
-        description: "어린이집",
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -989,7 +989,7 @@ var CInfo = [
         address: "문원동 199",
         rotation: 1,
         fixed: 1,
-        description: "어린이집",
+        description: "청소년수련관 근처",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -997,7 +997,7 @@ var CInfo = [
         address: "참마을로 10-6",
         rotation: 1,
         fixed: 3,
-        description: "어린이집",
+        description: "예지유치원 앞",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1005,7 +1005,7 @@ var CInfo = [
         address: "문원동 15-168",
         rotation: 1,
         fixed: 3,
-        description: "어린이집",
+        description: "노인복지회관앞",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1013,7 +1013,7 @@ var CInfo = [
         address: "문원동 도로방범(102번지)",
         rotation: 0,
         fixed: 4,
-        description: "어린이집",
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1021,7 +1021,7 @@ var CInfo = [
         address: "문원동 15-170",
         rotation: 0,
         fixed: 4,
-        description: "어린이집",
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1029,7 +1029,7 @@ var CInfo = [
         address: "문원동 15-96",
         rotation: 1,
         fixed: 1,
-        description: "어린이집",
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1037,7 +1037,7 @@ var CInfo = [
         address: "문원동 15-95",
         rotation: 1,
         fixed: 4,
-        description: "어린이집",
+        description: "유토피아캐슬 맞은편"
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1045,7 +1045,7 @@ var CInfo = [
         address: "문원동 15-83",
         rotation: 1,
         fixed: 5,
-        description: "어린이집",
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1053,7 +1053,7 @@ var CInfo = [
         address: "문원동 15-22,33",
         rotation: 1,
         fixed: 5,
-        description: "어린이집",
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1061,7 +1061,7 @@ var CInfo = [
         address: "문원동 15-39",
         rotation: 1,
         fixed: 5,
-        description: "어린이집",
+        description: "이주1단지",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1069,7 +1069,7 @@ var CInfo = [
         address: "문원동 공원마을6길 21번지",
         rotation: 1,
         fixed: 5,
-        description: "어린이집",
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1077,7 +1077,7 @@ var CInfo = [
         address: "문원동 15-146",
         rotation: 1,
         fixed: 4,
-        description: "어린이집",
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1085,7 +1085,7 @@ var CInfo = [
         address: "문원동 142",
         rotation: 1,
         fixed: 2,
-        description: "어린이집",
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1093,7 +1093,7 @@ var CInfo = [
         address: "문원동 115-21",
         rotation: 1,
         fixed: 3,
-        description: "어린이집",
+        description: "시립문원어린이집",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1101,7 +1101,7 @@ var CInfo = [
         address: "문원동 115",
         rotation: 1,
         fixed: 3,
-        description: "어린이집",
+        description: "시립문원어린이집 (선거관리위원회 옆)",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1109,7 +1109,7 @@ var CInfo = [
         address: "문원동 115-113",
         rotation: 1,
         fixed: 1,
-        description: "어린이집",
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1117,7 +1117,7 @@ var CInfo = [
         address: "문원동 115-81",
         rotation: 1,
         fixed: 4,
-        description: "어린이집",
+        description: "시립문원어린이집",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1125,7 +1125,7 @@ var CInfo = [
         address: "문원동 115-174",
         rotation: 1,
         fixed: 5,
-        description: "어린이집",
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1133,7 +1133,7 @@ var CInfo = [
         address: "문원동 115-214",
         rotation: 1,
         fixed: 2,
-        description: "어린이집",
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1141,7 +1141,7 @@ var CInfo = [
         address: "문원동 150-1 대로",
         rotation: 1,
         fixed: 2,
-        description: "어린이집",
+        description: "이주2단지",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1149,7 +1149,7 @@ var CInfo = [
         address: "문원동 115-143",
         rotation: 1,
         fixed: 4,
-        description: "어린이집",
+        description: "이주2단지",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1157,7 +1157,7 @@ var CInfo = [
         address: "문원동 115-232",
         rotation: 1,
         fixed: 3,
-        description: "어린이집",
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1165,7 +1165,7 @@ var CInfo = [
         address: "문원동 155-3",
         rotation: 1,
         fixed: 2,
-        description: "어린이집",
+        description: "문원동공원 (이상음원 시스템)",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1173,7 +1173,7 @@ var CInfo = [
         address: "문원동 115-363",
         rotation: 1,
         fixed: 5,
-        description: "어린이집",
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1181,7 +1181,7 @@ var CInfo = [
         address: "문원동 115-249",
         rotation: 1,
         fixed: 4,
-        description: "어린이집",
+        description: "이주2단지지",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1189,7 +1189,7 @@ var CInfo = [
         address: "문원동 115-387",
         rotation: 1,
         fixed: 3,
-        description: "어린이집",
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1197,7 +1197,7 @@ var CInfo = [
         address: "문원동 115-419",
         rotation: 1,
         fixed: 0,
-        description: "어린이집",
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1205,7 +1205,7 @@ var CInfo = [
         address: "막계동 1013-7",
         rotation: 1,
         fixed: 2,
-        description: "어린이집",
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
@@ -1213,7 +1213,7 @@ var CInfo = [
         address: "막계동 324-22",
         rotation: 1,
         fixed: 0,
-        description: "어린이집",
+        description: "대공원 나들길",
         image: "https://via.placeholder.com/150"
     }
 ];

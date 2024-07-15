@@ -1219,7 +1219,36 @@ var CInfo = [
 ];
 
 var Dpositions = [
-    { category: '별양동', lat: 37.426, lng: 126.994 }
+ //   { category: '별양동', lat: 37.426, lng: 126.994 },
+ //   { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+ //   { category: '별양동', lat: 37.426, lng: 126.994 },
+ //   { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+//    { category: '별양동', lat: 37.426, lng: 126.994 },
+      { category: '별양동', lat: 37.426, lng: 126.994 }                     
 ];
 var DInfo = [
     {

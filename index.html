@@ -3,26 +3,23 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kakao2</title>
+    <title>Kakao10</title>
     <link rel="stylesheet" href="style.css">
+    <!-- Kakao Maps SDK 로드 스크립트 -->
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6&libraries=services"></script>
 </head>
 <body>
     <div id="mapWrapper">
         <div id="map"></div>
-        <div id="categoryDropdownContainer">
-            <select id="categoryDropdown"></select>
-        </div>
     </div>
-
-    <!-- 새로운 검색창을 오른쪽 상단에 추가합니다. -->
-    <div id="newSearchForm" style="position: absolute; top: 20px; right: 20px;">
-        <input type="text" id="newSearchInput" placeholder="위도/경도 또는 관리번호 입력" required>
-        <button id="newSearchBtn">검색</button>
+    <div id="categoryDropdownContainer">
+        <select id="categoryDropdown"></select>
     </div>
-
-    <!-- Kakao Maps SDK 로드 스크립트 -->
-    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6&libraries=services"></script>
-    <!-- Kakao Maps API 로드 이후에 script.js 실행 -->
+    <!-- 검색창을 오른쪽 상단에 추가합니다. -->
+    <div id="searchForm">
+        <input type="text" id="searchInput" placeholder="위도/경도 또는 관리번호 입력" required>
+        <button type="submit">검색</button>
+    </div>
     <script src="script.js"></script>
 </body>
 </html>

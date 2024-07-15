@@ -1402,7 +1402,7 @@ searchForm.id = 'searchForm';
 searchForm.innerHTML = 
     '<input type="text" id="searchInput" placeholder="위도/경도 또는 관리번호 입력" required>' +
     '<button type="submit">검색</button>';
-map.controls[kakao.maps.ControlPosition.TOP_LEFT].push(searchForm);
+map.controls[kakao.maps.ControlPosition.TOP_RIGHT].push(searchForm); // 지도 오른쪽 위에 위치하도록 수정
 
 searchForm.addEventListener('submit', function(event) {
     event.preventDefault();

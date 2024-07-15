@@ -1396,18 +1396,6 @@ categoryDropdown.addEventListener('change', function() {
     createMarkersAndOverlays(selectedCategory);
 });
 
-// UI 토글 버튼 클릭 이벤트 추가
-toggleUIBtn.addEventListener('click', function() {
-    var mapWrapper = document.getElementById('mapWrapper');
-    if (mapWrapper.classList.contains('hideUI')) {
-        mapWrapper.classList.remove('hideUI');
-        toggleUIBtn.textContent = 'UI 숨기기';
-    } else {
-        mapWrapper.classList.add('hideUI');
-        toggleUIBtn.textContent = 'UI 보이기';
-    }
-});
-
 // 검색창을 추가하여 위도/경도/관리번호로 위치 검색 가능하도록 설정
 var searchForm = document.createElement('form');
 searchForm.id = 'searchForm';

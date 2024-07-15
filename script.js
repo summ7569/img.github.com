@@ -1437,7 +1437,7 @@ newSearchForm.addEventListener('submit', function(event) {
             return pos.lat === position.getLat() && pos.lng === position.getLng();
         });
         if (index !== -1) {
-            showCustomOverlay(positions[index], index);
+            kakao.maps.event.trigger(markers[index], 'click');
         }
     } else {
         alert('유효한 위도/경도 또는 관리번호를 입력하세요.');

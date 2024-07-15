@@ -1439,5 +1439,3 @@ newSearchForm.addEventListener('submit', function(event) {
 newSearchBtn.addEventListener('click', function() {
     newSearchForm.dispatchEvent(new Event('submit'));
 });
-
-});

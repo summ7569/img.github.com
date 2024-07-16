@@ -129,7 +129,6 @@ newSearchForm.addEventListener('submit', function(event) {
     var userInput = newSearchInput.value.trim();
 
     var position = null;
-    var category = '전부';
     var markerIndex = -1;
 
     // 위도/경도 형식 확인
@@ -148,7 +147,6 @@ newSearchForm.addEventListener('submit', function(event) {
             var foundItem = filtered[0];
             var index = allInfo.indexOf(foundItem);
             position = new kakao.maps.LatLng(allPositions[index].lat, allPositions[index].lng);
-            category = foundItem.category;
             markerIndex = index;
         }
     }
@@ -156,7 +154,9 @@ newSearchForm.addEventListener('submit', function(event) {
     if (position) {
         map.setCenter(position);
         map.setLevel(4); // 필요에 따라 줌 레벨을 조정
-        createMarkersAndOverlays(category);
+
+        // 모든 마커를 다시 그리기
+        createMarkersAndOverlays('전부');
 
         // 검색된 위치의 마커가 클릭된 것처럼 커스텀 오버레이 표시
         if (markerIndex !== -1) {

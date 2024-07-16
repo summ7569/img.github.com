@@ -1,4 +1,7 @@
-// 카테고리별 데이터를 모두 불러옵니다.
+// 카테고리 배열 수정
+var categories = ['갈현동', '과천동', '문원동', '별양동', '부림동', '주암동', '중앙동', '기타', '회전형', '고정형', '전부'];
+
+// 모든 마커와 오버레이를 표시할 데이터 설정
 const allPositions = Apositions.concat(Bpositions, Cpositions, Dpositions, Epositions, Fpositions, Gpositions, Hpositions);
 const allInfo = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, HInfo);
 
@@ -9,20 +12,18 @@ var mapOption = {
 };
 var map = new kakao.maps.Map(mapContainer, mapOption);
 
-var categories = ['갈현동', '과천동', '문원동', '별양동', '부림동', '주암동', '중앙동', '기타', '회전형', '고정형', '전부'];
-
 var markers = [];
 var currentOverlay = null;
 
-// 모든 마커와 오버레이를 표시합니다.
+// 모든 마커와 오버레이를 표시하는 함수 호출
 createMarkersAndOverlays('전부');
 
 function createMarkersAndOverlays(category) {
     closeCustomOverlay(); // 현재 열려 있는 커스텀 오버레이 닫기
     markers.forEach(function(marker) {
-        marker.setMap(null);
+        marker.setMap(null); // 지도에서 마커 제거
     });
-    markers = [];
+    markers = []; // 마커 배열 초기화
 
     allPositions.forEach(function(position, index) {
         var showMarker = true;
@@ -56,7 +57,7 @@ function createMarkersAndOverlays(category) {
                     showCustomOverlay(position, index);
                 });
 
-                marker.setMap(map);
+                marker.setMap(map); // 마커 지도에 표시
             }
         }
     });
@@ -64,13 +65,13 @@ function createMarkersAndOverlays(category) {
 
 function closeCustomOverlay() {
     if (currentOverlay) {
-        currentOverlay.setMap(null);
+        currentOverlay.setMap(null); // 오버레이 지도에서 제거
         currentOverlay = null;
     }
 }
 
 function showCustomOverlay(position, index) {
-    closeCustomOverlay();
+    closeCustomOverlay(); // 현재 열려 있는 커스텀 오버레이 닫기
 
     var overlayContent =
         '<div class="customOverlay">' +

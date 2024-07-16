@@ -92,9 +92,9 @@ body {
     border-radius: 5px;
     display: flex;
     align-items: center;
-    background: white;
+     background: rgba(255, 255, 255, 0.9); /* 투명한 흰색 배경 */
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    width: 250px; /* 검색창 너비 설정 */
+    width: 200px; /* 검색창 너비 설정 */
 }
 
 #newSearchForm input[type="text"] {
@@ -107,7 +107,7 @@ body {
 #newSearchForm button {
     padding: 6px 10px;
     font-size: 14px;
-    background-color: #007BFF;
+    background-color: rgba(255, 255, 255, 0.9); /* 투명한 흰색 배경 */
     color: #fff;
     border: none;
     cursor: pointer;

@@ -138,6 +138,14 @@ newSearchForm.addEventListener('submit', function(event) {
         var lat = parseFloat(match[1]);
         var lng = parseFloat(match[3]);
         position = new kakao.maps.LatLng(lat, lng);
+
+        // 위도와 경도로 마커 찾기
+        allPositions.forEach(function(pos, index) {
+            if (pos.lat === lat && pos.lng === lng) {
+                markerIndex = index;
+                return false; // 루프 종료
+            }
+        });
     } else {
         // 관리번호 검색
         var filtered = allInfo.filter(function(item) {
@@ -161,6 +169,24 @@ newSearchForm.addEventListener('submit', function(event) {
         // 검색된 위치의 마커가 클릭된 것처럼 커스텀 오버레이 표시
         if (markerIndex !== -1) {
             kakao.maps.event.trigger(markers[markerIndex], 'click');
+        } else {
+            // 해당 위치에 마커가 없는 경우, 임시 마커 생성 및 오버레이 표시
+            var tempMarker = new kakao.maps.Marker({
+                position: position,
+                map: map
+            });
+            var tempOverlay = new kakao.maps.CustomOverlay({
+                content: '<div class="customOverlay">해당 위치에 정보가 없습니다.</div>',
+                map: map,
+                position: position,
+                yAnchor: 1.1
+            });
+
+            // 3초 후에 임시 마커와 오버레이 제거
+            setTimeout(function() {
+                tempMarker.setMap(null);
+                tempOverlay.setMap(null);
+            }, 3000);
         }
     } else {
         alert('유효한 위도/경도 또는 관리번호를 입력하세요.');

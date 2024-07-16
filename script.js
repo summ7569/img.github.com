@@ -102,12 +102,15 @@ function showCustomOverlay(position, index) {
 var categoryDropdown = document.getElementById('categoryDropdown');
 
 // 드롭다운 형식의 카테고리 목록 생성 및 클릭 이벤트 추가
+categoryDropdown.innerHTML = ''; // 기존 옵션 초기화
+
 categories.forEach(function(category) {
     var option = document.createElement('option');
     option.value = category;
     option.textContent = category;
     categoryDropdown.appendChild(option);
 });
+
 
 categoryDropdown.addEventListener('change', function() {
     var selectedCategory = categoryDropdown.value;

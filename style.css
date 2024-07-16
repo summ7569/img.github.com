@@ -1,162 +1,158 @@
-/* 공통 스타일 */
-body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    height: 100vh;
-}
 
-#map {
-    width: 100%;
-    height: 100%;
-}
+        /* 공통 스타일 */
+        html, body {
+            width: 100%;
+            height: 100%;
+            margin: 0;
+            padding: 0;
+            font-family: Arial, sans-serif;
+        }
 
-#mapWrapper {
-    position: relative;
-    width: 100%;
-    height: 100vh; /* 브라우저 창의 높이에서 20px을 뺀 값 */
-    max-heigh: 100vh;
-    margin-bottom: 10px;
-}
+        #mapWrapper {
+            position: relative;
+            width: 100%;
+            height: 100%;
+        }
 
-#categoryDropdownContainer {
-    position: absolute;
-    top: 10px;
-    left: 10px;
-    z-index: 2; /* 드롭다운의 z-index */
-}
+        #map {
+            width: 100%;
+            height: 100%;
+        }
 
-#categoryDropdown {
-    padding: 5px;
-    font-size: 16px;
-    width: 150px; /* 드롭다운 너비 조정 */
-}
+        #categoryDropdownContainer {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            z-index: 2; /* 드롭다운의 z-index */
+            background: transparent; /* 배경 투명 */
+        }
 
-.customOverlay {
-    position: relative;
-    background: white;
-    border: 1px solid #ccc;
-    padding: 10px;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-    border-radius: 5px;
-    max-width: 600px; /* 최대 너비 설정 */
-}
+        #categoryDropdown {
+            padding: 5px;
+            font-size: 16px;
+            width: 150px; /* 드롭다운 너비 조정 */
+            background: transparent; /* 배경 투명 */
+            border: 1px solid #ccc;
+            color: #333;
+        }
 
-.customOverlay .closeBtn {
-    position: absolute;
-    top: 10px;
-    right: 10px;
-    cursor: pointer;
-    font-size: 16px;
-}
+        .customOverlay {
+            position: relative;
+            background: rgba(255, 255, 255, 0.8); /* 반투명 배경 */
+            border: 1px solid #ccc;
+            padding: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            max-width: 600px; /* 최대 너비 설정 */
+        }
 
-.customOverlay .title {
-    font-size: 16px;
-    font-weight: bold;
-    margin-bottom: 10px;
-}
+        .customOverlay .closeBtn {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            cursor: pointer;
+            font-size: 16px;
+        }
 
-.customOverlay .desc {
-    display: flex;
-    align-items: center;
-}
+        .customOverlay .title {
+            font-size: 16px;
+            font-weight: bold;
+            margin-bottom: 10px;
+        }
 
-.customOverlay .desc-content {
-    display: flex;
-}
+        .customOverlay .desc {
+            display: flex;
+            align-items: center;
+        }
 
-.customOverlay .desc-content img {
-    width: 150px;
-    height: 150px;
-    margin-right: 10px;
-}
+        .customOverlay .desc-content {
+            display: flex;
+        }
 
-.customOverlay .desc-content div {
-    flex: 1;
-}
+        .customOverlay .desc-content img {
+            width: 150px;
+            height: 150px;
+            margin-right: 10px;
+        }
 
-.closeBtn {
-    position: absolute;
-    top: 5px;
-    right: 5px;
-    cursor: pointer;
-    font-size: 14px;
-    color: #555;
-}
+        .customOverlay .desc-content div {
+            flex: 1;
+        }
 
-#newSearchForm {
-    position: absolute;
-    top: 10px;  /* 상단 여백을 설정하여 검색창을 위로 이동 */
-    right: 10px;  /* 오른쪽 여백을 설정하여 검색창을 오른쪽으로 이동 */
-    z-index: 3;  /* 검색창의 z-index를 높게 설정 */
-    padding: 10px;
-    border-radius: 5px;
-    display: flex;
-    align-items: center;
-    background: white;
-    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
-}
+        .closeBtn {
+            position: absolute;
+            top: 5px;
+            right: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            color: #555;
+        }
 
-#newSearchForm input[type="text"] {
-    padding: 5px;
-    font-size: 14px;
-    width: 200px;
-    border: 1px solid #ccc;
-}
+        #newSearchForm {
+            position: absolute;
+            top: 10px;  /* 상단 여백을 설정하여 검색창을 위로 이동 */
+            right: 10px;  /* 오른쪽 여백을 설정하여 검색창을 오른쪽으로 이동 */
+            z-index: 3;  /* 검색창의 z-index를 높게 설정 */
+            display: flex;
+            align-items: center;
+            background: transparent; /* 배경 투명 */
+        }
 
-#newSearchForm button {
-    padding: 6px 10px;
-    font-size: 14px;
-    background-color: #007BFF;
-    color: #fff;
-    border: none;
-    cursor: pointer;
-}
+        #newSearchForm input[type="text"] {
+            padding: 5px;
+            font-size: 14px;
+            width: 200px;
+            border: 1px solid #ccc;
+            background: white; /* 텍스트 입력창 배경 흰색 */
+        }
 
-#newSearchForm button:hover {
-    background-color: #0056b3;
-}
+        #newSearchForm button {
+            padding: 6px 10px;
+            font-size: 14px;
+            background-color: #007BFF;
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
 
-/* 모바일 환경에서 적용할 스타일 */
-@media screen and (max-width: 728px) {
-    #mapWrapper {
-        height: 100vh; /* 모바일 환경에서 높이 조정 */
-        max-height: 100vh;
-        margin-bottom: 5px; /* 모바일 환경에서 마진 조정 */
-    }
+        #newSearchForm button:hover {
+            background-color: #0056b3;
+        }
 
-    #categoryDropdownContainer {
-        top: 5px; /* 모바일 환경에서 상단 여백 조정 */
-        left: 5px; /* 모바일 환경에서 왼쪽 여백 조정 */
-    }
+        /* 모바일 환경에서 적용할 스타일 */
+        @media screen and (max-width: 728px) {
+            #categoryDropdownContainer {
+                top: 5px; /* 모바일 환경에서 상단 여백 조정 */
+                left: 5px; /* 모바일 환경에서 왼쪽 여백 조정 */
+            }
 
-    #categoryDropdown {
-        width: 100%; /* 모바일 환경에서 드롭다운 너비 조정 */
-        max-width: 250px; /* 모바일 환경에서 최대 너비 설정 */
-    }
+            #categoryDropdown {
+                width: 100%; /* 모바일 환경에서 드롭다운 너비 조정 */
+                max-width: 250px; /* 모바일 환경에서 최대 너비 설정 */
+            }
 
-    .customOverlay {
-        max-width: 100%; /* 모바일 환경에서 최대 너비 설정 */
-    }
+            .customOverlay {
+                max-width: 100%; /* 모바일 환경에서 최대 너비 설정 */
+            }
 
-    .customOverlay .desc-content img {
-        width: 100%; /* 모바일 환경에서 이미지 너비 조정 */
-        max-width: none; /* 모바일 환경에서 최대 너비 제거 */
-        height: auto; /* 이미지 높이 자동 설정 */
-        margin-right: 0; /* 모바일 환경에서 여백 제거 */
-    }
+            .customOverlay .desc-content img {
+                width: 100%; /* 모바일 환경에서 이미지 너비 조정 */
+                max-width: none; /* 모바일 환경에서 최대 너비 제거 */
+                height: auto; /* 이미지 높이 자동 설정 */
+                margin-right: 0; /* 모바일 환경에서 여백 제거 */
+            }
 
-    #newSearchForm {
-        width: 100%; /* 모바일 환경에서 검색창 너비 설정 */
-        max-width: none; /* 모바일 환경에서 최대 너비 제거 */
-        top: auto; /* 모바일 환경에서 기존의 top 속성 제거 */
-        bottom: 10px; /* 모바일 환경에서 하단 여백 설정 */
-        right: 0; /* 모바일 환경에서 오른쪽 정렬 */
-    }
+            #newSearchForm {
+                width: 100%; /* 모바일 환경에서 검색창 너비 설정 */
+                max-width: none; /* 모바일 환경에서 최대 너비 제거 */
+                top: auto; /* 모바일 환경에서 기존의 top 속성 제거 */
+                bottom: 10px; /* 모바일 환경에서 하단 여백 설정 */
+                right: 0; /* 모바일 환경에서 오른쪽 정렬 */
+            }
 
-    #newSearchForm input[type="text"] {
-        width: 100%; /* 모바일 환경에서 입력창 너비 설정 */
-        max-width: none; /* 모바일 환경에서 최대 너비 제거 */
-        margin-bottom: 5px; /* 모바일 환경에서 여백 설정 */
-    }
-}
+            #newSearchForm input[type="text"] {
+                width: 100%; /* 모바일 환경에서 입력창 너비 설정 */
+                max-width: none; /* 모바일 환경에서 최대 너비 제거 */
+                margin-bottom: 5px; /* 모바일 환경에서 여백 설정 */
+            }
+        }

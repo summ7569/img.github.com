@@ -1,9 +1,9 @@
-/* 기본 스타일 */
+/* 공통 스타일 */
 body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    height: 100%; /* Body도 높이를 100%로 설정 */
+    height: 100%;
 }
 
 #map {
@@ -28,6 +28,7 @@ body {
 #categoryDropdown {
     padding: 5px;
     font-size: 16px;
+    width: 150px; /* 드롭다운 너비 조정 */
 }
 
 .customOverlay {
@@ -84,21 +85,22 @@ body {
 
 #newSearchForm {
     position: absolute;
-    top: 10px;  /* 상단 여백을 설정하여 검색창을 위로 이동 */
-    right: 10px;  /* 오른쪽 여백을 설정하여 검색창을 오른쪽으로 이동 */
-    z-index: 3;  /* 검색창의 z-index를 높게 설정 */
+    top: 10px;
+    right: 10px;
+    z-index: 3;
     padding: 10px;
     border-radius: 5px;
     display: flex;
     align-items: center;
     background: white;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 250px; /* 검색창 너비 설정 */
 }
 
 #newSearchForm input[type="text"] {
     padding: 5px;
     font-size: 14px;
-    width: 200px;
+    width: 150px; /* 입력창 너비 설정 */
     border: 1px solid #ccc;
 }
 
@@ -115,34 +117,45 @@ body {
     background-color: #0056b3;
 }
 
-/* 모바일 스타일 */
-@media (max-width: 768px) {
+/* 모바일 환경에서 적용할 스타일 */
+@media screen and (max-width: 768px) {
     #mapWrapper {
-        height: calc(100vh - 120px); /* 모바일 화면에서는 높이를 더 작게 설정합니다. */
+        height: calc(100vh - 50px); /* 모바일 환경에서 높이 조정 */
+        margin-bottom: 5px; /* 모바일 환경에서 마진 조정 */
     }
 
     #categoryDropdownContainer {
-        top: 60px; /* 모바일에서 드롭다운 위치를 조정합니다. */
-        left: 10px;
+        top: 5px; /* 모바일 환경에서 상단 여백 조정 */
+        left: 5px; /* 모바일 환경에서 왼쪽 여백 조정 */
+    }
+
+    #categoryDropdown {
+        width: 100%; /* 모바일 환경에서 드롭다운 너비 조정 */
+        max-width: 250px; /* 모바일 환경에서 최대 너비 설정 */
     }
 
     .customOverlay {
-        max-width: 100%; /* 오버레이의 최대 너비를 화면 크기에 맞추어 조정합니다. */
-        width: 100%; /* 오버레이의 너비를 화면 크기에 맞추어 조정합니다. */
+        max-width: 100%; /* 모바일 환경에서 최대 너비 설정 */
     }
 
     .customOverlay .desc-content img {
-        width: 100px; /* 이미지 크기를 모바일 화면에 맞게 조정합니다. */
-        height: 100px;
+        width: 100%; /* 모바일 환경에서 이미지 너비 조정 */
+        max-width: none; /* 모바일 환경에서 최대 너비 제거 */
+        height: auto; /* 이미지 높이 자동 설정 */
+        margin-right: 0; /* 모바일 환경에서 여백 제거 */
     }
 
     #newSearchForm {
-        top: 10px; /* 검색창 위치를 모바일에 맞게 조정합니다. */
-        right: 10px;
-        padding: 5px; /* 모바일에서 패딩을 작게 설정합니다. */
+        width: 100%; /* 모바일 환경에서 검색창 너비 설정 */
+        max-width: none; /* 모바일 환경에서 최대 너비 제거 */
+        top: auto; /* 모바일 환경에서 기존의 top 속성 제거 */
+        bottom: 10px; /* 모바일 환경에서 하단 여백 설정 */
+        right: 0; /* 모바일 환경에서 오른쪽 정렬 */
     }
 
     #newSearchForm input[type="text"] {
-        width: 150px; /* 검색 입력 필드의 너비를 조정합니다. */
+        width: 100%; /* 모바일 환경에서 입력창 너비 설정 */
+        max-width: none; /* 모바일 환경에서 최대 너비 제거 */
+        margin-bottom: 5px; /* 모바일 환경에서 여백 설정 */
     }
 }

@@ -1,7 +1,4 @@
-// 카테고리 배열 수정
-var categories = ['갈현동', '과천동', '문원동', '별양동', '부림동', '주암동', '중앙동', '기타', '회전형', '고정형', '전부'];
-
-// 모든 마커와 오버레이를 표시할 데이터 설정
+// 카테고리별 데이터를 모두 불러옵니다.
 const allPositions = Apositions.concat(Bpositions, Cpositions, Dpositions, Epositions, Fpositions, Gpositions, Hpositions);
 const allInfo = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, HInfo);
 
@@ -12,18 +9,20 @@ var mapOption = {
 };
 var map = new kakao.maps.Map(mapContainer, mapOption);
 
+var categories = ['갈현동', '과천동', '문원동', '별양동', '부림동', '주암동', '중앙동', '기타', '회전형', '고정형', '전부'];
+
 var markers = [];
 var currentOverlay = null;
 
-// 모든 마커와 오버레이를 표시하는 함수 호출
+// 모든 마커와 오버레이를 표시합니다.
 createMarkersAndOverlays('전부');
 
 function createMarkersAndOverlays(category) {
     closeCustomOverlay(); // 현재 열려 있는 커스텀 오버레이 닫기
     markers.forEach(function(marker) {
-        marker.setMap(null); // 지도에서 마커 제거
+        marker.setMap(null);
     });
-    markers = []; // 마커 배열 초기화
+    markers = [];
 
     allPositions.forEach(function(position, index) {
         var showMarker = true;
@@ -57,7 +56,7 @@ function createMarkersAndOverlays(category) {
                     showCustomOverlay(position, index);
                 });
 
-                marker.setMap(map); // 마커 지도에 표시
+                marker.setMap(map);
             }
         }
     });
@@ -65,13 +64,13 @@ function createMarkersAndOverlays(category) {
 
 function closeCustomOverlay() {
     if (currentOverlay) {
-        currentOverlay.setMap(null); // 오버레이 지도에서 제거
+        currentOverlay.setMap(null);
         currentOverlay = null;
     }
 }
 
 function showCustomOverlay(position, index) {
-    closeCustomOverlay(); // 현재 열려 있는 커스텀 오버레이 닫기
+    closeCustomOverlay();
 
     var overlayContent =
         '<div class="customOverlay">' +
@@ -102,15 +101,12 @@ function showCustomOverlay(position, index) {
 var categoryDropdown = document.getElementById('categoryDropdown');
 
 // 드롭다운 형식의 카테고리 목록 생성 및 클릭 이벤트 추가
-categoryDropdown.innerHTML = ''; // 기존 옵션 초기화
-
 categories.forEach(function(category) {
     var option = document.createElement('option');
     option.value = category;
     option.textContent = category;
     categoryDropdown.appendChild(option);
 });
-
 
 categoryDropdown.addEventListener('change', function() {
     var selectedCategory = categoryDropdown.value;

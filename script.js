@@ -56,6 +56,11 @@ function createMarkersAndOverlays(category) {
                     showCustomOverlay(position, index);
                 });
 
+                // 모바일 터치 이벤트 처리 추가
+                kakao.maps.event.addListener(marker, 'touchstart', function() {
+                    showCustomOverlay(position, index);
+                });
+
                 marker.setMap(map);
             }
         }

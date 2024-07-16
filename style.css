@@ -2,7 +2,7 @@ body {
     font-family: Arial, sans-serif;
     margin: 0;
     padding: 0;
-    height: 100%; /* Body도 높이를 100%로 설정 */
+    height: 100%;
 }
 
 #map {
@@ -21,12 +21,13 @@ body {
     position: absolute;
     top: 10px;
     left: 10px;
-    z-index: 2; /* 드롭다운의 z-index */
+    z-index: 2;
 }
 
 #categoryDropdown {
     padding: 5px;
     font-size: 16px;
+    width: 150px; /* 모바일에서 드롭다운 너비 조정 */
 }
 
 .customOverlay {
@@ -36,7 +37,8 @@ body {
     padding: 10px;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
-    max-width: 600px; /* 최대 너비 설정 */
+    width: 100%; /* 모바일에서 오버레이 최대 너비 조정 */
+    max-width: 100%; /* 모바일에서 오버레이 최대 너비 조정 */
 }
 
 .customOverlay .closeBtn {
@@ -56,16 +58,20 @@ body {
 .customOverlay .desc {
     display: flex;
     align-items: center;
+    flex-wrap: wrap; /* 모바일에서 내용 줄바꿈 처리 */
 }
 
 .customOverlay .desc-content {
     display: flex;
+    flex-wrap: wrap; /* 모바일에서 내용 줄바꿈 처리 */
 }
 
 .customOverlay .desc-content img {
-    width: 150px;
-    height: 150px;
-    margin-right: 10px;
+    width: 100%; /* 모바일에서 이미지 너비 조정 */
+    max-width: 100%; /* 모바일에서 이미지 최대 너비 조정 */
+    height: auto; /* 모바일에서 이미지 높이 자동 설정 */
+    margin-right: 0; /* 모바일에서 여백 제거 */
+    margin-bottom: 10px; /* 모바일에서 여백 추가 */
 }
 
 .customOverlay .desc-content div {
@@ -83,22 +89,25 @@ body {
 
 #newSearchForm {
     position: absolute;
-    top: 10px;  /* 상단 여백을 설정하여 검색창을 위로 이동 */
-    right: 10px;  /* 오른쪽 여백을 설정하여 검색창을 오른쪽으로 이동 */
-    z-index: 3;  /* 검색창의 z-index를 높게 설정 */
+    top: 10px;
+    right: 10px;
+    z-index: 3;
     padding: 10px;
     border-radius: 5px;
     display: flex;
     align-items: center;
     background: white;
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    width: 100%; /* 모바일에서 검색창 최대 너비 조정 */
 }
 
 #newSearchForm input[type="text"] {
     padding: 5px;
     font-size: 14px;
-    width: 200px;
+    width: 100%; /* 모바일에서 입력창 너비 조정 */
+    max-width: 200px; /* 모바일에서 최대 너비 설정 */
     border: 1px solid #ccc;
+    margin-right: 10px; /* 모바일에서 여백 추가 */
 }
 
 #newSearchForm button {

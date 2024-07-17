@@ -35,7 +35,7 @@ var DInfo = [
         number: "A-BY-8",
         address: "별양동 1-15",
         rotation: 1,
-        fixed: 3,
+        fixed: 5,
         description: "소방서삼거리",
         image: "https://via.placeholder.com/150"
     },
@@ -51,7 +51,7 @@ var DInfo = [
         number: "A-BY-10",
         address: "별양동 7",
         rotation: 1,
-        fixed: 3,
+        fixed: 1,
         description: "4단지후문405동 상가방향",
         image: "https://via.placeholder.com/150"
     },
@@ -59,7 +59,7 @@ var DInfo = [
         number: "A-BY-12",
         address: "별양동 2-2",
         rotation: 1,
-        fixed: 3,
+        fixed: 6,
         description: "중앙공원 입구 상가 앞",
         image: "https://via.placeholder.com/150"
     },
@@ -67,7 +67,7 @@ var DInfo = [
         number: "A-BY-13",
         address: "별양동 2-5",
         rotation: 1,
-        fixed: 3,
+        fixed: 1,
         description: "중앙공원 내부",
         image: "https://via.placeholder.com/150"
     },
@@ -75,7 +75,7 @@ var DInfo = [
         number: "A-BY-14",
         address: "별양동 5단지",
         rotation: 1,
-        fixed: 3,
+        fixed: 1,
         description: "505동 ~ 506동 사이",
         image: "https://via.placeholder.com/150"
     },
@@ -83,7 +83,7 @@ var DInfo = [
         number: "A-BY-15",
         address: "별양동 청계초",
         rotation: 1,
-        fixed: 3,
+        fixed: 2,
         description: "청계초 진입로 입구",
         image: "https://via.placeholder.com/150"
     },
@@ -91,7 +91,7 @@ var DInfo = [
         number: "A-BY-17",
         address: "별양동 12",
         rotation: 1,
-        fixed: 3,
+        fixed: 0,
         description: "중앙공원 과천역 5번출구 앞",
         image: "https://via.placeholder.com/150"
     },
@@ -107,7 +107,7 @@ var DInfo = [
         number: "A-BY-19",
         address: "별양동 84-2",
         rotation: 1,
-        fixed: 3,
+        fixed: 6,
         description: "중앙공원 내 물놀이터",
         image: "https://via.placeholder.com/150"
     },
@@ -115,7 +115,7 @@ var DInfo = [
         number: "A-BY-20",
         address: "별양동 3-1",
         rotation: 1,
-        fixed: 3,
+        fixed: 0,
         description: "7-2단지 소공원",
         image: "https://via.placeholder.com/150"
     },
@@ -123,7 +123,7 @@ var DInfo = [
         number: "A-BY-21",
         address: "별양동 16",
         rotation: 1,
-        fixed: 3,
+        fixed: 1,
         description: "문원초 - 정문",
         image: "https://via.placeholder.com/150"
     },
@@ -155,7 +155,7 @@ var DInfo = [
         number: "A-BY-26",
         address: "별양동 45",
         rotation: 1,
-        fixed: 3,
+        fixed: 0,
         description: "과천회관 뒤 향촌소공원",
         image: "https://via.placeholder.com/150"
     },
@@ -179,7 +179,7 @@ var DInfo = [
         number: "A-BY-29",
         address: "별양동 37-4",
         rotation: 1,
-        fixed: 3,
+        fixed: 5,
         description: "별양동 37-4~46-7번지 앞",
         image: "https://via.placeholder.com/150"
     },
@@ -187,7 +187,7 @@ var DInfo = [
         number: "A-BY-30",
         address: "별양동 18-7",
         rotation: 1,
-        fixed: 3,
+        fixed: 5,
         description: "",
         image: "https://via.placeholder.com/150"
     },
@@ -195,7 +195,7 @@ var DInfo = [
         number: "A-BY-31",
         address: "별양동 32-1",
         rotation: 1,
-        fixed: 3,
+        fixed: 4,
         description: "",
         image: "https://via.placeholder.com/150"
     },
@@ -203,7 +203,7 @@ var DInfo = [
         number: "A-BY-32",
         address: "별양동 18-20",
         rotation: 1,
-        fixed: 3,
+        fixed: 2,
         description: "",
         image: "https://via.placeholder.com/150"
     },
@@ -211,7 +211,7 @@ var DInfo = [
         number: "A-BY-33",
         address: "별양동 28-4",
         rotation: 1,
-        fixed: 3,
+        fixed: 4,
         description: "",
         image: "https://via.placeholder.com/150"
     },
@@ -219,7 +219,7 @@ var DInfo = [
         number: "A-BY-34",
         address: "별양동 34-1",
         rotation: 1,
-        fixed: 3,
+        fixed: 0,
         description: "",
         image: "https://via.placeholder.com/150"
     },
@@ -235,14 +235,14 @@ var DInfo = [
         number: "A-BY-36",
         address: "별양동 49-1",
         rotation: 1,
-        fixed: 3,
+        fixed: 2,
         description: "향촌길 57-11 화단",
         image: "https://via.placeholder.com/150"
     },
         {
         number: "A-BY-37",
         address: "별양동 21-6",
-        rotation: 1,
+        rotation: 0,
         fixed: 3,
         description: "",
         image: "https://via.placeholder.com/150"
@@ -250,8 +250,8 @@ var DInfo = [
         {
         number: "A-BY-38",
         address: "별양동 85-2",
-        rotation: 1,
-        fixed: 3,
+        rotation: 0,
+        fixed: 2,
         description: "굴다리시장",
         image: "https://via.placeholder.com/150"
     },
@@ -259,7 +259,7 @@ var DInfo = [
         number: "A-177",
         address: "코오롱로 53",
         rotation: 1,
-        fixed: 3,
+        fixed: 0,
         description: "문원초",
         image: "https://via.placeholder.com/150"
     },
@@ -267,7 +267,7 @@ var DInfo = [
         number: "A-178",
         address: "코오롱로 54",
         rotation: 1,
-        fixed: 3,
+        fixed: 0,
         description: "문원초",
         image: "https://via.placeholder.com/150"
     }

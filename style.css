@@ -171,4 +171,9 @@ html, body {
         max-width: none; /* 모바일 환경에서 최대 너비 제거 */
         margin-bottom: 5px; /* 모바일 환경에서 여백 설정 */
     }
+
+    #latLngButton {
+        top: 10px; /* 모바일 환경에서 상단 여백 조정 */
+        right: 10px; /* 모바일 환경에서 오른쪽 여백 조정 */
+    }
 }

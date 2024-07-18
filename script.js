@@ -222,9 +222,9 @@ document.body.appendChild(latLngButton);
 latLngButton.addEventListener('click', function() {
     isLatLngClickMode = !isLatLngClickMode;
     if (isLatLngClickMode) {
-        latLngButton.textContent = '위도/경도 끄기';
+        latLngButton.textContent = '위도/경도 표시 모드 종료';
     } else {
-        latLngButton.textContent = '위도/경도 찾기';
+        latLngButton.textContent = '위도/경도 표시 모드';
     }
 });
 

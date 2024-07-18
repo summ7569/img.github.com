@@ -177,6 +177,7 @@ newSearchForm.addEventListener('submit', function(event) {
                 position: position,
                 map: map
             });
+            var tempOverlayContent =
             var tempOverlay = new kakao.maps.CustomOverlay({
                 content: '<div class="customOverlay">해당 위치에 정보가 없습니다.</div>',
                 map: map,
@@ -204,20 +205,20 @@ function closeTempOverlay() {
 
 // 버튼 요소 가져오기
 var latLngButton = document.createElement('button');
-latLngButton.textContent = '위도/경도 표시 모드';
+latLngButton.textContent = '위도/경도 찾기기';
 latLngButton.style.position = 'absolute';
-latLngButton.style.top = '10px';
+latLngButton.style.top = '60px'; // 버튼 위치 아래로 이동
 latLngButton.style.right = '10px';
-latLngButton.style.zIndex = 1000; // 다른 요소들보다 위에 위치하도록 설정
+latLngButton.style.zIndex = 1; // 다른 요소 위에 위치
 document.body.appendChild(latLngButton);
 
-// 버튼 클릭 시 위도/경도 표시 모드 전환
+// 버튼 클릭 시 위도/경도 표시 모드 토글
 latLngButton.addEventListener('click', function() {
     isLatLngClickMode = !isLatLngClickMode;
     if (isLatLngClickMode) {
-        latLngButton.textContent = '위도/경도 표시 모드 종료';
+        latLngButton.textContent = '위도/경도 끄기';
     } else {
-        latLngButton.textContent = '위도/경도 표시 모드';
+        latLngButton.textContent = '위도/경도 찾기';
     }
 });
 

@@ -40,6 +40,7 @@ html, body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     max-width: 600px; /* 최대 너비 설정 */
+    margin-right: 20px; /* 오른쪽 여백 추가 */
 }
 
 .customOverlay .closeBtn {
@@ -112,6 +113,25 @@ html, body {
 }
 
 #newSearchForm button:hover {
+    background-color: #0056b3;
+}
+
+#latLngButton {
+    position: absolute;
+    top: 60px; /* 버튼 위치 아래로 이동 */
+    right: 10px;
+    z-index: 1; /* 다른 요소 위에 위치 */
+    padding: 10px 15px;
+    font-size: 14px;
+    background-color: #007BFF;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+    border-radius: 5px; /* 버튼 모서리 둥글게 */
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2); /* 그림자 효과 추가 */
+}
+
+#latLngButton:hover {
     background-color: #0056b3;
 }
 

@@ -178,8 +178,7 @@ newSearchForm.addEventListener('submit', function(event) {
                 map: map
             });
             var tempOverlayContent =
-var tempOverlayContent =
-    '<div class="customOverlay">' +
+                '<div class="customOverlay">' +
     '    <span class="closeBtn" onclick="closeTempOverlay()">×</span>' +
     '    해당 위치에 정보가 없습니다.' +
     '</div>';
@@ -189,7 +188,7 @@ var tempOverlayContent =
                 position: position,
                 yAnchor: 1.1 // 중앙 정렬(0.5)에서 위쪽으로 조정하여 닫기 버튼이 가려지지 않게 함
             });
-
+                
             // 3초 후에 임시 마커와 오버레이 제거
             setTimeout(function() {
                 tempMarker.setMap(null);

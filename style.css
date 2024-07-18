@@ -40,7 +40,7 @@ html, body {
     box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     border-radius: 5px;
     max-width: 600px; /* 최대 너비 설정 */
-    margin-right: 20px; /* 오른쪽 여백 추가 */
+    margin-right: 40px; /* 오른쪽 여백 추가 */
 }
 
 .customOverlay .closeBtn {
@@ -118,7 +118,7 @@ html, body {
 
 #latLngButton {
     position: absolute;
-    top: 60px; /* 버튼 위치 아래로 이동 */
+    top: 73px; /* 버튼 위치 아래로 이동 (기존 위치에서 13px 내려감) */
     right: 10px;
     z-index: 1; /* 다른 요소 위에 위치 */
     padding: 10px 15px;

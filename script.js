@@ -256,7 +256,7 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
             content: tempOverlayContent,
             map: map,
             position: latlng,
-            yAnchor: 1.5 // 중앙 정렬(0.5)에서 위쪽으로 조정하여 닫기 버튼이 가려지지 않게 함
+            yAnchor: 2.0 // 중앙 정렬(0.5)에서 위쪽으로 조정하여 닫기 버튼이 가려지지 않게 함
         });
     }
 });

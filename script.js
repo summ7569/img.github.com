@@ -177,7 +177,6 @@ newSearchForm.addEventListener('submit', function(event) {
                 position: position,
                 map: map
             });
-            var tempOverlayContent =
             var tempOverlay = new kakao.maps.CustomOverlay({
                 content: '<div class="customOverlay">해당 위치에 정보가 없습니다.</div>',
                 map: map,

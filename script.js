@@ -177,13 +177,8 @@ newSearchForm.addEventListener('submit', function(event) {
                 position: position,
                 map: map
             });
-            var tempOverlayContent =
-                '<div class="customOverlay">' +
-                '    <span class="closeBtn" onclick="closeTempOverlay()">×</span>' +
-                '    클릭한 위치의 위도는 ' + position.getLat() + ' 이고, 경도는 ' + position.getLng() + ' 입니다' +
-                '</div>';
-            tempOverlay = new kakao.maps.CustomOverlay({
-                content: tempOverlayContent,
+            var tempOverlay = new kakao.maps.CustomOverlay({
+                content: '<div class="customOverlay">해당 위치에 정보가 없습니다.</div>',
                 map: map,
                 position: position,
                 yAnchor: 1.1

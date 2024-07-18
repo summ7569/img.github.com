@@ -205,22 +205,20 @@ function closeTempOverlay() {
 
 // 버튼 요소 가져오기
 var latLngButton = document.createElement('button');
-latLngButton.textContent = '위도/경도 찾기기';
-latLngButton.style.position = 'absolute';
-latLngButton.style.top = '60px'; // 버튼 위치 아래로 이동
-latLngButton.style.right = '10px';
-latLngButton.style.zIndex = 1; // 다른 요소 위에 위치
+latLngButton.id = 'latLngButton';
+latLngButton.textContent = '위도/경도 찾기';
 document.body.appendChild(latLngButton);
 
 // 버튼 클릭 시 위도/경도 표시 모드 토글
 latLngButton.addEventListener('click', function() {
     isLatLngClickMode = !isLatLngClickMode;
     if (isLatLngClickMode) {
-        latLngButton.textContent = '위도/경도 끄기';
+        latLngButton.textContent = '위도/경도 끄기)';
     } else {
         latLngButton.textContent = '위도/경도 찾기';
     }
 });
+
 
 // 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {

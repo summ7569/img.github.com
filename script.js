@@ -101,7 +101,7 @@ function showCustomOverlay(position, index) {
         content: overlayContent,
         map: map,
         position: new kakao.maps.LatLng(position.lat, position.lng),
-        yAnchor: 1.5 // 중앙 정렬(0.5)에서 위쪽으로 조정하여 닫기 버튼이 가려지지 않게 함
+        yAnchor: 1.1 // 중앙 정렬(0.5)에서 위쪽으로 조정하여 닫기 버튼이 가려지지 않게 함
     });
 }
 
@@ -187,7 +187,7 @@ var tempOverlayContent =
                 content: tempOverlayContent,
                 map: map,
                 position: position,
-                yAnchor: 1.5 // 중앙 정렬(0.5)에서 위쪽으로 조정하여 닫기 버튼이 가려지지 않게 함
+                yAnchor: 1.1 // 중앙 정렬(0.5)에서 위쪽으로 조정하여 닫기 버튼이 가려지지 않게 함
             });
 
             // 3초 후에 임시 마커와 오버레이 제거

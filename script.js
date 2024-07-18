@@ -13,6 +13,8 @@ var categories = ['갈현동', '과천동', '문원동', '별양동', '부림동
 
 var markers = [];
 var currentOverlay = null;
+var isLatLngClickMode = false; // 위도와 경도를 표시하는 모드인지 확인하는 플래그
+var tempOverlay = null; // 임시 오버레이를 저장할 변수
 
 // 모든 마커와 오버레이를 표시합니다.
 createMarkersAndOverlays('전부');
@@ -175,18 +177,17 @@ newSearchForm.addEventListener('submit', function(event) {
                 position: position,
                 map: map
             });
-            var tempOverlay = new kakao.maps.CustomOverlay({
-                content: '<div class="customOverlay">해당 위치에 정보가 없습니다.</div>',
+            var tempOverlayContent =
+                '<div class="customOverlay">' +
+                '    <span class="closeBtn" onclick="closeTempOverlay()">×</span>' +
+                '    클릭한 위치의 위도는 ' + position.getLat() + ' 이고, 경도는 ' + position.getLng() + ' 입니다' +
+                '</div>';
+            tempOverlay = new kakao.maps.CustomOverlay({
+                content: tempOverlayContent,
                 map: map,
                 position: position,
                 yAnchor: 1.1
             });
-
-            // 3초 후에 임시 마커와 오버레이 제거
-            setTimeout(function() {
-                tempMarker.setMap(null);
-                tempOverlay.setMap(null);
-            }, 3000);
         }
     } else {
         alert('유효한 위도/경도 또는 관리번호를 입력하세요.');
@@ -196,4 +197,55 @@ newSearchForm.addEventListener('submit', function(event) {
 // 검색 버튼 클릭 시 검색 이벤트 실행
 newSearchBtn.addEventListener('click', function() {
     newSearchForm.dispatchEvent(new Event('submit'));
+});
+
+// 임시 오버레이 닫기 함수
+function closeTempOverlay() {
+    if (tempOverlay) {
+        tempOverlay.setMap(null);
+        tempOverlay = null;
+    }
+}
+
+// 버튼 요소 가져오기
+var latLngButton = document.createElement('button');
+latLngButton.textContent = '위도/경도 표시 모드';
+latLngButton.style.position = 'absolute';
+latLngButton.style.top = '10px';
+latLngButton.style.right = '10px';
+latLngButton.style.zIndex = 1000; // 다른 요소들보다 위에 위치하도록 설정
+document.body.appendChild(latLngButton);
+
+// 버튼 클릭 시 위도/경도 표시 모드 전환
+latLngButton.addEventListener('click', function() {
+    isLatLngClickMode = !isLatLngClickMode;
+    if (isLatLngClickMode) {
+        latLngButton.textContent = '위도/경도 표시 모드 종료';
+    } else {
+        latLngButton.textContent = '위도/경도 표시 모드';
+    }
+});
+
+// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+    if (isLatLngClickMode) {
+        // 클릭한 위도, 경도 정보를 가져옵니다 
+        var latlng = mouseEvent.latLng; 
+
+        // 기존 임시 오버레이가 있으면 제거
+        closeTempOverlay();
+        
+        // 클릭한 위치에 임시 오버레이 생성
+        var tempOverlayContent =
+            '<div class="customOverlay">' +
+            '    <span class="closeBtn" onclick="closeTempOverlay()">×</span>' +
+            '    클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, 경도는 ' + latlng.getLng() + ' 입니다' +
+            '</div>';
+        tempOverlay = new kakao.maps.CustomOverlay({
+            content: tempOverlayContent,
+            map: map,
+            position: latlng,
+            yAnchor: 1.1
+        });
+    }
 });

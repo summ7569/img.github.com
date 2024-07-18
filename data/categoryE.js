@@ -24,170 +24,170 @@ var Epositions = [
 var EInfo = [
     {
         number: "A-BL-2",
-        address: "부림동",
+        address: "부림동 11-5",
         rotation: 1,
-        fixed: 2,
-        description: "어린이집",
+        fixed: 1,
+        description: "부림2길 76",
         image: "https://via.placeholder.com/150"
     },
     {
         number: "A-BL-3",
-        address: "부림동",
+        address: "부림동 14-14",
         rotation: 1,
-        fixed: 2,
-        description: "어린이집",
+        fixed: 5,
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
         number: "A-BL-4",
-        address: "부림동",
+        address: "부림동 22-1",
         rotation: 1,
         fixed: 2,
-        description: "어린이집",
+        description: "연봉재길",
         image: "https://via.placeholder.com/150"
     },
     {
         number: "A-BL-5",
-        address: "부림동",
+        address: "부림동 61",
         rotation: 1,
-        fixed: 2,
-        description: "어린이집",
+        fixed: 4,
+        description: "부림4길 45",
         image: "https://via.placeholder.com/150"
     },
     {
         number: "A-BL-6",
-        address: "부림동",
+        address: "부림동 29-11",
         rotation: 1,
-        fixed: 2,
-        description: "어린이집",
+        fixed: 4,
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
         number: "A-BL-7",
-        address: "부림동",
+        address: "부림동 29-4",
         rotation: 1,
-        fixed: 2,
-        description: "어린이집",
+        fixed: 8,
+        description: "9단지 상가앞",
         image: "https://via.placeholder.com/150"
     },
     {
         number: "A-BL-8",
-        address: "부림동",
+        address: "부림동 30-4,5",
         rotation: 1,
-        fixed: 2,
-        description: "어린이집",
+        fixed: 4,
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
         number: "A-BL-9",
-        address: "부림동",
+        address: "부림동 36-1",
         rotation: 1,
-        fixed: 2,
-        description: "어린이집",
+        fixed: 5,
+        description: "부림로 27",
         image: "https://via.placeholder.com/150"
     },
     {
         number: "A-BL-10",
-        address: "부림동",
+        address: "부림동 41",
         rotation: 1,
         fixed: 2,
-        description: "어린이집",
+        description: "904동 옆",
         image: "https://via.placeholder.com/150"
     },
     {
         number: "A-BL-11",
         address: "부림동",
         rotation: 1,
-        fixed: 2,
-        description: "어린이집",
+        fixed: 0,
+        description: "909동 ~ 상가사이",
         image: "https://via.placeholder.com/150"
     },
     {
         number: "A-BL-12",
-        address: "부림동",
+        address: "부림동 38-9",
         rotation: 1,
-        fixed: 2,
-        description: "어린이집",
+        fixed: 5,
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
         number: "A-BL-13",
-        address: "부림동",
+        address: "부림동 40-8",
         rotation: 1,
-        fixed: 2,
-        description: "어린이집",
+        fixed: 1,
+        description: "",
         image: "https://via.placeholder.com/150"
     },
     {
         number: "A-BL-14",
-        address: "부림동",
+        address: "부림동 41",
         rotation: 1,
-        fixed: 2,
-        description: "어린이집",
+        fixed: 0,
+        description: "908동 ~ 905동 사이(화단)",
         image: "https://via.placeholder.com/150"
     },
     {
         number: "A-BL-15",
-        address: "부림동",
+        address: "부림동 41",
         rotation: 1,
-        fixed: 2,
-        description: "어린이집",
+        fixed: 3,
+        description: "805동~804동 사이",
         image: "https://via.placeholder.com/150"
     },
     {
         number: "A-BL-16",
-        address: "부림동",
+        address: "부림동 41",
         rotation: 1,
-        fixed: 2,
-        description: "어린이집",
+        fixed: 0,
+        description: "802동 놀이터안",
         image: "https://via.placeholder.com/150"
     },
     {
         number: "A-BL-17",
-        address: "부림동",
+        address: "부림동 41",
         rotation: 1,
-        fixed: 2,
-        description: "어린이집",
+        fixed: 4,
+        description: "810동~상가 사이",
         image: "https://via.placeholder.com/150"
     },
     {
         number: "A-BL-18",
         address: "부림동",
         rotation: 1,
-        fixed: 2,
-        description: "어린이집",
+        fixed: 0,
+        description: "811동 옆 주차장",
         image: "https://via.placeholder.com/150"
     },
     {
         number: "A-BL-19",
-        address: "부림동",
+        address: "별양로 180-1",
         rotation: 1,
-        fixed: 2,
-        description: "어린이집",
+        fixed: 0,
+        description: "관문초",
         image: "https://via.placeholder.com/150"
     },
     {
         number: "A-BL-20",
-        address: "부림동",
+        address: "별양로 180-2",
         rotation: 1,
-        fixed: 2,
-        description: "어린이집",
+        fixed: 0,
+        description: "관문초",
         image: "https://via.placeholder.com/150"
     },
     {
         number: "A-BL-21",
-        address: "부림동",
+        address: "부림동 49",
         rotation: 1,
-        fixed: 2,
-        description: "어린이집",
+        fixed: 3,
+        description: "729동 대공원 나들이길(관문초)",
         image: "https://via.placeholder.com/150"
     },
     {
         number: "A-BL-22",
-        address: "부림동",
+        address: "부림동 54-5",
         rotation: 1,
         fixed: 2,
-        description: "어린이집",
+        description: "통학로(7단지후문 버스정류장)",
         image: "https://via.placeholder.com/150"
     }
   

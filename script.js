@@ -13,6 +13,8 @@ var categories = ['갈현동', '과천동', '문원동', '별양동', '부림동
 
 var markers = [];
 var currentOverlay = null;
+var isLatLngClickMode = false; // 위도와 경도를 표시하는 모드인지 확인하는 플래그
+var tempOverlay = null; // 임시 오버레이를 저장할 변수
 
 // 모든 마커와 오버레이를 표시합니다.
 createMarkersAndOverlays('전부');
@@ -99,7 +101,7 @@ function showCustomOverlay(position, index) {
         content: overlayContent,
         map: map,
         position: new kakao.maps.LatLng(position.lat, position.lng),
-        yAnchor: 1.1 // 중앙 정렬(0.5) 위쪽 오버레이 (1.5)
+        yAnchor: 1.5 // 중앙 정렬(0.5)에서 위쪽으로 조정하여 닫기 버튼이 가려지지 않게 함
     });
 }
 
@@ -175,11 +177,17 @@ newSearchForm.addEventListener('submit', function(event) {
                 position: position,
                 map: map
             });
-            var tempOverlay = new kakao.maps.CustomOverlay({
-                content: '<div class="customOverlay">해당 위치에 정보가 없습니다.</div>',
+            var tempOverlayContent =
+var tempOverlayContent =
+    '<div class="customOverlay">' +
+    '    <span class="closeBtn" onclick="closeTempOverlay()">×</span>' +
+    '    해당 위치에 정보가 없습니다.' +
+    '</div>';
+            tempOverlay = new kakao.maps.CustomOverlay({
+                content: tempOverlayContent,
                 map: map,
                 position: position,
-                yAnchor: 1.1
+                yAnchor: 1.5 // 중앙 정렬(0.5)에서 위쪽으로 조정하여 닫기 버튼이 가려지지 않게 함
             });
 
             // 3초 후에 임시 마커와 오버레이 제거
@@ -192,14 +200,6 @@ newSearchForm.addEventListener('submit', function(event) {
         alert('유효한 위도/경도 또는 관리번호를 입력하세요.');
     }
 });
-
-// 검색 버튼 클릭 시 검색 이벤트 실행
-newSearchBtn.addEventListener('click', function() {
-    
-    newSearchForm.dispatchEvent(new Event('submit'));
-});
-
-
 
 // 임시 오버레이 닫기 함수
 function closeTempOverlay() {
@@ -247,7 +247,7 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
             content: tempOverlayContent,
             map: map,
             position: latlng,
-            yAnchor: 1.1
+            yAnchor: 1.5 // 중앙 정렬(0.5)에서 위쪽으로 조정하여 닫기 버튼이 가려지지 않게 함
         });
     }
 });

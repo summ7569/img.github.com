@@ -1,86 +1,39 @@
-// 데이터 배열 합치기
+// 모든 위치 및 정보 데이터
 const allPositions = Apositions.concat(Bpositions, Cpositions, Dpositions, Epositions, Fpositions, Gpositions, Hpositions);
 const allInfo = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, HInfo);
 
-// 지도 초기화
+// 지도 및 로드뷰 초기화
 var mapContainer = document.getElementById('map');
+var roadviewContainer = document.getElementById('roadview');
+var toggleRoadviewBtn = document.getElementById('toggleRoadviewBtn');
+
 var mapOption = {
     center: new kakao.maps.LatLng(37.429504, 126.988322),
     level: 5
 };
 var map = new kakao.maps.Map(mapContainer, mapOption);
-
-// 로드뷰 초기화
-var roadviewContainer = document.getElementById('roadview');
-var toggleRoadviewBtn = document.getElementById('toggleRoadviewBtn');
 var roadview = new kakao.maps.Roadview(roadviewContainer);
 var roadviewClient = new kakao.maps.RoadviewClient();
 
-// 미니맵 초기화
-var miniMapContainer = document.getElementById('miniMap');
-var miniMapOption = {
-    center: new kakao.maps.LatLng(37.429504, 126.988322),
-    level: 7 // 미니맵의 레벨 조정 (작게)
-};
-var miniMap = new kakao.maps.Map(miniMapContainer, miniMapOption);
+var roadviewVisible = false; // 초기 로드뷰 상태
 
 // 초기 로드뷰 위치 설정
 var initialPosition = new kakao.maps.LatLng(37.429504, 126.988322);
 roadviewClient.getNearestPanoId(initialPosition, 50, function(panoId) {
-    if (panoId !== null) {
+    if (panoId) {
         roadview.setPanoId(panoId, initialPosition);
-        miniMap.setCenter(initialPosition); // 미니맵의 중심도 초기화
     } else {
         console.error('해당 위치에 로드뷰가 없습니다.');
     }
 });
 
-// 로드뷰 가시성 변수
-var roadviewVisible = false;
-
-// 지도 클릭 시 로드뷰 위치 변경
-kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-    if (roadviewVisible) {
-        var clickedPosition = mouseEvent.latLng;
-        roadviewClient.getNearestPanoId(clickedPosition, 50, function(panoId) {
-            if (panoId !== null) {
-                roadview.setPanoId(panoId, clickedPosition);
-                miniMap.setCenter(clickedPosition); // 미니맵 중심 업데이트
-            } else {
-                // 로드뷰가 활성화된 상태에서만 알림을 표시
-                alert('해당 위치에 로드뷰가 없습니다.');
-            }
-        });
-    }
-});
-
-// 미니맵 클릭 시 로드뷰 위치 변경
-kakao.maps.event.addListener(miniMap, 'click', function(mouseEvent) {
-    if (roadviewVisible) {
-        var clickedPosition = mouseEvent.latLng;
-        roadviewClient.getNearestPanoId(clickedPosition, 50, function(panoId) {
-            if (panoId !== null) {
-                roadview.setPanoId(panoId, clickedPosition);
-                miniMap.setCenter(clickedPosition); // 미니맵 중심 업데이트
-            } else {
-                alert('해당 위치에 로드뷰가 없습니다.');
-            }
-        });
-    }
-});
-// 로드뷰와 미니맵 동기화
-function syncMiniMap() {
-    var roadviewPosition = roadview.getPosition();
-    miniMap.setCenter(roadviewPosition);
-}
-
+// 로드뷰와 지도를 전환하는 함수
 function toggleRoadview() {
     roadviewVisible = !roadviewVisible;
     if (roadviewVisible) {
-        // 로드뷰가 활성화된 경우
         var centerPosition = map.getCenter();
         roadviewClient.getNearestPanoId(centerPosition, 50, function(panoId) {
-            if (panoId !== null) {
+            if (panoId) {
                 roadview.setPanoId(panoId, centerPosition);
                 document.getElementById('roadview').classList.remove('hidden'); // 로드뷰 표시
                 document.getElementById('map').classList.add('hidden'); // 지도 숨기기
@@ -91,29 +44,71 @@ function toggleRoadview() {
             }
         });
     } else {
-        // 로드뷰가 비활성화된 경우
         document.getElementById('roadview').classList.add('hidden'); // 로드뷰 숨기기
         document.getElementById('map').classList.remove('hidden'); // 지도 표시
         toggleRoadviewBtn.textContent = '로드뷰 보기';
     }
 }
 
-// 미니맵 클릭 시 로드뷰 위치 변경
-kakao.maps.event.addListener(miniMap, 'click', function(mouseEvent) {
+// 지도 클릭 시 로드뷰 위치 업데이트
+kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     if (roadviewVisible) {
         var clickedPosition = mouseEvent.latLng;
         roadviewClient.getNearestPanoId(clickedPosition, 50, function(panoId) {
-            if (panoId !== null) {
+            if (panoId) {
                 roadview.setPanoId(panoId, clickedPosition);
-                miniMap.setCenter(clickedPosition); // 미니맵 중심 업데이트
-            } else {
-                alert('해당 위치에 로드뷰가 없습니다.');
             }
         });
     }
 });
 
-// 버튼 클릭 이벤트 리스너 등록
+// 미니맵 동기화 함수
+function syncMiniMap() {
+    var miniMap = document.getElementById('miniMap');
+    var miniMapOption = {
+        center: map.getCenter(),
+        level: 4 // 미니맵 확대 수준
+    };
+    var miniMapInstance = new kakao.maps.Map(miniMap, miniMapOption);
+    miniMapInstance.setCenter(map.getCenter()); // 미니맵 중앙을 지도 중심으로 설정
+    miniMapInstance.setLevel(4); // 미니맵 레벨 설정
+
+    // 지도 이동 시 미니맵 동기화
+    kakao.maps.event.addListener(map, 'center_changed', function() {
+        miniMapInstance.setCenter(map.getCenter());
+    });
+    kakao.maps.event.addListener(map, 'zoom_changed', function() {
+        miniMapInstance.setLevel(map.getLevel() - 1); // 미니맵의 레벨을 지도보다 한 단계 낮게 설정
+    });
+}
+
+// 검색 버튼 클릭 시 로드뷰로 이동
+document.getElementById('newSearchBtn').addEventListener('click', function() {
+    var searchInput = document.getElementById('newSearchInput').value;
+    // 위도/경도 또는 관리번호로 검색하는 로직 추가
+    // 검색된 위치로 로드뷰 이동
+    // 예시로 입력된 값이 위도/경도로 가정하고 처리
+    var latLng = searchInput.split(',');
+    if (latLng.length === 2) {
+        var position = new kakao.maps.LatLng(parseFloat(latLng[0]), parseFloat(latLng[1]));
+        if (roadviewVisible) {
+            roadviewClient.getNearestPanoId(position, 50, function(panoId) {
+                if (panoId) {
+                    roadview.setPanoId(panoId, position);
+                } else {
+                    console.error('해당 위치에 로드뷰가 없습니다.');
+                }
+            });
+        } else {
+            map.setCenter(position);
+            syncMiniMap();
+        }
+    } else {
+        alert('위도와 경도를 콤마로 구분하여 입력해 주세요.');
+    }
+});
+
+// 버튼 클릭 이벤트 등록
 toggleRoadviewBtn.addEventListener('click', toggleRoadview);
 
 var categories = ['갈현동', '과천동', '문원동', '별양동', '부림동', '주암동', '중앙동', '기타', '회전형', '고정형', '전부'];

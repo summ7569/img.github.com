@@ -140,11 +140,11 @@ html, body {
 #newSearchForm button {
     padding: 6px 10px;
     font-size: 14px;
-    background-color: #007BFF;
+    background-color: #0056b3;
     color: #fff;
     border: none;
     cursor: pointer;
-    background: rgba(255, 255, 255); /* 배경을 반투명으로 설정 */
+    background: rgba(255, 255, 255, 0.8); /* 배경을 반투명으로 설정 */
 }
 
 #newSearchForm button:hover {

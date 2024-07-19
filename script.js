@@ -1,115 +1,17 @@
-// 모든 위치 및 정보 데이터
-const allPositions = Apositions.concat(Bpositions, Cpositions, Dpositions, Epositions, Fpositions, Gpositions, Hpositions);
+// 카테고리별 데이터를 모두 불러옵니다.
+const allPositions = Apositions.concat(Bpositions, Cpositions, Cpositions, Dpositions, Epositions, Fpositions, Gpositions, Hpositions);
 const allInfo = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, HInfo);
 
-// 지도 및 로드뷰 초기화
 var mapContainer = document.getElementById('map');
-var roadviewContainer = document.getElementById('roadview');
-var toggleRoadviewBtn = document.getElementById('toggleRoadviewBtn');
-
 var mapOption = {
-    center: new kakao.maps.LatLng(37.429504, 126.988322),
+    center: new kakao.maps.LatLng(37.4295040000, 126.9883220000),
     level: 5
 };
 var map = new kakao.maps.Map(mapContainer, mapOption);
-var roadview = new kakao.maps.Roadview(roadviewContainer);
-var roadviewClient = new kakao.maps.RoadviewClient();
 
-var roadviewVisible = false; // 초기 로드뷰 상태
-
-// 초기 로드뷰 위치 설정
-var initialPosition = new kakao.maps.LatLng(37.429504, 126.988322);
-roadviewClient.getNearestPanoId(initialPosition, 50, function(panoId) {
-    if (panoId) {
-        roadview.setPanoId(panoId, initialPosition);
-    } else {
-        console.error('해당 위치에 로드뷰가 없습니다.');
-    }
-});
-
-// 로드뷰와 지도를 전환하는 함수
-function toggleRoadview() {
-    roadviewVisible = !roadviewVisible;
-    if (roadviewVisible) {
-        var centerPosition = map.getCenter();
-        roadviewClient.getNearestPanoId(centerPosition, 50, function(panoId) {
-            if (panoId) {
-                roadview.setPanoId(panoId, centerPosition);
-                roadviewContainer.classList.remove('hidden'); // 로드뷰 표시
-                mapContainer.classList.add('hidden'); // 지도 숨기기
-                toggleRoadviewBtn.textContent = '지도 보기';
-                syncMiniMap(); // 미니맵 동기화
-            } else {
-                console.error('해당 위치에 로드뷰가 없습니다.');
-            }
-        });
-    } else {
-        roadviewContainer.classList.add('hidden'); // 로드뷰 숨기기
-        mapContainer.classList.remove('hidden'); // 지도 표시
-        toggleRoadviewBtn.textContent = '로드뷰 보기';
-    }
-}
-
-// 지도 클릭 시 로드뷰 위치 업데이트
-kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-    if (roadviewVisible) {
-        var clickedPosition = mouseEvent.latLng;
-        roadviewClient.getNearestPanoId(clickedPosition, 50, function(panoId) {
-            if (panoId) {
-                roadview.setPanoId(panoId, clickedPosition);
-            }
-        });
-    }
-});
-
-// 미니맵 동기화 함수
-function syncMiniMap() {
-    var miniMap = document.getElementById('miniMap');
-    var miniMapOption = {
-        center: map.getCenter(),
-        level: 4 // 미니맵 확대 수준
-    };
-    var miniMapInstance = new kakao.maps.Map(miniMap, miniMapOption);
-    miniMapInstance.setCenter(map.getCenter()); // 미니맵 중앙을 지도 중심으로 설정
-    miniMapInstance.setLevel(4); // 미니맵 레벨 설정
-
-    // 지도 이동 시 미니맵 동기화
-    kakao.maps.event.addListener(map, 'center_changed', function() {
-        miniMapInstance.setCenter(map.getCenter());
-    });
-    kakao.maps.event.addListener(map, 'zoom_changed', function() {
-        miniMapInstance.setLevel(map.getLevel() - 1); // 미니맵의 레벨을 지도보다 한 단계 낮게 설정
-    });
-}
-
-// 검색 버튼 클릭 시 로드뷰로 이동
-document.getElementById('newSearchBtn').addEventListener('click', function() {
-    var searchInput = document.getElementById('newSearchInput').value;
-    // 위도/경도 또는 관리번호로 검색하는 로직 추가
-    // 검색된 위치로 로드뷰 이동
-    var latLng = searchInput.split(',');
-    if (latLng.length === 2) {
-        var position = new kakao.maps.LatLng(parseFloat(latLng[0]), parseFloat(latLng[1]));
-        if (roadviewVisible) {
-            roadviewClient.getNearestPanoId(position, 50, function(panoId) {
-                if (panoId) {
-                    roadview.setPanoId(panoId, position);
-                } else {
-                    console.error('해당 위치에 로드뷰가 없습니다.');
-                }
-            });
-        } else {
-            map.setCenter(position);
-            syncMiniMap();
-        }
-    } else {
-        alert('위도와 경도를 콤마로 구분하여 입력해 주세요.');
-    }
-});
-
-// 버튼 클릭 이벤트 등록
-toggleRoadviewBtn.addEventListener('click', toggleRoadview);
-
+var roadviewContainer = document.getElementById('roadview'); // 로드뷰 컨테이너
+var roadview = new kakao.maps.Roadview(roadviewContainer); // 로드뷰 객체
+var roadviewClient = new kakao.maps.RoadviewClient(); // 로드뷰 클라이언트
 
 var categories = ['갈현동', '과천동', '문원동', '별양동', '부림동', '주암동', '중앙동', '기타', '회전형', '고정형', '전부'];
 
@@ -117,12 +19,35 @@ var markers = [];
 var currentOverlay = null;
 var isLatLngClickMode = false; // 위도와 경도를 표시하는 모드인지 확인하는 플래그
 var tempOverlay = null; // 임시 오버레이를 저장할 변수
+var isRoadviewMode = false; // 로드뷰 모드 플래그
 
 // 전체 코드는 다음과 같이 수정됩니다.
 // 기존 코드의 일부만 표시합니다. 전체 코드를 한 번에 통합하고 실행해야 합니다.
 
 // 모든 마커와 오버레이를 표시합니다.
 createMarkersAndOverlays('전부');
+
+// 로드뷰 모드 토글 버튼 이벤트 리스너 추가
+document.getElementById('toggleRoadviewBtn').addEventListener('click', function() {
+    isRoadviewMode = !isRoadviewMode;
+    if (isRoadviewMode) {
+        document.getElementById('map').classList.add('minimized');
+        document.getElementById('roadview').classList.remove('hidden');
+        document.getElementById('toggleRoadviewBtn').textContent = '지도 보기';
+        setRoadview(map.getCenter()); // 현재 중심점을 로드뷰로 설정
+    } else {
+        document.getElementById('map').classList.remove('minimized');
+        document.getElementById('roadview').classList.add('hidden');
+        document.getElementById('toggleRoadviewBtn').textContent = '로드뷰 보기';
+    }
+});
+
+function setRoadview(latLng) {
+    roadviewClient.getNearestPanoId(latLng, 50, function(panoId) {
+        roadview.setPanoId(panoId);
+        roadview.setViewpoint({ pan: 0, tilt: 0, zoom: 0 });
+    });
+}
 
 function createMarkersAndOverlays(category) {
     closeCustomOverlay(); // 현재 열려 있는 커스텀 오버레이 닫기
@@ -173,23 +98,6 @@ function createMarkersAndOverlays(category) {
         }
     });
 }
-
-// 로드뷰 토글 버튼 기능 추가
-var roadviewVisible = false;
-var toggleRoadviewBtn = document.getElementById('toggleRoadviewBtn');
-
-toggleRoadviewBtn.addEventListener('click', function() {
-    roadviewVisible = !roadviewVisible;
-    if (roadviewVisible) {
-        mapContainer.classList.add('minimized');
-        roadviewContainer.style.display = 'block';
-        toggleRoadviewBtn.textContent = '지도 보기';
-    } else {
-        mapContainer.classList.remove('minimized');
-        roadviewContainer.style.display = 'none';
-        toggleRoadviewBtn.textContent = '로드뷰 보기';
-    }
-});
 
 function closeCustomOverlay() {
     if (currentOverlay) {
@@ -342,40 +250,31 @@ var latLngButton = document.createElement('button');
 latLngButton.textContent = '위도/경도 찾기';
 latLngButton.style.position = 'absolute';
 latLngButton.style.top = '45px';
-latLngButton.style.right = '10px';
-latLngButton.style.zIndex = 1000; // 다른 요소들보다 위에 위치하도록 설정
+latLngButton.style.left = '10px';
+latLngButton.style.zIndex = '2';
+latLngButton.style.padding = '10px';
+latLngButton.style.backgroundColor = '#007BFF';
+latLngButton.style.color = '#fff';
+latLngButton.style.border = 'none';
+latLngButton.style.cursor = 'pointer';
 document.body.appendChild(latLngButton);
 
-// 버튼 클릭 시 위도/경도 표시 모드 전환
+// 위도/경도 모드 버튼 클릭 이벤트 추가
 latLngButton.addEventListener('click', function() {
     isLatLngClickMode = !isLatLngClickMode;
     if (isLatLngClickMode) {
-        latLngButton.textContent = '위도/경도 끄기';
+        latLngButton.textContent = '위도/경도 입력 모드 종료';
+        map.setClickable(true); // 클릭 가능하게 설정
     } else {
         latLngButton.textContent = '위도/경도 찾기';
+        map.setClickable(false); // 클릭 불가능하게 설정
     }
 });
 
-// 지도를 클릭하면 마지막 파라미터로 넘어온 함수를 호출합니다
+// 지도 클릭 시 위도/경도 가져오기
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     if (isLatLngClickMode) {
-        // 클릭한 위도, 경도 정보를 가져옵니다 
-        var latlng = mouseEvent.latLng; 
-
-        // 기존 임시 오버레이가 있으면 제거
-        closeTempOverlay();
-
-        // 클릭한 위치에 임시 오버레이 생성
-        var tempOverlayContent =
-            '<div class="customOverlay">' +
-            '    <span class="closeBtn" onclick="closeTempOverlay()">×</span>' +
-            '    클릭한 위치의 위도는 ' + latlng.getLat() + ' 이고, 경도는 ' + latlng.getLng() + ' 입니다' +
-            '</div>';
-        tempOverlay = new kakao.maps.CustomOverlay({
-            content: tempOverlayContent,
-            map: map,
-            position: latlng,
-            yAnchor: 2.0 // 중앙 정렬(0.5)에서 위쪽으로 조정하여 닫기 버튼이 가려지지 않게 함
-        });
+        var latlng = mouseEvent.latLng;
+        alert('위도: ' + latlng.getLat() + ', 경도: ' + latlng.getLng());
     }
 });

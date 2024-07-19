@@ -148,7 +148,7 @@ html, body {
     padding: 6px 10px;
     font-size: 14px;
     background-color: rgba(0, 86, 179, 0.9);
-    color: #fff;
+    color: rgba(0, 86, 179, 0.9);
     border: none;
     cursor: pointer;
     background: rgba(255, 255, 255, 0.8); /* 배경을 반투명으로 설정 */

@@ -4,7 +4,7 @@ const allInfo = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, HInfo);
 
 var mapContainer = document.getElementById('map');
 var mapOption = {
-    center: new kakao.maps.LatLng(37.4295040000, 126.9883220000),
+    center: new kakao.maps.LatLng(37.42533199886157, 126.99700610367982),
     level: 5
 };
 var map = new kakao.maps.Map(mapContainer, mapOption);

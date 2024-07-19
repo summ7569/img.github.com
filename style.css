@@ -144,7 +144,7 @@ html, body {
     color: #fff;
     border: none;
     cursor: pointer;
-    background: rgba(255, 255, 255, 0.8); /* 배경을 반투명으로 설정 */
+    background: rgba(255, 255, 255); /* 배경을 반투명으로 설정 */
 }
 
 #newSearchForm button:hover {

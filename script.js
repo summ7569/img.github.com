@@ -1,4 +1,3 @@
-// 카테고리별 데이터 통합
 const allPositions = Apositions.concat(Bpositions, Cpositions, Dpositions, Epositions, Fpositions, Gpositions, Hpositions);
 const allInfo = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, HInfo);
 
@@ -25,14 +24,7 @@ roadviewClient.getNearestPanoId(position, 50, function(panoId) {
 });
 
 // 로드뷰 가시성 변수
-var roadviewVisible = false; // 초기값 설정 (필요에 따라 동적으로 변경할 수 있음)
-
-// 작은 지도 컨테이너와 지도 객체 초기화
-var miniMapContainer = document.getElementById('miniMap');
-var miniMap = new kakao.maps.Map(miniMapContainer, {
-    center: map.getCenter(),
-    level: 5
-});
+var roadviewVisible = true; // 초기값 설정 (필요에 따라 동적으로 변경할 수 있음)
 
 // 지도의 특정 위치를 클릭하면 로드뷰 위치를 변경하는 기능 추가
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
@@ -55,8 +47,6 @@ function toggleRoadview() {
     roadviewVisible = !roadviewVisible;
     if (roadviewVisible) {
         // 로드뷰가 활성화된 경우
-        roadviewContainer.classList.remove('hidden');
-        document.getElementById('miniMapWrapper').classList.remove('hidden');
         var centerPosition = map.getCenter();
         roadviewClient.getNearestPanoId(centerPosition, 50, function(panoId) {
             if (panoId !== null) {
@@ -67,21 +57,9 @@ function toggleRoadview() {
         });
     } else {
         // 로드뷰가 비활성화된 경우
-        roadviewContainer.classList.add('hidden');
-        document.getElementById('miniMapWrapper').classList.add('hidden');
+        // 로드뷰 컨테이너를 숨기거나 다른 처리를 할 수 있음
     }
 }
-
-// 로드뷰와 작은 지도 연동
-kakao.maps.event.addListener(roadview, 'position_changed', function() {
-    const panoPosition = roadview.getPosition();
-    miniMap.setCenter(panoPosition);
-});
-
-kakao.maps.event.addListener(roadview, 'viewpoint_changed', function() {
-    const panoPosition = roadview.getPosition();
-    miniMap.setCenter(panoPosition);
-});
 
 
 var categories = ['갈현동', '과천동', '문원동', '별양동', '부림동', '주암동', '중앙동', '기타', '회전형', '고정형', '전부'];

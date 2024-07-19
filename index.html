@@ -3,20 +3,19 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kakao6</title>
+    <title>Kakao31</title>
     <link rel="stylesheet" href="style.css">
     <!-- Kakao Maps SDK 로드 스크립트 -->
     <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6&libraries=services"></script>
 </head>
 <body>
     <div id="mapWrapper">
-        <div id="map"></div>
+        <div id="map" class="minimized"></div>
         <div id="roadview" class="hidden"></div> <!-- 로드뷰 화면 추가 -->
         <button id="toggleRoadviewBtn">로드뷰 보기</button> <!-- 로드뷰 토글 버튼 추가 -->
     </div>
     <div id="categoryDropdownContainer">
-        <select id="categoryDropdown">
-        </select>
+        <select id="categoryDropdown"></select>
     </div>
     <!-- 검색창을 오른쪽 상단에 추가합니다. -->
     <div id="newSearchForm">

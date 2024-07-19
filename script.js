@@ -14,29 +14,131 @@ var roadviewContainer = document.getElementById('roadview');
 var roadview = new kakao.maps.Roadview(roadviewContainer); 
 var roadviewClient = new kakao.maps.RoadviewClient(); 
 
-// 특정 위치의 로드뷰 파노라마 ID를 얻어 로드뷰를 표시합니다
-var position = new kakao.maps.LatLng(37.4295040000, 126.9883220000);
-roadviewClient.getNearestPanoId(position, 50, function(panoId) {
-    roadview.setPanoId(panoId, position);
-});
+var overlayOn = false, // 지도 위에 로드뷰 오버레이가 추가된 상태를 가지고 있을 변수
+    container = document.getElementById('container'), // 지도와 로드뷰를 감싸고 있는 div 입니다
+    mapWrapper = document.getElementById('mapWrapper'), // 지도를 감싸고 있는 div 입니다
+    rvContainer = document.getElementById('roadview'); // 로드뷰를 표시할 div 입니다
 
-// 지도의 특정 위치를 클릭하면 로드뷰 위치를 변경하는 기능 추가
-kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-    if (roadviewVisible) { // 로드뷰가 활성화되어 있을 때만
-        var clickedPosition = mouseEvent.latLng;
+var mapCenter = new kakao.maps.LatLng(33.45042 , 126.57091), // 지도의 중심좌표
+    mapOption = {
+        center: mapCenter, // 지도의 중심좌표
+        level: 3 // 지도의 확대 레벨
+    };
 
-        // 로드뷰 파노라마 ID 얻기
-        roadviewClient.getNearestPanoId(clickedPosition, 50, function(panoId) {
-            if (panoId !== null) {
-                roadview.setPanoId(panoId, clickedPosition);
-            } else {
-                alert('해당 위치에 로드뷰가 없습니다.');
-            }
-        });
+// 지도를 표시할 div와 지도 옵션으로 지도를 생성합니다
+var map = new kakao.maps.Map(mapContainer, mapOption);
+
+// 로드뷰 객체를 생성합니다 
+var rv = new kakao.maps.Roadview(rvContainer); 
+
+// 좌표로부터 로드뷰 파노라마 ID를 가져올 로드뷰 클라이언트 객체를 생성합니다 
+var rvClient = new kakao.maps.RoadviewClient(); 
+
+// 로드뷰에 좌표가 바뀌었을 때 발생하는 이벤트를 등록합니다 
+kakao.maps.event.addListener(rv, 'position_changed', function() {
+    var rvPosition = rv.getPosition();
+
+    map.setCenter(rvPosition);
+
+    if(overlayOn) {
+        marker.setPosition(rvPosition);
     }
 });
 
+// 마커 이미지를 생성합니다
+var markImage = new kakao.maps.MarkerImage(
+    'https://t1.daumcdn.net/localimg/localimages/07/2018/pc/roadview_minimap_wk_2018.png',
+    new kakao.maps.Size(26, 46),
+    {
+        spriteSize: new kakao.maps.Size(1666, 168),
+        spriteOrigin: new kakao.maps.Point(705, 114),
+        offset: new kakao.maps.Point(13, 46)
+    }
+);
 
+// 드래그가 가능한 마커를 생성합니다
+var marker = new kakao.maps.Marker({
+    image : markImage,
+    position: mapCenter,
+    draggable: true
+});
+
+// 마커에 dragend 이벤트를 등록합니다
+kakao.maps.event.addListener(marker, 'dragend', function(mouseEvent) {
+    var position = marker.getPosition();
+    toggleRoadview(position);
+});
+
+//지도에 클릭 이벤트를 등록합니다
+kakao.maps.event.addListener(map, 'click', function(mouseEvent){
+    if(!overlayOn) {
+        return;
+    }
+    var position = mouseEvent.latLng;
+    marker.setPosition(position);
+    toggleRoadview(position);
+});
+
+// 전달받은 좌표(position)에 가까운 로드뷰의 파노라마 ID를 추출하여
+// 로드뷰를 설정하는 함수입니다
+function toggleRoadview(position){
+    rvClient.getNearestPanoId(position, 50, function(panoId) {
+        if (panoId === null) {
+            toggleMapWrapper(true, position);
+        } else {
+            toggleMapWrapper(false, position);
+            rv.setPanoId(panoId, position);
+        }
+    });
+}
+
+// 지도를 감싸고 있는 div의 크기를 조정하는 함수입니다
+function toggleMapWrapper(active, position) {
+    if (active) {
+        container.className = '';
+        map.relayout();
+        map.setCenter(position);
+    } else {
+        if (container.className.indexOf('view_roadview') === -1) {
+            container.className = 'view_roadview';
+            map.relayout();
+            map.setCenter(position);
+        }
+    }
+}
+
+// 지도 위의 로드뷰 도로 오버레이를 추가,제거하는 함수입니다
+function toggleOverlay(active) {
+    if (active) {
+        overlayOn = true;
+        map.addOverlayMapTypeId(kakao.maps.MapTypeId.ROADVIEW);
+        marker.setMap(map);
+        marker.setPosition(map.getCenter());
+        toggleRoadview(map.getCenter());
+    } else {
+        overlayOn = false;
+        map.removeOverlayMapTypeId(kakao.maps.MapTypeId.ROADVIEW);
+        marker.setMap(null);
+    }
+}
+
+// 지도 위의 로드뷰 버튼을 눌렀을 때 호출되는 함수입니다
+function setRoadviewRoad() {
+    var control = document.getElementById('roadviewControl');
+    if (control.className.indexOf('active') === -1) {
+        control.className = 'active';
+        toggleOverlay(true);
+    } else {
+        control.className = '';
+        toggleOverlay(false);
+    }
+}
+
+// 로드뷰에서 X버튼을 눌렀을 때 로드뷰를 지도 뒤로 숨기는 함수입니다
+function closeRoadview() {
+    var position = marker.getPosition();
+    toggleMapWrapper(true, position);
+}
 
 var categories = ['갈현동', '과천동', '문원동', '별양동', '부림동', '주암동', '중앙동', '기타', '회전형', '고정형', '전부'];
 

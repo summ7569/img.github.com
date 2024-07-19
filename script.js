@@ -9,6 +9,33 @@ var mapOption = {
 };
 var map = new kakao.maps.Map(mapContainer, mapOption);
 
+// 로드뷰 컨테이너와 로드뷰 객체 초기화
+var roadviewContainer = document.getElementById('roadview'); 
+var roadview = new kakao.maps.Roadview(roadviewContainer); 
+var roadviewClient = new kakao.maps.RoadviewClient(); 
+
+// 특정 위치의 로드뷰 파노라마 ID를 얻어 로드뷰를 표시합니다
+var position = new kakao.maps.LatLng(37.4295040000, 126.9883220000);
+roadviewClient.getNearestPanoId(position, 50, function(panoId) {
+    roadview.setPanoId(panoId, position);
+});
+
+// 지도의 특정 위치를 클릭하면 로드뷰 위치를 변경하는 기능 추가
+kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+    var clickedPosition = mouseEvent.latLng;
+
+    // 로드뷰 파노라마 ID 얻기
+    roadviewClient.getNearestPanoId(clickedPosition, 50, function(panoId) {
+        if (panoId !== null) {
+            roadview.setPanoId(panoId, clickedPosition);
+        } else {
+            alert('해당 위치에 로드뷰가 없습니다.');
+        }
+    });
+});
+
+
+
 var categories = ['갈현동', '과천동', '문원동', '별양동', '부림동', '주암동', '중앙동', '기타', '회전형', '고정형', '전부'];
 
 var markers = [];
@@ -71,6 +98,23 @@ function createMarkersAndOverlays(category) {
         }
     });
 }
+
+// 로드뷰 토글 버튼 기능 추가
+var roadviewVisible = false;
+var toggleRoadviewBtn = document.getElementById('toggleRoadviewBtn');
+
+toggleRoadviewBtn.addEventListener('click', function() {
+    roadviewVisible = !roadviewVisible;
+    if (roadviewVisible) {
+        mapContainer.classList.add('minimized');
+        roadviewContainer.style.display = 'block';
+        toggleRoadviewBtn.textContent = '지도 보기';
+    } else {
+        mapContainer.classList.remove('minimized');
+        roadviewContainer.style.display = 'none';
+        toggleRoadviewBtn.textContent = '로드뷰 보기';
+    }
+});
 
 function closeCustomOverlay() {
     if (currentOverlay) {

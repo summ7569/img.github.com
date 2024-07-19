@@ -47,19 +47,33 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
                 roadview.setPanoId(panoId, clickedPosition);
                 miniMap.setCenter(clickedPosition); // 미니맵 중심 업데이트
             } else {
+                // 로드뷰가 활성화된 상태에서만 알림을 표시
                 alert('해당 위치에 로드뷰가 없습니다.');
             }
         });
     }
 });
 
+// 미니맵 클릭 시 로드뷰 위치 변경
+kakao.maps.event.addListener(miniMap, 'click', function(mouseEvent) {
+    if (roadviewVisible) {
+        var clickedPosition = mouseEvent.latLng;
+        roadviewClient.getNearestPanoId(clickedPosition, 50, function(panoId) {
+            if (panoId !== null) {
+                roadview.setPanoId(panoId, clickedPosition);
+                miniMap.setCenter(clickedPosition); // 미니맵 중심 업데이트
+            } else {
+                alert('해당 위치에 로드뷰가 없습니다.');
+            }
+        });
+    }
+});
 // 로드뷰와 미니맵 동기화
 function syncMiniMap() {
     var roadviewPosition = roadview.getPosition();
     miniMap.setCenter(roadviewPosition);
 }
 
-// 로드뷰와 지도의 전환 함수
 function toggleRoadview() {
     roadviewVisible = !roadviewVisible;
     if (roadviewVisible) {
@@ -68,8 +82,8 @@ function toggleRoadview() {
         roadviewClient.getNearestPanoId(centerPosition, 50, function(panoId) {
             if (panoId !== null) {
                 roadview.setPanoId(panoId, centerPosition);
-                roadviewContainer.classList.remove('hidden');
-                mapContainer.classList.add('hidden');
+                document.getElementById('roadview').classList.remove('hidden'); // 로드뷰 표시
+                document.getElementById('map').classList.add('hidden'); // 지도 숨기기
                 toggleRoadviewBtn.textContent = '지도 보기';
                 syncMiniMap(); // 미니맵 동기화
             } else {
@@ -78,8 +92,8 @@ function toggleRoadview() {
         });
     } else {
         // 로드뷰가 비활성화된 경우
-        roadviewContainer.classList.add('hidden');
-        mapContainer.classList.remove('hidden');
+        document.getElementById('roadview').classList.add('hidden'); // 로드뷰 숨기기
+        document.getElementById('map').classList.remove('hidden'); // 지도 표시
         toggleRoadviewBtn.textContent = '로드뷰 보기';
     }
 }

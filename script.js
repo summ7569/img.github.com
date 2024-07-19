@@ -33,7 +33,7 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
             } else {
                 alert('해당 위치에 로드뷰가 없습니다.');
             }
-        });
+        })
     }
 });
 

@@ -274,3 +274,5 @@ latLngButton.addEventListener('click', function() {
     isLatLngClickMode = !isLatLngClickMode;
     latLngButton.textContent = isLatLngClickMode ? '위도/경도 끄기' : '위도/경도 찾기';
 });
+
+

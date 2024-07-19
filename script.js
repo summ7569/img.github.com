@@ -4,7 +4,7 @@ const allInfo = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, HInfo);
 
 var mapContainer = document.getElementById('map');
 var mapOption = {
-    center: new kakao.maps.LatLng(37.4295040000, 126.9883220000),
+    center: new kakao.maps.LatLng(37.429504, 126.988322),
     level: 5
 };
 var map = new kakao.maps.Map(mapContainer, mapOption);
@@ -14,12 +14,18 @@ var roadviewContainer = document.getElementById('roadview');
 var roadview = new kakao.maps.Roadview(roadviewContainer); 
 var roadviewClient = new kakao.maps.RoadviewClient(); 
 
-// 특정 위치의 로드뷰 파노라마 ID를 얻어 로드뷰를 표시합니다
-var position = new kakao.maps.LatLng(37.4295040000, 126.9883220000);
+// 초기 로드뷰 위치 설정
+var position = new kakao.maps.LatLng(37.429504, 126.988322);
 roadviewClient.getNearestPanoId(position, 50, function(panoId) {
-    roadview.setPanoId(panoId, position);
+    if (panoId !== null) {
+        roadview.setPanoId(panoId, position);
+    } else {
+        console.error('해당 위치에 로드뷰가 없습니다.');
+    }
 });
 
+// 로드뷰 가시성 변수
+var roadviewVisible = true; // 초기값 설정 (필요에 따라 동적으로 변경할 수 있음)
 
 // 지도의 특정 위치를 클릭하면 로드뷰 위치를 변경하는 기능 추가
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
@@ -36,6 +42,25 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
         });
     }
 });
+
+// 로드뷰 활성화 토글 함수 (예: 버튼 클릭 시 호출)
+function toggleRoadview() {
+    roadviewVisible = !roadviewVisible;
+    if (roadviewVisible) {
+        // 로드뷰가 활성화된 경우
+        var centerPosition = map.getCenter();
+        roadviewClient.getNearestPanoId(centerPosition, 50, function(panoId) {
+            if (panoId !== null) {
+                roadview.setPanoId(panoId, centerPosition);
+            } else {
+                console.error('해당 위치에 로드뷰가 없습니다.');
+            }
+        });
+    } else {
+        // 로드뷰가 비활성화된 경우
+        // 로드뷰 컨테이너를 숨기거나 다른 처리를 할 수 있음
+    }
+}
 
 
 

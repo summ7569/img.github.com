@@ -6,13 +6,16 @@
     <title>Kakao3</title>
     <link rel="stylesheet" href="style.css">
     <!-- Kakao Maps SDK 로드 스크립트 -->
-    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=da010f91e59f856e4b8d54937ba756b6&libraries=services"></script>
+    <script src="https://dapi.kakao.com/v2/maps/sdk.js?appkey=YOUR_APP_KEY&libraries=services"></script>
 </head>
 <body>
     <div id="mapWrapper">
         <div id="map"></div>
         <div id="roadview" class="hidden"></div> <!-- 로드뷰 화면 추가 -->
         <button id="toggleRoadviewBtn">로드뷰 보기</button> <!-- 로드뷰 토글 버튼 추가 -->
+        <div id="miniMapWrapper" class="hidden"> <!-- 작은 지도 컨테이너 추가 -->
+            <div id="miniMap"></div>
+        </div>
     </div>
     <div id="categoryDropdownContainer">
         <select id="categoryDropdown">

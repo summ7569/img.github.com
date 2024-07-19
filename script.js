@@ -16,11 +16,20 @@ var toggleRoadviewBtn = document.getElementById('toggleRoadviewBtn');
 var roadview = new kakao.maps.Roadview(roadviewContainer);
 var roadviewClient = new kakao.maps.RoadviewClient();
 
+// 미니맵 초기화
+var miniMapContainer = document.getElementById('miniMap');
+var miniMapOption = {
+    center: new kakao.maps.LatLng(37.429504, 126.988322),
+    level: 7 // 미니맵의 레벨 조정 (작게)
+};
+var miniMap = new kakao.maps.Map(miniMapContainer, miniMapOption);
+
 // 초기 로드뷰 위치 설정
 var initialPosition = new kakao.maps.LatLng(37.429504, 126.988322);
 roadviewClient.getNearestPanoId(initialPosition, 50, function(panoId) {
     if (panoId !== null) {
         roadview.setPanoId(panoId, initialPosition);
+        miniMap.setCenter(initialPosition); // 미니맵의 중심도 초기화
     } else {
         console.error('해당 위치에 로드뷰가 없습니다.');
     }
@@ -36,12 +45,19 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
         roadviewClient.getNearestPanoId(clickedPosition, 50, function(panoId) {
             if (panoId !== null) {
                 roadview.setPanoId(panoId, clickedPosition);
+                miniMap.setCenter(clickedPosition); // 미니맵 중심 업데이트
             } else {
                 alert('해당 위치에 로드뷰가 없습니다.');
             }
         });
     }
 });
+
+// 로드뷰와 미니맵 동기화
+function syncMiniMap() {
+    var roadviewPosition = roadview.getPosition();
+    miniMap.setCenter(roadviewPosition);
+}
 
 // 로드뷰와 지도의 전환 함수
 function toggleRoadview() {
@@ -55,6 +71,7 @@ function toggleRoadview() {
                 roadviewContainer.classList.remove('hidden');
                 mapContainer.classList.add('hidden');
                 toggleRoadviewBtn.textContent = '지도 보기';
+                syncMiniMap(); // 미니맵 동기화
             } else {
                 console.error('해당 위치에 로드뷰가 없습니다.');
             }
@@ -67,10 +84,23 @@ function toggleRoadview() {
     }
 }
 
+// 미니맵 클릭 시 로드뷰 위치 변경
+kakao.maps.event.addListener(miniMap, 'click', function(mouseEvent) {
+    if (roadviewVisible) {
+        var clickedPosition = mouseEvent.latLng;
+        roadviewClient.getNearestPanoId(clickedPosition, 50, function(panoId) {
+            if (panoId !== null) {
+                roadview.setPanoId(panoId, clickedPosition);
+                miniMap.setCenter(clickedPosition); // 미니맵 중심 업데이트
+            } else {
+                alert('해당 위치에 로드뷰가 없습니다.');
+            }
+        });
+    }
+});
+
 // 버튼 클릭 이벤트 리스너 등록
 toggleRoadviewBtn.addEventListener('click', toggleRoadview);
-
-
 
 var categories = ['갈현동', '과천동', '문원동', '별양동', '부림동', '주암동', '중앙동', '기타', '회전형', '고정형', '전부'];
 

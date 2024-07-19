@@ -1,6 +1,8 @@
+// 데이터 배열 합치기
 const allPositions = Apositions.concat(Bpositions, Cpositions, Dpositions, Epositions, Fpositions, Gpositions, Hpositions);
 const allInfo = AInfo.concat(BInfo, CInfo, DInfo, EInfo, FInfo, GInfo, HInfo);
 
+// 지도 초기화
 var mapContainer = document.getElementById('map');
 var mapOption = {
     center: new kakao.maps.LatLng(37.429504, 126.988322),
@@ -8,30 +10,29 @@ var mapOption = {
 };
 var map = new kakao.maps.Map(mapContainer, mapOption);
 
-// 로드뷰 컨테이너와 로드뷰 객체 초기화
-var roadviewContainer = document.getElementById('roadview'); 
-var roadview = new kakao.maps.Roadview(roadviewContainer); 
-var roadviewClient = new kakao.maps.RoadviewClient(); 
+// 로드뷰 초기화
+var roadviewContainer = document.getElementById('roadview');
+var toggleRoadviewBtn = document.getElementById('toggleRoadviewBtn');
+var roadview = new kakao.maps.Roadview(roadviewContainer);
+var roadviewClient = new kakao.maps.RoadviewClient();
 
 // 초기 로드뷰 위치 설정
-var position = new kakao.maps.LatLng(37.429504, 126.988322);
-roadviewClient.getNearestPanoId(position, 50, function(panoId) {
+var initialPosition = new kakao.maps.LatLng(37.429504, 126.988322);
+roadviewClient.getNearestPanoId(initialPosition, 50, function(panoId) {
     if (panoId !== null) {
-        roadview.setPanoId(panoId, position);
+        roadview.setPanoId(panoId, initialPosition);
     } else {
         console.error('해당 위치에 로드뷰가 없습니다.');
     }
 });
 
 // 로드뷰 가시성 변수
-var roadviewVisible = true; // 초기값 설정 (필요에 따라 동적으로 변경할 수 있음)
+var roadviewVisible = false;
 
-// 지도의 특정 위치를 클릭하면 로드뷰 위치를 변경하는 기능 추가
+// 지도 클릭 시 로드뷰 위치 변경
 kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
-    if (roadviewVisible) { // 로드뷰가 활성화되어 있을 때만
+    if (roadviewVisible) {
         var clickedPosition = mouseEvent.latLng;
-
-        // 로드뷰 파노라마 ID 얻기
         roadviewClient.getNearestPanoId(clickedPosition, 50, function(panoId) {
             if (panoId !== null) {
                 roadview.setPanoId(panoId, clickedPosition);
@@ -42,7 +43,7 @@ kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
     }
 });
 
-// 로드뷰 활성화 토글 함수 (예: 버튼 클릭 시 호출)
+// 로드뷰와 지도의 전환 함수
 function toggleRoadview() {
     roadviewVisible = !roadviewVisible;
     if (roadviewVisible) {
@@ -51,15 +52,24 @@ function toggleRoadview() {
         roadviewClient.getNearestPanoId(centerPosition, 50, function(panoId) {
             if (panoId !== null) {
                 roadview.setPanoId(panoId, centerPosition);
+                roadviewContainer.classList.remove('hidden');
+                mapContainer.classList.add('hidden');
+                toggleRoadviewBtn.textContent = '지도 보기';
             } else {
                 console.error('해당 위치에 로드뷰가 없습니다.');
             }
         });
     } else {
         // 로드뷰가 비활성화된 경우
-        // 로드뷰 컨테이너를 숨기거나 다른 처리를 할 수 있음
+        roadviewContainer.classList.add('hidden');
+        mapContainer.classList.remove('hidden');
+        toggleRoadviewBtn.textContent = '로드뷰 보기';
     }
 }
+
+// 버튼 클릭 이벤트 리스너 등록
+toggleRoadviewBtn.addEventListener('click', toggleRoadview);
+
 
 
 var categories = ['갈현동', '과천동', '문원동', '별양동', '부림동', '주암동', '중앙동', '기타', '회전형', '고정형', '전부'];

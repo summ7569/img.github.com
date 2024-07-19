@@ -35,8 +35,8 @@ function toggleRoadview() {
         roadviewClient.getNearestPanoId(centerPosition, 50, function(panoId) {
             if (panoId) {
                 roadview.setPanoId(panoId, centerPosition);
-                document.getElementById('roadview').classList.remove('hidden'); // 로드뷰 표시
-                document.getElementById('map').classList.add('hidden'); // 지도 숨기기
+                roadviewContainer.classList.remove('hidden'); // 로드뷰 표시
+                mapContainer.classList.add('hidden'); // 지도 숨기기
                 toggleRoadviewBtn.textContent = '지도 보기';
                 syncMiniMap(); // 미니맵 동기화
             } else {
@@ -44,8 +44,8 @@ function toggleRoadview() {
             }
         });
     } else {
-        document.getElementById('roadview').classList.add('hidden'); // 로드뷰 숨기기
-        document.getElementById('map').classList.remove('hidden'); // 지도 표시
+        roadviewContainer.classList.add('hidden'); // 로드뷰 숨기기
+        mapContainer.classList.remove('hidden'); // 지도 표시
         toggleRoadviewBtn.textContent = '로드뷰 보기';
     }
 }
@@ -87,7 +87,6 @@ document.getElementById('newSearchBtn').addEventListener('click', function() {
     var searchInput = document.getElementById('newSearchInput').value;
     // 위도/경도 또는 관리번호로 검색하는 로직 추가
     // 검색된 위치로 로드뷰 이동
-    // 예시로 입력된 값이 위도/경도로 가정하고 처리
     var latLng = searchInput.split(',');
     if (latLng.length === 2) {
         var position = new kakao.maps.LatLng(parseFloat(latLng[0]), parseFloat(latLng[1]));
@@ -110,6 +109,7 @@ document.getElementById('newSearchBtn').addEventListener('click', function() {
 
 // 버튼 클릭 이벤트 등록
 toggleRoadviewBtn.addEventListener('click', toggleRoadview);
+
 
 var categories = ['갈현동', '과천동', '문원동', '별양동', '부림동', '주암동', '중앙동', '기타', '회전형', '고정형', '전부'];
 

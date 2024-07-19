@@ -147,7 +147,7 @@ html, body {
 #newSearchForm button {
     padding: 6px 10px;
     font-size: 14px;
-    background-color: #0056b3;
+    background-color: rgba(0, 86, 179, 0.9);
     color: #fff;
     border: none;
     cursor: pointer;
@@ -155,7 +155,7 @@ html, body {
 }
 
 #newSearchForm button:hover {
-    background-color: #0056b3;
+    background-color: rgba(0, 86, 179, 0.8);
 }
 
 /* 모바일 환경에서 적용할 스타일 */

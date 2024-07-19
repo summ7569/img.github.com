@@ -21,19 +21,18 @@ roadviewClient.getNearestPanoId(position, 50, function(panoId) {
 });
 
 // 지도의 특정 위치를 클릭하면 로드뷰 위치를 변경하는 기능 추가
-kakao.maps.event.addListener(map, 'click', function(mouseEvent) {
+kakao.maps.event.addListener(map, 'click', function(mouseEvent) {{
     if (roadviewVisible) { // 로드뷰가 활성화되어 있을 때만
-        var clickedPosition = mouseEvent.latLng;
+    var clickedPosition = mouseEvent.latLng;
 
-        // 로드뷰 파노라마 ID 얻기
-        roadviewClient.getNearestPanoId(clickedPosition, 50, function(panoId) {
-            if (panoId !== null) {
-                roadview.setPanoId(panoId, clickedPosition);
-            } else {
-                alert('해당 위치에 로드뷰가 없습니다.');
-            }
-        });
-    }
+    // 로드뷰 파노라마 ID 얻기
+    roadviewClient.getNearestPanoId(clickedPosition, 50, function(panoId) {
+        if (panoId !== null) {
+            roadview.setPanoId(panoId, clickedPosition);
+        } else {
+            alert('해당 위치에 로드뷰가 없습니다.');
+        }
+    });
 });
 
 
